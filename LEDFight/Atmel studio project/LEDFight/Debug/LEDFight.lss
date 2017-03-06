@@ -1,0 +1,4315 @@
+
+LEDFight.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000018ea  00000000  00000000  000000b4  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000019a  00800060  000018ea  0000199e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000017  008001fa  008001fa  00001b38  2**0
+                  ALLOC
+  3 .eeprom       00000047  00810000  00810000  00001b38  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  4 .comment      00000030  00000000  00000000  00001b7f  2**0
+                  CONTENTS, READONLY
+  5 .debug_aranges 000001c0  00000000  00000000  00001baf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00002bf6  00000000  00000000  00001d6f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 00000b2b  00000000  00000000  00004965  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000efe  00000000  00000000  00005490  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000460  00000000  00000000  00006390  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000800  00000000  00000000  000067f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000106c  00000000  00000000  00006ff0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000178  00000000  00000000  0000805c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+       0:	16 c0       	rjmp	.+44     	; 0x2e <__ctors_end>
+       2:	30 c0       	rjmp	.+96     	; 0x64 <__bad_interrupt>
+       4:	2f c0       	rjmp	.+94     	; 0x64 <__bad_interrupt>
+       6:	c1 c0       	rjmp	.+386    	; 0x18a <__vector_3>
+       8:	2d c0       	rjmp	.+90     	; 0x64 <__bad_interrupt>
+       a:	2c c0       	rjmp	.+88     	; 0x64 <__bad_interrupt>
+       c:	6c ca       	rjmp	.-2856   	; 0xfffff4e6 <__eeprom_end+0xff7ef49f>
+       e:	c9 c9       	rjmp	.-3182   	; 0xfffff3a2 <__eeprom_end+0xff7ef35b>
+      10:	29 c0       	rjmp	.+82     	; 0x64 <__bad_interrupt>
+      12:	29 c0       	rjmp	.+82     	; 0x66 <__vector_9>
+      14:	27 c0       	rjmp	.+78     	; 0x64 <__bad_interrupt>
+      16:	26 c0       	rjmp	.+76     	; 0x64 <__bad_interrupt>
+      18:	25 c0       	rjmp	.+74     	; 0x64 <__bad_interrupt>
+      1a:	24 c0       	rjmp	.+72     	; 0x64 <__bad_interrupt>
+      1c:	06 c7       	rjmp	.+3596   	; 0xe2a <__vector_14>
+      1e:	22 c0       	rjmp	.+68     	; 0x64 <__bad_interrupt>
+      20:	21 c0       	rjmp	.+66     	; 0x64 <__bad_interrupt>
+      22:	20 c0       	rjmp	.+64     	; 0x64 <__bad_interrupt>
+      24:	1f c0       	rjmp	.+62     	; 0x64 <__bad_interrupt>
+
+00000026 <__trampolines_end>:
+      26:	b6 11       	cpse	r27, r6
+      28:	fa 3a       	cpi	r31, 0xAA	; 170
+      2a:	8a 38       	cpi	r24, 0x8A	; 138
+      2c:	89 00       	.word	0x0089	; ????
+
+0000002e <__ctors_end>:
+      2e:	11 24       	eor	r1, r1
+      30:	1f be       	out	0x3f, r1	; 63
+      32:	cf e5       	ldi	r28, 0x5F	; 95
+      34:	d4 e0       	ldi	r29, 0x04	; 4
+      36:	de bf       	out	0x3e, r29	; 62
+      38:	cd bf       	out	0x3d, r28	; 61
+
+0000003a <__do_copy_data>:
+      3a:	11 e0       	ldi	r17, 0x01	; 1
+      3c:	a0 e6       	ldi	r26, 0x60	; 96
+      3e:	b0 e0       	ldi	r27, 0x00	; 0
+      40:	ea ee       	ldi	r30, 0xEA	; 234
+      42:	f8 e1       	ldi	r31, 0x18	; 24
+      44:	02 c0       	rjmp	.+4      	; 0x4a <__SREG__+0xb>
+      46:	05 90       	lpm	r0, Z+
+      48:	0d 92       	st	X+, r0
+      4a:	aa 3f       	cpi	r26, 0xFA	; 250
+      4c:	b1 07       	cpc	r27, r17
+      4e:	d9 f7       	brne	.-10     	; 0x46 <__SREG__+0x7>
+
+00000050 <__do_clear_bss>:
+      50:	22 e0       	ldi	r18, 0x02	; 2
+      52:	aa ef       	ldi	r26, 0xFA	; 250
+      54:	b1 e0       	ldi	r27, 0x01	; 1
+      56:	01 c0       	rjmp	.+2      	; 0x5a <.do_clear_bss_start>
+
+00000058 <.do_clear_bss_loop>:
+      58:	1d 92       	st	X+, r1
+
+0000005a <.do_clear_bss_start>:
+      5a:	a1 31       	cpi	r26, 0x11	; 17
+      5c:	b2 07       	cpc	r27, r18
+      5e:	e1 f7       	brne	.-8      	; 0x58 <.do_clear_bss_loop>
+      60:	c3 da       	rcall	.-2682   	; 0xfffff5e8 <__eeprom_end+0xff7ef5a1>
+      62:	41 cc       	rjmp	.-1918   	; 0xfffff8e6 <__eeprom_end+0xff7ef89f>
+
+00000064 <__bad_interrupt>:
+      64:	cd cf       	rjmp	.-102    	; 0x0 <__vectors>
+
+00000066 <__vector_9>:
+ */ 
+
+#include "button.h"
+
+ISR(TIMER0_OVF_vect)
+{
+      66:	1f 92       	push	r1
+      68:	0f 92       	push	r0
+      6a:	0f b6       	in	r0, 0x3f	; 63
+      6c:	0f 92       	push	r0
+      6e:	11 24       	eor	r1, r1
+      70:	2f 93       	push	r18
+      72:	3f 93       	push	r19
+      74:	4f 93       	push	r20
+      76:	5f 93       	push	r21
+      78:	8f 93       	push	r24
+      7a:	9f 93       	push	r25
+	static u08 autoclick_release = 0;
+	static u16 relax_bonus_disable = 0;
+	if (button_parameters.button1_to_check == check_1_to_0)
+      7c:	80 91 03 02 	lds	r24, 0x0203
+      80:	82 fd       	sbrc	r24, 2
+      82:	0f c0       	rjmp	.+30     	; 0xa2 <__vector_9+0x3c>
+	{
+		if( BTN1_0 && button_parameters.button1_state)
+      84:	85 9b       	sbis	0x10, 5	; 16
+      86:	0d c0       	rjmp	.+26     	; 0xa2 <__vector_9+0x3c>
+      88:	80 91 03 02 	lds	r24, 0x0203
+      8c:	80 ff       	sbrs	r24, 0
+      8e:	09 c0       	rjmp	.+18     	; 0xa2 <__vector_9+0x3c>
+		{
+			button_parameters.button1_state = !button_parameters.button1_state;
+      90:	80 91 03 02 	lds	r24, 0x0203
+      94:	80 95       	com	r24
+      96:	90 91 03 02 	lds	r25, 0x0203
+      9a:	80 fb       	bst	r24, 0
+      9c:	90 f9       	bld	r25, 0
+      9e:	90 93 03 02 	sts	0x0203, r25
+		}
+	}
+	
+	if (button_parameters.button1_to_check == check_0_to_1)
+      a2:	80 91 03 02 	lds	r24, 0x0203
+      a6:	82 ff       	sbrs	r24, 2
+      a8:	18 c0       	rjmp	.+48     	; 0xda <__vector_9+0x74>
+	{
+		if( BTN1_1 && !button_parameters.button1_state)
+      aa:	85 99       	sbic	0x10, 5	; 16
+      ac:	16 c0       	rjmp	.+44     	; 0xda <__vector_9+0x74>
+      ae:	80 91 03 02 	lds	r24, 0x0203
+      b2:	80 fd       	sbrc	r24, 0
+      b4:	12 c0       	rjmp	.+36     	; 0xda <__vector_9+0x74>
+		{
+			if(!button_parameters.button1_relax)
+      b6:	80 91 03 02 	lds	r24, 0x0203
+      ba:	84 fd       	sbrc	r24, 4
+      bc:	05 c0       	rjmp	.+10     	; 0xc8 <__vector_9+0x62>
+			player1_click_count++;
+      be:	80 91 01 02 	lds	r24, 0x0201
+      c2:	8f 5f       	subi	r24, 0xFF	; 255
+      c4:	80 93 01 02 	sts	0x0201, r24
+			button_parameters.button1_state = !button_parameters.button1_state;
+      c8:	80 91 03 02 	lds	r24, 0x0203
+      cc:	80 95       	com	r24
+      ce:	90 91 03 02 	lds	r25, 0x0203
+      d2:	80 fb       	bst	r24, 0
+      d4:	90 f9       	bld	r25, 0
+      d6:	90 93 03 02 	sts	0x0203, r25
+		}
+	}
+	
+	if (button_parameters.button1_relax)
+      da:	80 91 03 02 	lds	r24, 0x0203
+      de:	84 ff       	sbrs	r24, 4
+      e0:	47 c0       	rjmp	.+142    	; 0x170 <__vector_9+0x10a>
+	{
+		autoclick_release++;
+      e2:	30 91 ff 01 	lds	r19, 0x01FF
+      e6:	3f 5f       	subi	r19, 0xFF	; 255
+      e8:	30 93 ff 01 	sts	0x01FF, r19
+		relax_bonus_disable++;
+      ec:	80 91 fd 01 	lds	r24, 0x01FD
+      f0:	90 91 fe 01 	lds	r25, 0x01FE
+      f4:	01 96       	adiw	r24, 0x01	; 1
+      f6:	90 93 fe 01 	sts	0x01FE, r25
+      fa:	80 93 fd 01 	sts	0x01FD, r24
+		
+		if(autoclick_release == game_settings.speed_of_autoclick)
+      fe:	40 91 07 02 	lds	r20, 0x0207
+     102:	42 95       	swap	r20
+     104:	46 95       	lsr	r20
+     106:	46 95       	lsr	r20
+     108:	43 70       	andi	r20, 0x03	; 3
+     10a:	20 91 08 02 	lds	r18, 0x0208
+     10e:	22 0f       	add	r18, r18
+     110:	22 0f       	add	r18, r18
+     112:	24 2b       	or	r18, r20
+     114:	32 13       	cpse	r19, r18
+     116:	07 c0       	rjmp	.+14     	; 0x126 <__vector_9+0xc0>
+		{
+			player1_click_count++;
+     118:	20 91 01 02 	lds	r18, 0x0201
+     11c:	2f 5f       	subi	r18, 0xFF	; 255
+     11e:	20 93 01 02 	sts	0x0201, r18
+			autoclick_release = 0;
+     122:	10 92 ff 01 	sts	0x01FF, r1
+		}
+		if(relax_bonus_disable == game_settings.time_of_autoclick)
+     126:	40 91 08 02 	lds	r20, 0x0208
+     12a:	42 95       	swap	r20
+     12c:	46 95       	lsr	r20
+     12e:	46 95       	lsr	r20
+     130:	43 70       	andi	r20, 0x03	; 3
+     132:	50 91 09 02 	lds	r21, 0x0209
+     136:	55 0f       	add	r21, r21
+     138:	55 0f       	add	r21, r21
+     13a:	25 2f       	mov	r18, r21
+     13c:	24 2b       	or	r18, r20
+     13e:	50 91 09 02 	lds	r21, 0x0209
+     142:	52 95       	swap	r21
+     144:	56 95       	lsr	r21
+     146:	56 95       	lsr	r21
+     148:	53 70       	andi	r21, 0x03	; 3
+     14a:	40 91 0a 02 	lds	r20, 0x020A
+     14e:	47 70       	andi	r20, 0x07	; 7
+     150:	44 0f       	add	r20, r20
+     152:	44 0f       	add	r20, r20
+     154:	34 2f       	mov	r19, r20
+     156:	35 2b       	or	r19, r21
+     158:	82 17       	cp	r24, r18
+     15a:	93 07       	cpc	r25, r19
+     15c:	49 f4       	brne	.+18     	; 0x170 <__vector_9+0x10a>
+		{
+			button_parameters.button1_relax = 0;
+     15e:	80 91 03 02 	lds	r24, 0x0203
+     162:	8f 7e       	andi	r24, 0xEF	; 239
+     164:	80 93 03 02 	sts	0x0203, r24
+			relax_bonus_disable = 0;
+     168:	10 92 fe 01 	sts	0x01FE, r1
+     16c:	10 92 fd 01 	sts	0x01FD, r1
+		}
+	}
+	
+	TIMER0_CLEAR;
+     170:	84 e8       	ldi	r24, 0x84	; 132
+     172:	82 bf       	out	0x32, r24	; 50
+}
+     174:	9f 91       	pop	r25
+     176:	8f 91       	pop	r24
+     178:	5f 91       	pop	r21
+     17a:	4f 91       	pop	r20
+     17c:	3f 91       	pop	r19
+     17e:	2f 91       	pop	r18
+     180:	0f 90       	pop	r0
+     182:	0f be       	out	0x3f, r0	; 63
+     184:	0f 90       	pop	r0
+     186:	1f 90       	pop	r1
+     188:	18 95       	reti
+
+0000018a <__vector_3>:
+
+ISR(TIMER2_COMP_vect)
+{
+     18a:	1f 92       	push	r1
+     18c:	0f 92       	push	r0
+     18e:	0f b6       	in	r0, 0x3f	; 63
+     190:	0f 92       	push	r0
+     192:	11 24       	eor	r1, r1
+     194:	2f 93       	push	r18
+     196:	3f 93       	push	r19
+     198:	4f 93       	push	r20
+     19a:	5f 93       	push	r21
+     19c:	8f 93       	push	r24
+     19e:	9f 93       	push	r25
+	static u08 autoclick_release = 0;
+	static u16 relax_bonus_disable = 0;
+	
+	if(button_parameters.button2_to_check == check_1_to_0)
+     1a0:	80 91 03 02 	lds	r24, 0x0203
+     1a4:	83 fd       	sbrc	r24, 3
+     1a6:	12 c0       	rjmp	.+36     	; 0x1cc <__vector_3+0x42>
+	{
+		if( BTN2_0 && button_parameters.button2_state)
+     1a8:	87 9b       	sbis	0x10, 7	; 16
+     1aa:	10 c0       	rjmp	.+32     	; 0x1cc <__vector_3+0x42>
+     1ac:	80 91 03 02 	lds	r24, 0x0203
+     1b0:	81 ff       	sbrs	r24, 1
+     1b2:	0c c0       	rjmp	.+24     	; 0x1cc <__vector_3+0x42>
+		{
+			button_parameters.button2_state = !button_parameters.button2_state;
+     1b4:	80 91 03 02 	lds	r24, 0x0203
+     1b8:	86 95       	lsr	r24
+     1ba:	81 70       	andi	r24, 0x01	; 1
+     1bc:	91 e0       	ldi	r25, 0x01	; 1
+     1be:	89 27       	eor	r24, r25
+     1c0:	90 91 03 02 	lds	r25, 0x0203
+     1c4:	80 fb       	bst	r24, 0
+     1c6:	91 f9       	bld	r25, 1
+     1c8:	90 93 03 02 	sts	0x0203, r25
+		}
+	}
+	
+	if(button_parameters.button2_to_check == check_0_to_1)
+     1cc:	80 91 03 02 	lds	r24, 0x0203
+     1d0:	83 ff       	sbrs	r24, 3
+     1d2:	1b c0       	rjmp	.+54     	; 0x20a <__vector_3+0x80>
+	{
+		if( BTN2_1 && !button_parameters.button2_state)
+     1d4:	87 99       	sbic	0x10, 7	; 16
+     1d6:	19 c0       	rjmp	.+50     	; 0x20a <__vector_3+0x80>
+     1d8:	80 91 03 02 	lds	r24, 0x0203
+     1dc:	81 fd       	sbrc	r24, 1
+     1de:	15 c0       	rjmp	.+42     	; 0x20a <__vector_3+0x80>
+		{
+			if(!button_parameters.button2_relax)
+     1e0:	80 91 03 02 	lds	r24, 0x0203
+     1e4:	85 fd       	sbrc	r24, 5
+     1e6:	05 c0       	rjmp	.+10     	; 0x1f2 <__vector_3+0x68>
+			player2_click_count++;
+     1e8:	80 91 02 02 	lds	r24, 0x0202
+     1ec:	8f 5f       	subi	r24, 0xFF	; 255
+     1ee:	80 93 02 02 	sts	0x0202, r24
+			button_parameters.button2_state = !button_parameters.button2_state;
+     1f2:	80 91 03 02 	lds	r24, 0x0203
+     1f6:	86 95       	lsr	r24
+     1f8:	81 70       	andi	r24, 0x01	; 1
+     1fa:	91 e0       	ldi	r25, 0x01	; 1
+     1fc:	89 27       	eor	r24, r25
+     1fe:	90 91 03 02 	lds	r25, 0x0203
+     202:	80 fb       	bst	r24, 0
+     204:	91 f9       	bld	r25, 1
+     206:	90 93 03 02 	sts	0x0203, r25
+		}
+	}
+	
+	if (button_parameters.button2_relax)
+     20a:	80 91 03 02 	lds	r24, 0x0203
+     20e:	85 ff       	sbrs	r24, 5
+     210:	47 c0       	rjmp	.+142    	; 0x2a0 <__vector_3+0x116>
+	{
+		autoclick_release++;
+     212:	30 91 fc 01 	lds	r19, 0x01FC
+     216:	3f 5f       	subi	r19, 0xFF	; 255
+     218:	30 93 fc 01 	sts	0x01FC, r19
+		relax_bonus_disable++;
+     21c:	80 91 fa 01 	lds	r24, 0x01FA
+     220:	90 91 fb 01 	lds	r25, 0x01FB
+     224:	01 96       	adiw	r24, 0x01	; 1
+     226:	90 93 fb 01 	sts	0x01FB, r25
+     22a:	80 93 fa 01 	sts	0x01FA, r24
+		
+		if(autoclick_release == game_settings.speed_of_autoclick)
+     22e:	40 91 07 02 	lds	r20, 0x0207
+     232:	42 95       	swap	r20
+     234:	46 95       	lsr	r20
+     236:	46 95       	lsr	r20
+     238:	43 70       	andi	r20, 0x03	; 3
+     23a:	20 91 08 02 	lds	r18, 0x0208
+     23e:	22 0f       	add	r18, r18
+     240:	22 0f       	add	r18, r18
+     242:	24 2b       	or	r18, r20
+     244:	32 13       	cpse	r19, r18
+     246:	07 c0       	rjmp	.+14     	; 0x256 <__vector_3+0xcc>
+		{
+			player2_click_count++;
+     248:	20 91 02 02 	lds	r18, 0x0202
+     24c:	2f 5f       	subi	r18, 0xFF	; 255
+     24e:	20 93 02 02 	sts	0x0202, r18
+			autoclick_release = 0;
+     252:	10 92 fc 01 	sts	0x01FC, r1
+		}
+		if(relax_bonus_disable == game_settings.time_of_autoclick)
+     256:	40 91 08 02 	lds	r20, 0x0208
+     25a:	42 95       	swap	r20
+     25c:	46 95       	lsr	r20
+     25e:	46 95       	lsr	r20
+     260:	43 70       	andi	r20, 0x03	; 3
+     262:	50 91 09 02 	lds	r21, 0x0209
+     266:	55 0f       	add	r21, r21
+     268:	55 0f       	add	r21, r21
+     26a:	25 2f       	mov	r18, r21
+     26c:	24 2b       	or	r18, r20
+     26e:	50 91 09 02 	lds	r21, 0x0209
+     272:	52 95       	swap	r21
+     274:	56 95       	lsr	r21
+     276:	56 95       	lsr	r21
+     278:	53 70       	andi	r21, 0x03	; 3
+     27a:	40 91 0a 02 	lds	r20, 0x020A
+     27e:	47 70       	andi	r20, 0x07	; 7
+     280:	44 0f       	add	r20, r20
+     282:	44 0f       	add	r20, r20
+     284:	34 2f       	mov	r19, r20
+     286:	35 2b       	or	r19, r21
+     288:	82 17       	cp	r24, r18
+     28a:	93 07       	cpc	r25, r19
+     28c:	49 f4       	brne	.+18     	; 0x2a0 <__vector_3+0x116>
+		{
+			button_parameters.button2_relax = 0;
+     28e:	80 91 03 02 	lds	r24, 0x0203
+     292:	8f 7d       	andi	r24, 0xDF	; 223
+     294:	80 93 03 02 	sts	0x0203, r24
+			relax_bonus_disable = 0;
+     298:	10 92 fb 01 	sts	0x01FB, r1
+     29c:	10 92 fa 01 	sts	0x01FA, r1
+		}
+	}
+     2a0:	9f 91       	pop	r25
+     2a2:	8f 91       	pop	r24
+     2a4:	5f 91       	pop	r21
+     2a6:	4f 91       	pop	r20
+     2a8:	3f 91       	pop	r19
+     2aa:	2f 91       	pop	r18
+     2ac:	0f 90       	pop	r0
+     2ae:	0f be       	out	0x3f, r0	; 63
+     2b0:	0f 90       	pop	r0
+     2b2:	1f 90       	pop	r1
+     2b4:	18 95       	reti
+
+000002b6 <save_current_settings>:
+	DEFAULT_shift_direction
+};
+
+void save_current_settings ()
+{
+	eeprom_write_block((settings_struct *)&game_settings, &last_game_settings, sizeof(game_settings));
+     2b6:	47 e0       	ldi	r20, 0x07	; 7
+     2b8:	50 e0       	ldi	r21, 0x00	; 0
+     2ba:	60 e0       	ldi	r22, 0x00	; 0
+     2bc:	70 e0       	ldi	r23, 0x00	; 0
+     2be:	84 e0       	ldi	r24, 0x04	; 4
+     2c0:	92 e0       	ldi	r25, 0x02	; 2
+     2c2:	b3 ca       	rjmp	.-2714   	; 0xfffff82a <__eeprom_end+0xff7ef7e3>
+
+000002c4 <load_last_settings>:
+}
+void load_last_settings ()
+{
+	eeprom_read_block((settings_struct *)&game_settings, &last_game_settings, sizeof(game_settings));
+     2c4:	47 e0       	ldi	r20, 0x07	; 7
+     2c6:	50 e0       	ldi	r21, 0x00	; 0
+     2c8:	60 e0       	ldi	r22, 0x00	; 0
+     2ca:	70 e0       	ldi	r23, 0x00	; 0
+     2cc:	84 e0       	ldi	r24, 0x04	; 4
+     2ce:	92 e0       	ldi	r25, 0x02	; 2
+     2d0:	94 ca       	rjmp	.-2776   	; 0xfffff7fa <__eeprom_end+0xff7ef7b3>
+
+000002d2 <load_default_settings>:
+}
+void load_default_settings ()
+{
+	memcpy_P((settings_struct *)&game_settings, &default_game_settings, sizeof(default_game_settings));
+     2d2:	47 e0       	ldi	r20, 0x07	; 7
+     2d4:	50 e0       	ldi	r21, 0x00	; 0
+     2d6:	66 e2       	ldi	r22, 0x26	; 38
+     2d8:	70 e0       	ldi	r23, 0x00	; 0
+     2da:	84 e0       	ldi	r24, 0x04	; 4
+     2dc:	92 e0       	ldi	r25, 0x02	; 2
+     2de:	61 ca       	rjmp	.-2878   	; 0xfffff7a2 <__eeprom_end+0xff7ef75b>
+
+000002e0 <check_last_settings>:
+{
+	u08 number_of_byte;
+	u08 lenght_of_gamesettings = sizeof(game_settings);
+	u08 *game_settings_pointer = (u08 *)&game_settings;
+	
+	load_last_settings();
+     2e0:	f1 df       	rcall	.-30     	; 0x2c4 <load_last_settings>
+     2e2:	e4 e0       	ldi	r30, 0x04	; 4
+     2e4:	f2 e0       	ldi	r31, 0x02	; 2
+	
+	for (number_of_byte = 0; number_of_byte < lenght_of_gamesettings; number_of_byte++)
+	{
+		if (0 == *game_settings_pointer++)
+     2e6:	81 91       	ld	r24, Z+
+     2e8:	81 11       	cpse	r24, r1
+     2ea:	05 c0       	rjmp	.+10     	; 0x2f6 <check_last_settings+0x16>
+	u08 lenght_of_gamesettings = sizeof(game_settings);
+	u08 *game_settings_pointer = (u08 *)&game_settings;
+	
+	load_last_settings();
+	
+	for (number_of_byte = 0; number_of_byte < lenght_of_gamesettings; number_of_byte++)
+     2ec:	82 e0       	ldi	r24, 0x02	; 2
+     2ee:	eb 30       	cpi	r30, 0x0B	; 11
+     2f0:	f8 07       	cpc	r31, r24
+     2f2:	c9 f7       	brne	.-14     	; 0x2e6 <check_last_settings+0x6>
+		else
+		break;
+	}
+	
+	if (number_of_byte == lenght_of_gamesettings)
+	load_default_settings();
+     2f4:	ee cf       	rjmp	.-36     	; 0x2d2 <load_default_settings>
+     2f6:	08 95       	ret
+
+000002f8 <game_setup>:
+}
+
+void game_setup ()
+{
+     2f8:	cf 92       	push	r12
+     2fa:	df 92       	push	r13
+     2fc:	ef 92       	push	r14
+     2fe:	ff 92       	push	r15
+     300:	0f 93       	push	r16
+     302:	1f 93       	push	r17
+     304:	cf 93       	push	r28
+     306:	df 93       	push	r29
+	cli();
+     308:	f8 94       	cli
+	lcd_cls();
+     30a:	51 d7       	rcall	.+3746   	; 0x11ae <lcd_cls>
+	
+	enum menu_blocks main_menu_flag = QUICK_GAME;
+	enum menu_blocks2 settings_menu_flag = MAIN_MENU;
+     30c:	00 e0       	ldi	r16, 0x00	; 0
+void game_setup ()
+{
+	cli();
+	lcd_cls();
+	
+	enum menu_blocks main_menu_flag = QUICK_GAME;
+     30e:	11 e0       	ldi	r17, 0x01	; 1
+			{
+				lcd_locate(0,0);
+				lcd_str("Szansa na bonus");
+				lcd_locate(1,0);
+				lcd_str("=== ");
+				lcd_int( 100/game_settings.probability_of_bonus );
+     310:	c4 e6       	ldi	r28, 0x64	; 100
+     312:	d0 e0       	ldi	r29, 0x00	; 0
+				lcd_locate(0,0);
+				lcd_str("Cz"_e"sto"_s _c" bonus"_o"w");
+				lcd_locate(1,0);
+				lcd_str("=== ");
+				lcd_str("co ");
+				lcd_int( (((u32)(game_settings.frequency_of_bonus)+1)*256)/8000);
+     314:	50 e4       	ldi	r21, 0x40	; 64
+     316:	c5 2e       	mov	r12, r21
+     318:	5f e1       	ldi	r21, 0x1F	; 31
+     31a:	d5 2e       	mov	r13, r21
+     31c:	e1 2c       	mov	r14, r1
+     31e:	f1 2c       	mov	r15, r1
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+     320:	2f ef       	ldi	r18, 0xFF	; 255
+     322:	80 e7       	ldi	r24, 0x70	; 112
+     324:	92 e0       	ldi	r25, 0x02	; 2
+     326:	21 50       	subi	r18, 0x01	; 1
+     328:	80 40       	sbci	r24, 0x00	; 0
+     32a:	90 40       	sbci	r25, 0x00	; 0
+     32c:	e1 f7       	brne	.-8      	; 0x326 <game_setup+0x2e>
+     32e:	00 c0       	rjmp	.+0      	; 0x330 <game_setup+0x38>
+     330:	00 00       	nop
+	
+	while(1)
+	{
+		_delay_ms(100);
+		
+		if (PLUS_BUTTON && settings_menu_flag == MAIN_MENU)
+     332:	87 99       	sbic	0x10, 7	; 16
+     334:	08 c0       	rjmp	.+16     	; 0x346 <game_setup+0x4e>
+     336:	01 11       	cpse	r16, r1
+     338:	06 c0       	rjmp	.+12     	; 0x346 <game_setup+0x4e>
+		{
+			if (main_menu_flag < RESET_SETTINGS)
+     33a:	14 30       	cpi	r17, 0x04	; 4
+     33c:	10 f4       	brcc	.+4      	; 0x342 <game_setup+0x4a>
+			main_menu_flag++;
+     33e:	1f 5f       	subi	r17, 0xFF	; 255
+     340:	01 c0       	rjmp	.+2      	; 0x344 <game_setup+0x4c>
+			else
+			main_menu_flag = QUICK_GAME;
+     342:	11 e0       	ldi	r17, 0x01	; 1
+			lcd_cls();
+     344:	34 d7       	rcall	.+3688   	; 0x11ae <lcd_cls>
+		}
+		if (MINUS_BUTTON && settings_menu_flag == MAIN_MENU)
+     346:	b0 99       	sbic	0x16, 0	; 22
+     348:	08 c0       	rjmp	.+16     	; 0x35a <game_setup+0x62>
+     34a:	01 11       	cpse	r16, r1
+     34c:	06 c0       	rjmp	.+12     	; 0x35a <game_setup+0x62>
+		{
+			if (main_menu_flag > QUICK_GAME)
+     34e:	11 30       	cpi	r17, 0x01	; 1
+     350:	11 f0       	breq	.+4      	; 0x356 <game_setup+0x5e>
+			main_menu_flag--;
+     352:	11 50       	subi	r17, 0x01	; 1
+     354:	01 c0       	rjmp	.+2      	; 0x358 <game_setup+0x60>
+			else
+			main_menu_flag = RESET_SETTINGS;
+     356:	14 e0       	ldi	r17, 0x04	; 4
+			lcd_cls();
+     358:	2a d7       	rcall	.+3668   	; 0x11ae <lcd_cls>
+		}
+		if (RETURN_BUTTON)
+     35a:	86 99       	sbic	0x10, 6	; 16
+     35c:	05 c0       	rjmp	.+10     	; 0x368 <game_setup+0x70>
+		{
+			if (settings_menu_flag != MAIN_MENU)
+     35e:	01 11       	cpse	r16, r1
+			save_current_settings();
+     360:	aa df       	rcall	.-172    	; 0x2b6 <save_current_settings>
+			settings_menu_flag = MAIN_MENU;
+			main_menu_flag = QUICK_GAME;
+			lcd_cls();
+     362:	25 d7       	rcall	.+3658   	; 0x11ae <lcd_cls>
+		}
+		if (RETURN_BUTTON)
+		{
+			if (settings_menu_flag != MAIN_MENU)
+			save_current_settings();
+			settings_menu_flag = MAIN_MENU;
+     364:	00 e0       	ldi	r16, 0x00	; 0
+     366:	02 c0       	rjmp	.+4      	; 0x36c <game_setup+0x74>
+			main_menu_flag = QUICK_GAME;
+			lcd_cls();
+		}
+		
+		if (main_menu_flag == QUICK_GAME)
+     368:	11 30       	cpi	r17, 0x01	; 1
+     36a:	79 f4       	brne	.+30     	; 0x38a <game_setup+0x92>
+		{
+			lcd_locate(0,0);
+     36c:	60 e0       	ldi	r22, 0x00	; 0
+     36e:	80 e0       	ldi	r24, 0x00	; 0
+     370:	18 d7       	rcall	.+3632   	; 0x11a2 <lcd_locate>
+			lcd_str("=== NOWA GRA ===");
+     372:	8c e6       	ldi	r24, 0x6C	; 108
+     374:	90 e0       	ldi	r25, 0x00	; 0
+     376:	c9 d6       	rcall	.+3474   	; 0x110a <lcd_str>
+			lcd_locate(1,0);
+     378:	60 e0       	ldi	r22, 0x00	; 0
+     37a:	81 e0       	ldi	r24, 0x01	; 1
+     37c:	12 d7       	rcall	.+3620   	; 0x11a2 <lcd_locate>
+			lcd_str("================");
+     37e:	8d e7       	ldi	r24, 0x7D	; 125
+     380:	90 e0       	ldi	r25, 0x00	; 0
+     382:	c3 d6       	rcall	.+3462   	; 0x110a <lcd_str>
+			if (SELECT_BUTTON)
+     384:	85 99       	sbic	0x10, 5	; 16
+     386:	ce c4       	rjmp	.+2460   	; 0xd24 <__stack+0x8c5>
+     388:	cf c4       	rjmp	.+2462   	; 0xd28 <__stack+0x8c9>
+				break;
+				lcd_cls();
+			}
+		}
+		
+		if (main_menu_flag == SETTINGS)
+     38a:	12 30       	cpi	r17, 0x02	; 2
+     38c:	09 f0       	breq	.+2      	; 0x390 <game_setup+0x98>
+     38e:	82 c4       	rjmp	.+2308   	; 0xc94 <__stack+0x835>
+		{
+			if (settings_menu_flag == MAIN_MENU)
+     390:	01 11       	cpse	r16, r1
+     392:	19 c0       	rjmp	.+50     	; 0x3c6 <game_setup+0xce>
+			{
+				lcd_locate(0,0);
+     394:	60 e0       	ldi	r22, 0x00	; 0
+     396:	80 e0       	ldi	r24, 0x00	; 0
+     398:	04 d7       	rcall	.+3592   	; 0x11a2 <lcd_locate>
+				lcd_str("===USTAWIENIA===");
+     39a:	8e e8       	ldi	r24, 0x8E	; 142
+     39c:	90 e0       	ldi	r25, 0x00	; 0
+     39e:	b5 d6       	rcall	.+3434   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     3a0:	60 e0       	ldi	r22, 0x00	; 0
+     3a2:	81 e0       	ldi	r24, 0x01	; 1
+     3a4:	fe d6       	rcall	.+3580   	; 0x11a2 <lcd_locate>
+				lcd_str("================");
+     3a6:	8d e7       	ldi	r24, 0x7D	; 125
+     3a8:	90 e0       	ldi	r25, 0x00	; 0
+     3aa:	af d6       	rcall	.+3422   	; 0x110a <lcd_str>
+				if (SELECT_BUTTON)
+     3ac:	85 99       	sbic	0x10, 5	; 16
+     3ae:	b8 cf       	rjmp	.-144    	; 0x320 <game_setup+0x28>
+     3b0:	2f ef       	ldi	r18, 0xFF	; 255
+     3b2:	81 ee       	ldi	r24, 0xE1	; 225
+     3b4:	94 e0       	ldi	r25, 0x04	; 4
+     3b6:	21 50       	subi	r18, 0x01	; 1
+     3b8:	80 40       	sbci	r24, 0x00	; 0
+     3ba:	90 40       	sbci	r25, 0x00	; 0
+     3bc:	e1 f7       	brne	.-8      	; 0x3b6 <game_setup+0xbe>
+     3be:	00 c0       	rjmp	.+0      	; 0x3c0 <game_setup+0xc8>
+     3c0:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     3c2:	f5 d6       	rcall	.+3562   	; 0x11ae <lcd_cls>
+     3c4:	03 c0       	rjmp	.+6      	; 0x3cc <game_setup+0xd4>
+				}
+			}
+			if (settings_menu_flag == NUMBER_OF_LEDS)
+     3c6:	01 30       	cpi	r16, 0x01	; 1
+     3c8:	09 f0       	breq	.+2      	; 0x3cc <game_setup+0xd4>
+     3ca:	47 c0       	rjmp	.+142    	; 0x45a <game_setup+0x162>
+			{
+				lcd_locate(0,0);
+     3cc:	60 e0       	ldi	r22, 0x00	; 0
+     3ce:	80 e0       	ldi	r24, 0x00	; 0
+     3d0:	e8 d6       	rcall	.+3536   	; 0x11a2 <lcd_locate>
+				lcd_str("Liczba p"_o"l" );
+     3d2:	8f e9       	ldi	r24, 0x9F	; 159
+     3d4:	90 e0       	ldi	r25, 0x00	; 0
+     3d6:	99 d6       	rcall	.+3378   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     3d8:	60 e0       	ldi	r22, 0x00	; 0
+     3da:	81 e0       	ldi	r24, 0x01	; 1
+     3dc:	e2 d6       	rcall	.+3524   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     3de:	8a ea       	ldi	r24, 0xAA	; 170
+     3e0:	90 e0       	ldi	r25, 0x00	; 0
+     3e2:	93 d6       	rcall	.+3366   	; 0x110a <lcd_str>
+				lcd_int(game_settings.number_of_leds/2);
+     3e4:	80 91 04 02 	lds	r24, 0x0204
+     3e8:	8f 71       	andi	r24, 0x1F	; 31
+     3ea:	90 e0       	ldi	r25, 0x00	; 0
+     3ec:	96 95       	lsr	r25
+     3ee:	87 95       	ror	r24
+     3f0:	9c d6       	rcall	.+3384   	; 0x112a <lcd_int>
+				lcd_str(" ");
+     3f2:	84 eb       	ldi	r24, 0xB4	; 180
+     3f4:	91 e0       	ldi	r25, 0x01	; 1
+     3f6:	89 d6       	rcall	.+3346   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     3f8:	87 99       	sbic	0x10, 7	; 16
+     3fa:	10 c0       	rjmp	.+32     	; 0x41c <game_setup+0x124>
+				{
+					if (game_settings.number_of_leds < 22)
+     3fc:	80 91 04 02 	lds	r24, 0x0204
+     400:	8f 71       	andi	r24, 0x1F	; 31
+     402:	90 e0       	ldi	r25, 0x00	; 0
+     404:	46 97       	sbiw	r24, 0x16	; 22
+     406:	54 f4       	brge	.+20     	; 0x41c <game_setup+0x124>
+					{
+						game_settings.number_of_leds += 4;
+     408:	90 91 04 02 	lds	r25, 0x0204
+     40c:	9c 5f       	subi	r25, 0xFC	; 252
+     40e:	9f 71       	andi	r25, 0x1F	; 31
+     410:	80 91 04 02 	lds	r24, 0x0204
+     414:	80 7e       	andi	r24, 0xE0	; 224
+     416:	89 2b       	or	r24, r25
+     418:	80 93 04 02 	sts	0x0204, r24
+					}
+				}
+				if (MINUS_BUTTON)
+     41c:	b0 99       	sbic	0x16, 0	; 22
+     41e:	10 c0       	rjmp	.+32     	; 0x440 <game_setup+0x148>
+				{
+					if (game_settings.number_of_leds > 6)
+     420:	80 91 04 02 	lds	r24, 0x0204
+     424:	8f 71       	andi	r24, 0x1F	; 31
+     426:	90 e0       	ldi	r25, 0x00	; 0
+     428:	07 97       	sbiw	r24, 0x07	; 7
+     42a:	54 f0       	brlt	.+20     	; 0x440 <game_setup+0x148>
+					{
+						game_settings.number_of_leds -= 4;
+     42c:	90 91 04 02 	lds	r25, 0x0204
+     430:	94 5e       	subi	r25, 0xE4	; 228
+     432:	9f 71       	andi	r25, 0x1F	; 31
+     434:	80 91 04 02 	lds	r24, 0x0204
+     438:	80 7e       	andi	r24, 0xE0	; 224
+     43a:	89 2b       	or	r24, r25
+     43c:	80 93 04 02 	sts	0x0204, r24
+					}
+				}
+				if (SELECT_BUTTON)
+     440:	85 99       	sbic	0x10, 5	; 16
+     442:	26 c4       	rjmp	.+2124   	; 0xc90 <__stack+0x831>
+     444:	2f ef       	ldi	r18, 0xFF	; 255
+     446:	81 ee       	ldi	r24, 0xE1	; 225
+     448:	94 e0       	ldi	r25, 0x04	; 4
+     44a:	21 50       	subi	r18, 0x01	; 1
+     44c:	80 40       	sbci	r24, 0x00	; 0
+     44e:	90 40       	sbci	r25, 0x00	; 0
+     450:	e1 f7       	brne	.-8      	; 0x44a <game_setup+0x152>
+     452:	00 c0       	rjmp	.+0      	; 0x454 <game_setup+0x15c>
+     454:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     456:	ab d6       	rcall	.+3414   	; 0x11ae <lcd_cls>
+     458:	03 c0       	rjmp	.+6      	; 0x460 <__stack+0x1>
+				}
+			}
+			if (settings_menu_flag == THRESHOLD_OF_CHANGE)
+     45a:	02 30       	cpi	r16, 0x02	; 2
+     45c:	09 f0       	breq	.+2      	; 0x460 <__stack+0x1>
+     45e:	52 c0       	rjmp	.+164    	; 0x504 <__stack+0xa5>
+			{
+				lcd_locate(0,0);
+     460:	60 e0       	ldi	r22, 0x00	; 0
+     462:	80 e0       	ldi	r24, 0x00	; 0
+     464:	9e d6       	rcall	.+3388   	; 0x11a2 <lcd_locate>
+				lcd_str("Czu"_l"o"_s _c " pad"_o"w");
+     466:	8f ea       	ldi	r24, 0xAF	; 175
+     468:	90 e0       	ldi	r25, 0x00	; 0
+     46a:	4f d6       	rcall	.+3230   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     46c:	60 e0       	ldi	r22, 0x00	; 0
+     46e:	81 e0       	ldi	r24, 0x01	; 1
+     470:	98 d6       	rcall	.+3376   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     472:	8a ea       	ldi	r24, 0xAA	; 170
+     474:	90 e0       	ldi	r25, 0x00	; 0
+     476:	49 d6       	rcall	.+3218   	; 0x110a <lcd_str>
+				lcd_int(game_settings.threshold_of_change+1);
+     478:	80 91 04 02 	lds	r24, 0x0204
+     47c:	82 95       	swap	r24
+     47e:	86 95       	lsr	r24
+     480:	83 70       	andi	r24, 0x03	; 3
+     482:	90 e0       	ldi	r25, 0x00	; 0
+     484:	01 96       	adiw	r24, 0x01	; 1
+     486:	51 d6       	rcall	.+3234   	; 0x112a <lcd_int>
+				if (PLUS_BUTTON)
+     488:	87 99       	sbic	0x10, 7	; 16
+     48a:	17 c0       	rjmp	.+46     	; 0x4ba <__stack+0x5b>
+				{
+					if (game_settings.threshold_of_change < 3)
+     48c:	80 91 04 02 	lds	r24, 0x0204
+     490:	82 95       	swap	r24
+     492:	86 95       	lsr	r24
+     494:	83 70       	andi	r24, 0x03	; 3
+     496:	83 30       	cpi	r24, 0x03	; 3
+     498:	81 f0       	breq	.+32     	; 0x4ba <__stack+0x5b>
+					{
+						game_settings.threshold_of_change++;
+     49a:	80 91 04 02 	lds	r24, 0x0204
+     49e:	82 95       	swap	r24
+     4a0:	86 95       	lsr	r24
+     4a2:	87 70       	andi	r24, 0x07	; 7
+     4a4:	8f 5f       	subi	r24, 0xFF	; 255
+     4a6:	83 70       	andi	r24, 0x03	; 3
+     4a8:	82 95       	swap	r24
+     4aa:	88 0f       	add	r24, r24
+     4ac:	80 7e       	andi	r24, 0xE0	; 224
+     4ae:	90 91 04 02 	lds	r25, 0x0204
+     4b2:	9f 79       	andi	r25, 0x9F	; 159
+     4b4:	98 2b       	or	r25, r24
+     4b6:	90 93 04 02 	sts	0x0204, r25
+					}
+				}
+				if (MINUS_BUTTON)
+     4ba:	b0 99       	sbic	0x16, 0	; 22
+     4bc:	16 c0       	rjmp	.+44     	; 0x4ea <__stack+0x8b>
+				{
+					if (game_settings.threshold_of_change > 0)
+     4be:	80 91 04 02 	lds	r24, 0x0204
+     4c2:	82 95       	swap	r24
+     4c4:	86 95       	lsr	r24
+     4c6:	83 70       	andi	r24, 0x03	; 3
+     4c8:	81 f0       	breq	.+32     	; 0x4ea <__stack+0x8b>
+					{
+						game_settings.threshold_of_change--;
+     4ca:	80 91 04 02 	lds	r24, 0x0204
+     4ce:	82 95       	swap	r24
+     4d0:	86 95       	lsr	r24
+     4d2:	87 70       	andi	r24, 0x07	; 7
+     4d4:	8d 5f       	subi	r24, 0xFD	; 253
+     4d6:	83 70       	andi	r24, 0x03	; 3
+     4d8:	82 95       	swap	r24
+     4da:	88 0f       	add	r24, r24
+     4dc:	80 7e       	andi	r24, 0xE0	; 224
+     4de:	90 91 04 02 	lds	r25, 0x0204
+     4e2:	9f 79       	andi	r25, 0x9F	; 159
+     4e4:	98 2b       	or	r25, r24
+     4e6:	90 93 04 02 	sts	0x0204, r25
+					}
+				}
+				if (SELECT_BUTTON)
+     4ea:	85 99       	sbic	0x10, 5	; 16
+     4ec:	ce c1       	rjmp	.+924    	; 0x88a <__stack+0x42b>
+     4ee:	2f ef       	ldi	r18, 0xFF	; 255
+     4f0:	81 ee       	ldi	r24, 0xE1	; 225
+     4f2:	94 e0       	ldi	r25, 0x04	; 4
+     4f4:	21 50       	subi	r18, 0x01	; 1
+     4f6:	80 40       	sbci	r24, 0x00	; 0
+     4f8:	90 40       	sbci	r25, 0x00	; 0
+     4fa:	e1 f7       	brne	.-8      	; 0x4f4 <__stack+0x95>
+     4fc:	00 c0       	rjmp	.+0      	; 0x4fe <__stack+0x9f>
+     4fe:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     500:	56 d6       	rcall	.+3244   	; 0x11ae <lcd_cls>
+     502:	03 c0       	rjmp	.+6      	; 0x50a <__stack+0xab>
+				}
+			}
+			if (settings_menu_flag == FREQUENCY_OF_BONUS)
+     504:	03 30       	cpi	r16, 0x03	; 3
+     506:	09 f0       	breq	.+2      	; 0x50a <__stack+0xab>
+     508:	d6 c0       	rjmp	.+428    	; 0x6b6 <__stack+0x257>
+			{
+				lcd_locate(0,0);
+     50a:	60 e0       	ldi	r22, 0x00	; 0
+     50c:	80 e0       	ldi	r24, 0x00	; 0
+     50e:	49 d6       	rcall	.+3218   	; 0x11a2 <lcd_locate>
+				lcd_str("Cz"_e"sto"_s _c" bonus"_o"w");
+     510:	8d eb       	ldi	r24, 0xBD	; 189
+     512:	90 e0       	ldi	r25, 0x00	; 0
+     514:	fa d5       	rcall	.+3060   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     516:	60 e0       	ldi	r22, 0x00	; 0
+     518:	81 e0       	ldi	r24, 0x01	; 1
+     51a:	43 d6       	rcall	.+3206   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     51c:	8a ea       	ldi	r24, 0xAA	; 170
+     51e:	90 e0       	ldi	r25, 0x00	; 0
+     520:	f4 d5       	rcall	.+3048   	; 0x110a <lcd_str>
+				lcd_str("co ");
+     522:	8e ec       	ldi	r24, 0xCE	; 206
+     524:	90 e0       	ldi	r25, 0x00	; 0
+     526:	f1 d5       	rcall	.+3042   	; 0x110a <lcd_str>
+				lcd_int( (((u32)(game_settings.frequency_of_bonus)+1)*256)/8000);
+     528:	80 91 04 02 	lds	r24, 0x0204
+     52c:	88 1f       	adc	r24, r24
+     52e:	88 27       	eor	r24, r24
+     530:	88 1f       	adc	r24, r24
+     532:	90 91 05 02 	lds	r25, 0x0205
+     536:	99 0f       	add	r25, r25
+     538:	49 2f       	mov	r20, r25
+     53a:	48 2b       	or	r20, r24
+     53c:	80 91 05 02 	lds	r24, 0x0205
+     540:	88 1f       	adc	r24, r24
+     542:	88 27       	eor	r24, r24
+     544:	88 1f       	adc	r24, r24
+     546:	90 91 06 02 	lds	r25, 0x0206
+     54a:	99 0f       	add	r25, r25
+     54c:	59 2f       	mov	r21, r25
+     54e:	58 2b       	or	r21, r24
+     550:	60 e0       	ldi	r22, 0x00	; 0
+     552:	70 e0       	ldi	r23, 0x00	; 0
+     554:	4f 5f       	subi	r20, 0xFF	; 255
+     556:	5f 4f       	sbci	r21, 0xFF	; 255
+     558:	6f 4f       	sbci	r22, 0xFF	; 255
+     55a:	7f 4f       	sbci	r23, 0xFF	; 255
+     55c:	96 2f       	mov	r25, r22
+     55e:	85 2f       	mov	r24, r21
+     560:	74 2f       	mov	r23, r20
+     562:	66 27       	eor	r22, r22
+     564:	a7 01       	movw	r20, r14
+     566:	96 01       	movw	r18, r12
+     568:	8d d8       	rcall	.-3814   	; 0xfffff684 <__eeprom_end+0xff7ef63d>
+     56a:	c9 01       	movw	r24, r18
+     56c:	de d5       	rcall	.+3004   	; 0x112a <lcd_int>
+				lcd_str(" ms ");
+     56e:	82 ed       	ldi	r24, 0xD2	; 210
+     570:	90 e0       	ldi	r25, 0x00	; 0
+     572:	cb d5       	rcall	.+2966   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     574:	87 99       	sbic	0x10, 7	; 16
+     576:	48 c0       	rjmp	.+144    	; 0x608 <__stack+0x1a9>
+				{
+					if (game_settings.frequency_of_bonus < 62499)
+     578:	20 91 04 02 	lds	r18, 0x0204
+     57c:	22 1f       	adc	r18, r18
+     57e:	22 27       	eor	r18, r18
+     580:	22 1f       	adc	r18, r18
+     582:	30 91 05 02 	lds	r19, 0x0205
+     586:	33 0f       	add	r19, r19
+     588:	83 2f       	mov	r24, r19
+     58a:	82 2b       	or	r24, r18
+     58c:	20 91 05 02 	lds	r18, 0x0205
+     590:	22 1f       	adc	r18, r18
+     592:	22 27       	eor	r18, r18
+     594:	22 1f       	adc	r18, r18
+     596:	30 91 06 02 	lds	r19, 0x0206
+     59a:	33 0f       	add	r19, r19
+     59c:	93 2f       	mov	r25, r19
+     59e:	92 2b       	or	r25, r18
+     5a0:	83 32       	cpi	r24, 0x23	; 35
+     5a2:	94 4f       	sbci	r25, 0xF4	; 244
+     5a4:	88 f5       	brcc	.+98     	; 0x608 <__stack+0x1a9>
+					{
+						game_settings.frequency_of_bonus += 3125;
+     5a6:	20 91 04 02 	lds	r18, 0x0204
+     5aa:	22 1f       	adc	r18, r18
+     5ac:	22 27       	eor	r18, r18
+     5ae:	22 1f       	adc	r18, r18
+     5b0:	30 91 05 02 	lds	r19, 0x0205
+     5b4:	33 0f       	add	r19, r19
+     5b6:	83 2f       	mov	r24, r19
+     5b8:	82 2b       	or	r24, r18
+     5ba:	20 91 05 02 	lds	r18, 0x0205
+     5be:	22 1f       	adc	r18, r18
+     5c0:	22 27       	eor	r18, r18
+     5c2:	22 1f       	adc	r18, r18
+     5c4:	30 91 06 02 	lds	r19, 0x0206
+     5c8:	33 0f       	add	r19, r19
+     5ca:	93 2f       	mov	r25, r19
+     5cc:	92 2b       	or	r25, r18
+     5ce:	8b 5c       	subi	r24, 0xCB	; 203
+     5d0:	93 4f       	sbci	r25, 0xF3	; 243
+     5d2:	20 91 04 02 	lds	r18, 0x0204
+     5d6:	80 fb       	bst	r24, 0
+     5d8:	27 f9       	bld	r18, 7
+     5da:	20 93 04 02 	sts	0x0204, r18
+     5de:	28 2f       	mov	r18, r24
+     5e0:	26 95       	lsr	r18
+     5e2:	80 91 05 02 	lds	r24, 0x0205
+     5e6:	80 78       	andi	r24, 0x80	; 128
+     5e8:	82 2b       	or	r24, r18
+     5ea:	80 93 05 02 	sts	0x0205, r24
+     5ee:	80 91 05 02 	lds	r24, 0x0205
+     5f2:	90 fb       	bst	r25, 0
+     5f4:	87 f9       	bld	r24, 7
+     5f6:	80 93 05 02 	sts	0x0205, r24
+     5fa:	96 95       	lsr	r25
+     5fc:	80 91 06 02 	lds	r24, 0x0206
+     600:	80 78       	andi	r24, 0x80	; 128
+     602:	89 2b       	or	r24, r25
+     604:	80 93 06 02 	sts	0x0206, r24
+					}
+				}
+				if (MINUS_BUTTON)
+     608:	b0 99       	sbic	0x16, 0	; 22
+     60a:	48 c0       	rjmp	.+144    	; 0x69c <__stack+0x23d>
+				{
+					if (game_settings.frequency_of_bonus > 3124)
+     60c:	20 91 04 02 	lds	r18, 0x0204
+     610:	22 1f       	adc	r18, r18
+     612:	22 27       	eor	r18, r18
+     614:	22 1f       	adc	r18, r18
+     616:	30 91 05 02 	lds	r19, 0x0205
+     61a:	33 0f       	add	r19, r19
+     61c:	83 2f       	mov	r24, r19
+     61e:	82 2b       	or	r24, r18
+     620:	20 91 05 02 	lds	r18, 0x0205
+     624:	22 1f       	adc	r18, r18
+     626:	22 27       	eor	r18, r18
+     628:	22 1f       	adc	r18, r18
+     62a:	30 91 06 02 	lds	r19, 0x0206
+     62e:	33 0f       	add	r19, r19
+     630:	93 2f       	mov	r25, r19
+     632:	92 2b       	or	r25, r18
+     634:	85 33       	cpi	r24, 0x35	; 53
+     636:	9c 40       	sbci	r25, 0x0C	; 12
+     638:	88 f1       	brcs	.+98     	; 0x69c <__stack+0x23d>
+					{
+						game_settings.frequency_of_bonus -= 3125;
+     63a:	20 91 04 02 	lds	r18, 0x0204
+     63e:	22 1f       	adc	r18, r18
+     640:	22 27       	eor	r18, r18
+     642:	22 1f       	adc	r18, r18
+     644:	30 91 05 02 	lds	r19, 0x0205
+     648:	33 0f       	add	r19, r19
+     64a:	83 2f       	mov	r24, r19
+     64c:	82 2b       	or	r24, r18
+     64e:	20 91 05 02 	lds	r18, 0x0205
+     652:	22 1f       	adc	r18, r18
+     654:	22 27       	eor	r18, r18
+     656:	22 1f       	adc	r18, r18
+     658:	30 91 06 02 	lds	r19, 0x0206
+     65c:	33 0f       	add	r19, r19
+     65e:	93 2f       	mov	r25, r19
+     660:	92 2b       	or	r25, r18
+     662:	85 53       	subi	r24, 0x35	; 53
+     664:	9c 40       	sbci	r25, 0x0C	; 12
+     666:	20 91 04 02 	lds	r18, 0x0204
+     66a:	80 fb       	bst	r24, 0
+     66c:	27 f9       	bld	r18, 7
+     66e:	20 93 04 02 	sts	0x0204, r18
+     672:	28 2f       	mov	r18, r24
+     674:	26 95       	lsr	r18
+     676:	80 91 05 02 	lds	r24, 0x0205
+     67a:	80 78       	andi	r24, 0x80	; 128
+     67c:	82 2b       	or	r24, r18
+     67e:	80 93 05 02 	sts	0x0205, r24
+     682:	80 91 05 02 	lds	r24, 0x0205
+     686:	90 fb       	bst	r25, 0
+     688:	87 f9       	bld	r24, 7
+     68a:	80 93 05 02 	sts	0x0205, r24
+     68e:	96 95       	lsr	r25
+     690:	80 91 06 02 	lds	r24, 0x0206
+     694:	80 78       	andi	r24, 0x80	; 128
+     696:	89 2b       	or	r24, r25
+     698:	80 93 06 02 	sts	0x0206, r24
+					}
+				}
+				if (SELECT_BUTTON)
+     69c:	85 99       	sbic	0x10, 5	; 16
+     69e:	2d c1       	rjmp	.+602    	; 0x8fa <__stack+0x49b>
+     6a0:	8f ef       	ldi	r24, 0xFF	; 255
+     6a2:	91 ee       	ldi	r25, 0xE1	; 225
+     6a4:	24 e0       	ldi	r18, 0x04	; 4
+     6a6:	81 50       	subi	r24, 0x01	; 1
+     6a8:	90 40       	sbci	r25, 0x00	; 0
+     6aa:	20 40       	sbci	r18, 0x00	; 0
+     6ac:	e1 f7       	brne	.-8      	; 0x6a6 <__stack+0x247>
+     6ae:	00 c0       	rjmp	.+0      	; 0x6b0 <__stack+0x251>
+     6b0:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     6b2:	7d d5       	rcall	.+2810   	; 0x11ae <lcd_cls>
+     6b4:	03 c0       	rjmp	.+6      	; 0x6bc <__stack+0x25d>
+				}
+			}
+			if (settings_menu_flag == PROBABILITY_OF_BONUS)
+     6b6:	04 30       	cpi	r16, 0x04	; 4
+     6b8:	09 f0       	breq	.+2      	; 0x6bc <__stack+0x25d>
+     6ba:	7b c0       	rjmp	.+246    	; 0x7b2 <__stack+0x353>
+			{
+				lcd_locate(0,0);
+     6bc:	60 e0       	ldi	r22, 0x00	; 0
+     6be:	80 e0       	ldi	r24, 0x00	; 0
+     6c0:	70 d5       	rcall	.+2784   	; 0x11a2 <lcd_locate>
+				lcd_str("Szansa na bonus");
+     6c2:	87 ed       	ldi	r24, 0xD7	; 215
+     6c4:	90 e0       	ldi	r25, 0x00	; 0
+     6c6:	21 d5       	rcall	.+2626   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     6c8:	60 e0       	ldi	r22, 0x00	; 0
+     6ca:	81 e0       	ldi	r24, 0x01	; 1
+     6cc:	6a d5       	rcall	.+2772   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     6ce:	8a ea       	ldi	r24, 0xAA	; 170
+     6d0:	90 e0       	ldi	r25, 0x00	; 0
+     6d2:	1b d5       	rcall	.+2614   	; 0x110a <lcd_str>
+				lcd_int( 100/game_settings.probability_of_bonus );
+     6d4:	80 91 06 02 	lds	r24, 0x0206
+     6d8:	88 1f       	adc	r24, r24
+     6da:	88 27       	eor	r24, r24
+     6dc:	88 1f       	adc	r24, r24
+     6de:	60 91 07 02 	lds	r22, 0x0207
+     6e2:	67 70       	andi	r22, 0x07	; 7
+     6e4:	66 0f       	add	r22, r22
+     6e6:	68 2b       	or	r22, r24
+     6e8:	70 e0       	ldi	r23, 0x00	; 0
+     6ea:	ce 01       	movw	r24, r28
+     6ec:	b8 d7       	rcall	.+3952   	; 0x165e <__divmodhi4>
+     6ee:	cb 01       	movw	r24, r22
+     6f0:	1c d5       	rcall	.+2616   	; 0x112a <lcd_int>
+				lcd_str(" %");
+     6f2:	87 ee       	ldi	r24, 0xE7	; 231
+     6f4:	90 e0       	ldi	r25, 0x00	; 0
+     6f6:	09 d5       	rcall	.+2578   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     6f8:	87 99       	sbic	0x10, 7	; 16
+     6fa:	26 c0       	rjmp	.+76     	; 0x748 <__stack+0x2e9>
+				{
+					if (game_settings.probability_of_bonus > 3)
+     6fc:	90 91 06 02 	lds	r25, 0x0206
+     700:	99 1f       	adc	r25, r25
+     702:	99 27       	eor	r25, r25
+     704:	99 1f       	adc	r25, r25
+     706:	80 91 07 02 	lds	r24, 0x0207
+     70a:	87 70       	andi	r24, 0x07	; 7
+     70c:	88 0f       	add	r24, r24
+     70e:	89 2b       	or	r24, r25
+     710:	90 e0       	ldi	r25, 0x00	; 0
+     712:	04 97       	sbiw	r24, 0x04	; 4
+     714:	cc f0       	brlt	.+50     	; 0x748 <__stack+0x2e9>
+					{
+						game_settings.probability_of_bonus--;
+     716:	90 91 06 02 	lds	r25, 0x0206
+     71a:	99 1f       	adc	r25, r25
+     71c:	99 27       	eor	r25, r25
+     71e:	99 1f       	adc	r25, r25
+     720:	80 91 07 02 	lds	r24, 0x0207
+     724:	87 70       	andi	r24, 0x07	; 7
+     726:	88 0f       	add	r24, r24
+     728:	89 2b       	or	r24, r25
+     72a:	81 5f       	subi	r24, 0xF1	; 241
+     72c:	8f 70       	andi	r24, 0x0F	; 15
+     72e:	90 91 06 02 	lds	r25, 0x0206
+     732:	80 fb       	bst	r24, 0
+     734:	97 f9       	bld	r25, 7
+     736:	90 93 06 02 	sts	0x0206, r25
+     73a:	86 95       	lsr	r24
+     73c:	90 91 07 02 	lds	r25, 0x0207
+     740:	98 7f       	andi	r25, 0xF8	; 248
+     742:	98 2b       	or	r25, r24
+     744:	90 93 07 02 	sts	0x0207, r25
+					}
+				}
+				if (MINUS_BUTTON)
+     748:	b0 99       	sbic	0x16, 0	; 22
+     74a:	26 c0       	rjmp	.+76     	; 0x798 <__stack+0x339>
+				{
+					if (game_settings.probability_of_bonus < 10)
+     74c:	90 91 06 02 	lds	r25, 0x0206
+     750:	99 1f       	adc	r25, r25
+     752:	99 27       	eor	r25, r25
+     754:	99 1f       	adc	r25, r25
+     756:	80 91 07 02 	lds	r24, 0x0207
+     75a:	87 70       	andi	r24, 0x07	; 7
+     75c:	88 0f       	add	r24, r24
+     75e:	89 2b       	or	r24, r25
+     760:	90 e0       	ldi	r25, 0x00	; 0
+     762:	0a 97       	sbiw	r24, 0x0a	; 10
+     764:	cc f4       	brge	.+50     	; 0x798 <__stack+0x339>
+					{
+						game_settings.probability_of_bonus++;
+     766:	90 91 06 02 	lds	r25, 0x0206
+     76a:	99 1f       	adc	r25, r25
+     76c:	99 27       	eor	r25, r25
+     76e:	99 1f       	adc	r25, r25
+     770:	80 91 07 02 	lds	r24, 0x0207
+     774:	87 70       	andi	r24, 0x07	; 7
+     776:	88 0f       	add	r24, r24
+     778:	89 2b       	or	r24, r25
+     77a:	8f 5f       	subi	r24, 0xFF	; 255
+     77c:	8f 70       	andi	r24, 0x0F	; 15
+     77e:	90 91 06 02 	lds	r25, 0x0206
+     782:	80 fb       	bst	r24, 0
+     784:	97 f9       	bld	r25, 7
+     786:	90 93 06 02 	sts	0x0206, r25
+     78a:	86 95       	lsr	r24
+     78c:	90 91 07 02 	lds	r25, 0x0207
+     790:	98 7f       	andi	r25, 0xF8	; 248
+     792:	98 2b       	or	r25, r24
+     794:	90 93 07 02 	sts	0x0207, r25
+					}
+				}
+				if (SELECT_BUTTON)
+     798:	85 99       	sbic	0x10, 5	; 16
+     79a:	3f c1       	rjmp	.+638    	; 0xa1a <__stack+0x5bb>
+     79c:	8f ef       	ldi	r24, 0xFF	; 255
+     79e:	91 ee       	ldi	r25, 0xE1	; 225
+     7a0:	24 e0       	ldi	r18, 0x04	; 4
+     7a2:	81 50       	subi	r24, 0x01	; 1
+     7a4:	90 40       	sbci	r25, 0x00	; 0
+     7a6:	20 40       	sbci	r18, 0x00	; 0
+     7a8:	e1 f7       	brne	.-8      	; 0x7a2 <__stack+0x343>
+     7aa:	00 c0       	rjmp	.+0      	; 0x7ac <__stack+0x34d>
+     7ac:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     7ae:	ff d4       	rcall	.+2558   	; 0x11ae <lcd_cls>
+     7b0:	02 c0       	rjmp	.+4      	; 0x7b6 <__stack+0x357>
+				}
+			}
+			if (settings_menu_flag == LEDMINUS_BONUS)
+     7b2:	05 30       	cpi	r16, 0x05	; 5
+     7b4:	a1 f5       	brne	.+104    	; 0x81e <__stack+0x3bf>
+			{
+				lcd_locate(0,0);
+     7b6:	60 e0       	ldi	r22, 0x00	; 0
+     7b8:	80 e0       	ldi	r24, 0x00	; 0
+     7ba:	f3 d4       	rcall	.+2534   	; 0x11a2 <lcd_locate>
+				lcd_str("Bonus odejmuj"_a"cy");
+     7bc:	8a ee       	ldi	r24, 0xEA	; 234
+     7be:	90 e0       	ldi	r25, 0x00	; 0
+     7c0:	a4 d4       	rcall	.+2376   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     7c2:	60 e0       	ldi	r22, 0x00	; 0
+     7c4:	81 e0       	ldi	r24, 0x01	; 1
+     7c6:	ed d4       	rcall	.+2522   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     7c8:	8a ea       	ldi	r24, 0xAA	; 170
+     7ca:	90 e0       	ldi	r25, 0x00	; 0
+     7cc:	9e d4       	rcall	.+2364   	; 0x110a <lcd_str>
+				lcd_str("Aktywny: ");
+     7ce:	8b ef       	ldi	r24, 0xFB	; 251
+     7d0:	90 e0       	ldi	r25, 0x00	; 0
+     7d2:	9b d4       	rcall	.+2358   	; 0x110a <lcd_str>
+				lcd_str(game_settings.ledminus_bonus_enable == true ? "TAK" : "NIE");
+     7d4:	80 91 07 02 	lds	r24, 0x0207
+     7d8:	83 ff       	sbrs	r24, 3
+     7da:	03 c0       	rjmp	.+6      	; 0x7e2 <__stack+0x383>
+     7dc:	84 e6       	ldi	r24, 0x64	; 100
+     7de:	90 e0       	ldi	r25, 0x00	; 0
+     7e0:	02 c0       	rjmp	.+4      	; 0x7e6 <__stack+0x387>
+     7e2:	88 e6       	ldi	r24, 0x68	; 104
+     7e4:	90 e0       	ldi	r25, 0x00	; 0
+     7e6:	91 d4       	rcall	.+2338   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     7e8:	87 99       	sbic	0x10, 7	; 16
+     7ea:	05 c0       	rjmp	.+10     	; 0x7f6 <__stack+0x397>
+				{
+					game_settings.ledminus_bonus_enable = true;
+     7ec:	80 91 07 02 	lds	r24, 0x0207
+     7f0:	88 60       	ori	r24, 0x08	; 8
+     7f2:	80 93 07 02 	sts	0x0207, r24
+				}
+				if (MINUS_BUTTON)
+     7f6:	b0 99       	sbic	0x16, 0	; 22
+     7f8:	05 c0       	rjmp	.+10     	; 0x804 <__stack+0x3a5>
+				{
+					game_settings.ledminus_bonus_enable = false;
+     7fa:	80 91 07 02 	lds	r24, 0x0207
+     7fe:	87 7f       	andi	r24, 0xF7	; 247
+     800:	80 93 07 02 	sts	0x0207, r24
+				}
+				if (SELECT_BUTTON)
+     804:	85 99       	sbic	0x10, 5	; 16
+     806:	0c c2       	rjmp	.+1048   	; 0xc20 <__stack+0x7c1>
+     808:	8f ef       	ldi	r24, 0xFF	; 255
+     80a:	91 ee       	ldi	r25, 0xE1	; 225
+     80c:	24 e0       	ldi	r18, 0x04	; 4
+     80e:	81 50       	subi	r24, 0x01	; 1
+     810:	90 40       	sbci	r25, 0x00	; 0
+     812:	20 40       	sbci	r18, 0x00	; 0
+     814:	e1 f7       	brne	.-8      	; 0x80e <__stack+0x3af>
+     816:	00 c0       	rjmp	.+0      	; 0x818 <__stack+0x3b9>
+     818:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     81a:	c9 d4       	rcall	.+2450   	; 0x11ae <lcd_cls>
+     81c:	02 c0       	rjmp	.+4      	; 0x822 <__stack+0x3c3>
+				}
+			}
+			if (settings_menu_flag == LEDPLUS_BONUS)
+     81e:	06 30       	cpi	r16, 0x06	; 6
+     820:	b1 f5       	brne	.+108    	; 0x88e <__stack+0x42f>
+			{
+				lcd_locate(0,0);
+     822:	60 e0       	ldi	r22, 0x00	; 0
+     824:	80 e0       	ldi	r24, 0x00	; 0
+     826:	bd d4       	rcall	.+2426   	; 0x11a2 <lcd_locate>
+				lcd_str("Bonus dodaj"_a"cy");
+     828:	85 e0       	ldi	r24, 0x05	; 5
+     82a:	91 e0       	ldi	r25, 0x01	; 1
+     82c:	6e d4       	rcall	.+2268   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     82e:	60 e0       	ldi	r22, 0x00	; 0
+     830:	81 e0       	ldi	r24, 0x01	; 1
+     832:	b7 d4       	rcall	.+2414   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     834:	8a ea       	ldi	r24, 0xAA	; 170
+     836:	90 e0       	ldi	r25, 0x00	; 0
+     838:	68 d4       	rcall	.+2256   	; 0x110a <lcd_str>
+				lcd_str("Aktywny: ");
+     83a:	8b ef       	ldi	r24, 0xFB	; 251
+     83c:	90 e0       	ldi	r25, 0x00	; 0
+     83e:	65 d4       	rcall	.+2250   	; 0x110a <lcd_str>
+				lcd_str(game_settings.ledplus_bonus_enable == true ? "TAK" : "NIE");
+     840:	80 91 07 02 	lds	r24, 0x0207
+     844:	84 ff       	sbrs	r24, 4
+     846:	03 c0       	rjmp	.+6      	; 0x84e <__stack+0x3ef>
+     848:	84 e6       	ldi	r24, 0x64	; 100
+     84a:	90 e0       	ldi	r25, 0x00	; 0
+     84c:	02 c0       	rjmp	.+4      	; 0x852 <__stack+0x3f3>
+     84e:	88 e6       	ldi	r24, 0x68	; 104
+     850:	90 e0       	ldi	r25, 0x00	; 0
+     852:	5b d4       	rcall	.+2230   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     854:	87 99       	sbic	0x10, 7	; 16
+     856:	05 c0       	rjmp	.+10     	; 0x862 <__stack+0x403>
+				{
+					game_settings.ledplus_bonus_enable = true;
+     858:	80 91 07 02 	lds	r24, 0x0207
+     85c:	80 61       	ori	r24, 0x10	; 16
+     85e:	80 93 07 02 	sts	0x0207, r24
+				}
+				if (MINUS_BUTTON)
+     862:	b0 99       	sbic	0x16, 0	; 22
+     864:	05 c0       	rjmp	.+10     	; 0x870 <__stack+0x411>
+				{
+					game_settings.ledplus_bonus_enable = false;
+     866:	80 91 07 02 	lds	r24, 0x0207
+     86a:	8f 7e       	andi	r24, 0xEF	; 239
+     86c:	80 93 07 02 	sts	0x0207, r24
+				}
+				if (SELECT_BUTTON)
+     870:	85 99       	sbic	0x10, 5	; 16
+     872:	90 c2       	rjmp	.+1312   	; 0xd94 <__stack+0x935>
+     874:	8f ef       	ldi	r24, 0xFF	; 255
+     876:	91 ee       	ldi	r25, 0xE1	; 225
+     878:	24 e0       	ldi	r18, 0x04	; 4
+     87a:	81 50       	subi	r24, 0x01	; 1
+     87c:	90 40       	sbci	r25, 0x00	; 0
+     87e:	20 40       	sbci	r18, 0x00	; 0
+     880:	e1 f7       	brne	.-8      	; 0x87a <__stack+0x41b>
+     882:	00 c0       	rjmp	.+0      	; 0x884 <__stack+0x425>
+     884:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     886:	93 d4       	rcall	.+2342   	; 0x11ae <lcd_cls>
+     888:	04 c0       	rjmp	.+8      	; 0x892 <__stack+0x433>
+     88a:	02 e0       	ldi	r16, 0x02	; 2
+     88c:	49 cd       	rjmp	.-1390   	; 0x320 <game_setup+0x28>
+				}
+			}
+			if (settings_menu_flag == RELAX_BONUS)
+     88e:	07 30       	cpi	r16, 0x07	; 7
+     890:	b1 f5       	brne	.+108    	; 0x8fe <__stack+0x49f>
+			{
+				lcd_locate(0,0);
+     892:	60 e0       	ldi	r22, 0x00	; 0
+     894:	80 e0       	ldi	r24, 0x00	; 0
+     896:	85 d4       	rcall	.+2314   	; 0x11a2 <lcd_locate>
+				lcd_str("Bonus relaksu");
+     898:	84 e1       	ldi	r24, 0x14	; 20
+     89a:	91 e0       	ldi	r25, 0x01	; 1
+     89c:	36 d4       	rcall	.+2156   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     89e:	60 e0       	ldi	r22, 0x00	; 0
+     8a0:	81 e0       	ldi	r24, 0x01	; 1
+     8a2:	7f d4       	rcall	.+2302   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     8a4:	8a ea       	ldi	r24, 0xAA	; 170
+     8a6:	90 e0       	ldi	r25, 0x00	; 0
+     8a8:	30 d4       	rcall	.+2144   	; 0x110a <lcd_str>
+				lcd_str("Aktywny: ");
+     8aa:	8b ef       	ldi	r24, 0xFB	; 251
+     8ac:	90 e0       	ldi	r25, 0x00	; 0
+     8ae:	2d d4       	rcall	.+2138   	; 0x110a <lcd_str>
+				lcd_str(game_settings.relax_bonus_enable == true ? "TAK" : "NIE");
+     8b0:	80 91 07 02 	lds	r24, 0x0207
+     8b4:	85 ff       	sbrs	r24, 5
+     8b6:	03 c0       	rjmp	.+6      	; 0x8be <__stack+0x45f>
+     8b8:	84 e6       	ldi	r24, 0x64	; 100
+     8ba:	90 e0       	ldi	r25, 0x00	; 0
+     8bc:	02 c0       	rjmp	.+4      	; 0x8c2 <__stack+0x463>
+     8be:	88 e6       	ldi	r24, 0x68	; 104
+     8c0:	90 e0       	ldi	r25, 0x00	; 0
+     8c2:	23 d4       	rcall	.+2118   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     8c4:	87 99       	sbic	0x10, 7	; 16
+     8c6:	05 c0       	rjmp	.+10     	; 0x8d2 <__stack+0x473>
+				{
+					game_settings.relax_bonus_enable = true;
+     8c8:	80 91 07 02 	lds	r24, 0x0207
+     8cc:	80 62       	ori	r24, 0x20	; 32
+     8ce:	80 93 07 02 	sts	0x0207, r24
+				}
+				if (MINUS_BUTTON)
+     8d2:	b0 99       	sbic	0x16, 0	; 22
+     8d4:	05 c0       	rjmp	.+10     	; 0x8e0 <__stack+0x481>
+				{
+					game_settings.relax_bonus_enable = false;
+     8d6:	80 91 07 02 	lds	r24, 0x0207
+     8da:	8f 7d       	andi	r24, 0xDF	; 223
+     8dc:	80 93 07 02 	sts	0x0207, r24
+				}
+				if (SELECT_BUTTON)
+     8e0:	85 99       	sbic	0x10, 5	; 16
+     8e2:	5a c2       	rjmp	.+1204   	; 0xd98 <__stack+0x939>
+     8e4:	8f ef       	ldi	r24, 0xFF	; 255
+     8e6:	91 ee       	ldi	r25, 0xE1	; 225
+     8e8:	24 e0       	ldi	r18, 0x04	; 4
+     8ea:	81 50       	subi	r24, 0x01	; 1
+     8ec:	90 40       	sbci	r25, 0x00	; 0
+     8ee:	20 40       	sbci	r18, 0x00	; 0
+     8f0:	e1 f7       	brne	.-8      	; 0x8ea <__stack+0x48b>
+     8f2:	00 c0       	rjmp	.+0      	; 0x8f4 <__stack+0x495>
+     8f4:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     8f6:	5b d4       	rcall	.+2230   	; 0x11ae <lcd_cls>
+     8f8:	05 c0       	rjmp	.+10     	; 0x904 <__stack+0x4a5>
+     8fa:	03 e0       	ldi	r16, 0x03	; 3
+     8fc:	11 cd       	rjmp	.-1502   	; 0x320 <game_setup+0x28>
+				}
+			}
+			if (settings_menu_flag == SPEED_OF_AUTOCLICK)
+     8fe:	08 30       	cpi	r16, 0x08	; 8
+     900:	09 f0       	breq	.+2      	; 0x904 <__stack+0x4a5>
+     902:	8d c0       	rjmp	.+282    	; 0xa1e <__stack+0x5bf>
+			{
+				lcd_locate(0,0);
+     904:	60 e0       	ldi	r22, 0x00	; 0
+     906:	80 e0       	ldi	r24, 0x00	; 0
+     908:	4c d4       	rcall	.+2200   	; 0x11a2 <lcd_locate>
+				lcd_str("Szybko"_s _c" autoclk");
+     90a:	82 e2       	ldi	r24, 0x22	; 34
+     90c:	91 e0       	ldi	r25, 0x01	; 1
+     90e:	fd d3       	rcall	.+2042   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     910:	60 e0       	ldi	r22, 0x00	; 0
+     912:	81 e0       	ldi	r24, 0x01	; 1
+     914:	46 d4       	rcall	.+2188   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     916:	8a ea       	ldi	r24, 0xAA	; 170
+     918:	90 e0       	ldi	r25, 0x00	; 0
+     91a:	f7 d3       	rcall	.+2030   	; 0x110a <lcd_str>
+				lcd_str("co ");
+     91c:	8e ec       	ldi	r24, 0xCE	; 206
+     91e:	90 e0       	ldi	r25, 0x00	; 0
+     920:	f4 d3       	rcall	.+2024   	; 0x110a <lcd_str>
+				lcd_int(game_settings.speed_of_autoclick*4);
+     922:	90 91 07 02 	lds	r25, 0x0207
+     926:	92 95       	swap	r25
+     928:	96 95       	lsr	r25
+     92a:	96 95       	lsr	r25
+     92c:	93 70       	andi	r25, 0x03	; 3
+     92e:	80 91 08 02 	lds	r24, 0x0208
+     932:	88 0f       	add	r24, r24
+     934:	88 0f       	add	r24, r24
+     936:	89 2b       	or	r24, r25
+     938:	24 e0       	ldi	r18, 0x04	; 4
+     93a:	82 9f       	mul	r24, r18
+     93c:	c0 01       	movw	r24, r0
+     93e:	11 24       	eor	r1, r1
+     940:	f4 d3       	rcall	.+2024   	; 0x112a <lcd_int>
+				lcd_str(" ms ");
+     942:	82 ed       	ldi	r24, 0xD2	; 210
+     944:	90 e0       	ldi	r25, 0x00	; 0
+     946:	e1 d3       	rcall	.+1986   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     948:	87 99       	sbic	0x10, 7	; 16
+     94a:	2c c0       	rjmp	.+88     	; 0x9a4 <__stack+0x545>
+				{
+					if (game_settings.speed_of_autoclick < 250)
+     94c:	90 91 07 02 	lds	r25, 0x0207
+     950:	92 95       	swap	r25
+     952:	96 95       	lsr	r25
+     954:	96 95       	lsr	r25
+     956:	93 70       	andi	r25, 0x03	; 3
+     958:	80 91 08 02 	lds	r24, 0x0208
+     95c:	88 0f       	add	r24, r24
+     95e:	88 0f       	add	r24, r24
+     960:	89 2b       	or	r24, r25
+     962:	8a 3f       	cpi	r24, 0xFA	; 250
+     964:	f8 f4       	brcc	.+62     	; 0x9a4 <__stack+0x545>
+					{
+						game_settings.speed_of_autoclick += 5;
+     966:	90 91 07 02 	lds	r25, 0x0207
+     96a:	92 95       	swap	r25
+     96c:	96 95       	lsr	r25
+     96e:	96 95       	lsr	r25
+     970:	93 70       	andi	r25, 0x03	; 3
+     972:	80 91 08 02 	lds	r24, 0x0208
+     976:	88 0f       	add	r24, r24
+     978:	88 0f       	add	r24, r24
+     97a:	89 2b       	or	r24, r25
+     97c:	8b 5f       	subi	r24, 0xFB	; 251
+     97e:	28 2f       	mov	r18, r24
+     980:	22 95       	swap	r18
+     982:	22 0f       	add	r18, r18
+     984:	22 0f       	add	r18, r18
+     986:	20 7c       	andi	r18, 0xC0	; 192
+     988:	90 91 07 02 	lds	r25, 0x0207
+     98c:	9f 73       	andi	r25, 0x3F	; 63
+     98e:	92 2b       	or	r25, r18
+     990:	90 93 07 02 	sts	0x0207, r25
+     994:	86 95       	lsr	r24
+     996:	86 95       	lsr	r24
+     998:	90 91 08 02 	lds	r25, 0x0208
+     99c:	90 7c       	andi	r25, 0xC0	; 192
+     99e:	98 2b       	or	r25, r24
+     9a0:	90 93 08 02 	sts	0x0208, r25
+					}
+				}
+				if (MINUS_BUTTON)
+     9a4:	b0 99       	sbic	0x16, 0	; 22
+     9a6:	2c c0       	rjmp	.+88     	; 0xa00 <__stack+0x5a1>
+				{
+					if (game_settings.speed_of_autoclick > 25)
+     9a8:	90 91 07 02 	lds	r25, 0x0207
+     9ac:	92 95       	swap	r25
+     9ae:	96 95       	lsr	r25
+     9b0:	96 95       	lsr	r25
+     9b2:	93 70       	andi	r25, 0x03	; 3
+     9b4:	80 91 08 02 	lds	r24, 0x0208
+     9b8:	88 0f       	add	r24, r24
+     9ba:	88 0f       	add	r24, r24
+     9bc:	89 2b       	or	r24, r25
+     9be:	8a 31       	cpi	r24, 0x1A	; 26
+     9c0:	f8 f0       	brcs	.+62     	; 0xa00 <__stack+0x5a1>
+					{
+						game_settings.speed_of_autoclick -= 5;
+     9c2:	90 91 07 02 	lds	r25, 0x0207
+     9c6:	92 95       	swap	r25
+     9c8:	96 95       	lsr	r25
+     9ca:	96 95       	lsr	r25
+     9cc:	93 70       	andi	r25, 0x03	; 3
+     9ce:	80 91 08 02 	lds	r24, 0x0208
+     9d2:	88 0f       	add	r24, r24
+     9d4:	88 0f       	add	r24, r24
+     9d6:	89 2b       	or	r24, r25
+     9d8:	85 50       	subi	r24, 0x05	; 5
+     9da:	28 2f       	mov	r18, r24
+     9dc:	22 95       	swap	r18
+     9de:	22 0f       	add	r18, r18
+     9e0:	22 0f       	add	r18, r18
+     9e2:	20 7c       	andi	r18, 0xC0	; 192
+     9e4:	90 91 07 02 	lds	r25, 0x0207
+     9e8:	9f 73       	andi	r25, 0x3F	; 63
+     9ea:	92 2b       	or	r25, r18
+     9ec:	90 93 07 02 	sts	0x0207, r25
+     9f0:	86 95       	lsr	r24
+     9f2:	86 95       	lsr	r24
+     9f4:	90 91 08 02 	lds	r25, 0x0208
+     9f8:	90 7c       	andi	r25, 0xC0	; 192
+     9fa:	98 2b       	or	r25, r24
+     9fc:	90 93 08 02 	sts	0x0208, r25
+					}
+				}
+				if (SELECT_BUTTON)
+     a00:	85 99       	sbic	0x10, 5	; 16
+     a02:	cc c1       	rjmp	.+920    	; 0xd9c <__stack+0x93d>
+     a04:	8f ef       	ldi	r24, 0xFF	; 255
+     a06:	91 ee       	ldi	r25, 0xE1	; 225
+     a08:	24 e0       	ldi	r18, 0x04	; 4
+     a0a:	81 50       	subi	r24, 0x01	; 1
+     a0c:	90 40       	sbci	r25, 0x00	; 0
+     a0e:	20 40       	sbci	r18, 0x00	; 0
+     a10:	e1 f7       	brne	.-8      	; 0xa0a <__stack+0x5ab>
+     a12:	00 c0       	rjmp	.+0      	; 0xa14 <__stack+0x5b5>
+     a14:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     a16:	cb d3       	rcall	.+1942   	; 0x11ae <lcd_cls>
+     a18:	05 c0       	rjmp	.+10     	; 0xa24 <__stack+0x5c5>
+     a1a:	04 e0       	ldi	r16, 0x04	; 4
+     a1c:	81 cc       	rjmp	.-1790   	; 0x320 <game_setup+0x28>
+				}
+			}
+			if (settings_menu_flag == TIME_OF_AUTOCLICK)
+     a1e:	09 30       	cpi	r16, 0x09	; 9
+     a20:	09 f0       	breq	.+2      	; 0xa24 <__stack+0x5c5>
+     a22:	00 c1       	rjmp	.+512    	; 0xc24 <__stack+0x7c5>
+			{
+				lcd_locate(0,0);
+     a24:	60 e0       	ldi	r22, 0x00	; 0
+     a26:	80 e0       	ldi	r24, 0x00	; 0
+     a28:	bc d3       	rcall	.+1912   	; 0x11a2 <lcd_locate>
+				lcd_str("Czas autoclk");
+     a2a:	83 e3       	ldi	r24, 0x33	; 51
+     a2c:	91 e0       	ldi	r25, 0x01	; 1
+     a2e:	6d d3       	rcall	.+1754   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     a30:	60 e0       	ldi	r22, 0x00	; 0
+     a32:	81 e0       	ldi	r24, 0x01	; 1
+     a34:	b6 d3       	rcall	.+1900   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     a36:	8a ea       	ldi	r24, 0xAA	; 170
+     a38:	90 e0       	ldi	r25, 0x00	; 0
+     a3a:	67 d3       	rcall	.+1742   	; 0x110a <lcd_str>
+				lcd_int(game_settings.time_of_autoclick*4);
+     a3c:	20 91 08 02 	lds	r18, 0x0208
+     a40:	22 95       	swap	r18
+     a42:	26 95       	lsr	r18
+     a44:	26 95       	lsr	r18
+     a46:	23 70       	andi	r18, 0x03	; 3
+     a48:	30 91 09 02 	lds	r19, 0x0209
+     a4c:	33 0f       	add	r19, r19
+     a4e:	33 0f       	add	r19, r19
+     a50:	83 2f       	mov	r24, r19
+     a52:	82 2b       	or	r24, r18
+     a54:	30 91 09 02 	lds	r19, 0x0209
+     a58:	32 95       	swap	r19
+     a5a:	36 95       	lsr	r19
+     a5c:	36 95       	lsr	r19
+     a5e:	33 70       	andi	r19, 0x03	; 3
+     a60:	20 91 0a 02 	lds	r18, 0x020A
+     a64:	27 70       	andi	r18, 0x07	; 7
+     a66:	22 0f       	add	r18, r18
+     a68:	22 0f       	add	r18, r18
+     a6a:	92 2f       	mov	r25, r18
+     a6c:	93 2b       	or	r25, r19
+     a6e:	88 0f       	add	r24, r24
+     a70:	99 1f       	adc	r25, r25
+     a72:	88 0f       	add	r24, r24
+     a74:	99 1f       	adc	r25, r25
+     a76:	59 d3       	rcall	.+1714   	; 0x112a <lcd_int>
+				lcd_str(" ms ");
+     a78:	82 ed       	ldi	r24, 0xD2	; 210
+     a7a:	90 e0       	ldi	r25, 0x00	; 0
+     a7c:	46 d3       	rcall	.+1676   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     a7e:	87 99       	sbic	0x10, 7	; 16
+     a80:	60 c0       	rjmp	.+192    	; 0xb42 <__stack+0x6e3>
+				{
+					if (game_settings.time_of_autoclick < 5000)
+     a82:	20 91 08 02 	lds	r18, 0x0208
+     a86:	22 95       	swap	r18
+     a88:	26 95       	lsr	r18
+     a8a:	26 95       	lsr	r18
+     a8c:	23 70       	andi	r18, 0x03	; 3
+     a8e:	30 91 09 02 	lds	r19, 0x0209
+     a92:	33 0f       	add	r19, r19
+     a94:	33 0f       	add	r19, r19
+     a96:	83 2f       	mov	r24, r19
+     a98:	82 2b       	or	r24, r18
+     a9a:	30 91 09 02 	lds	r19, 0x0209
+     a9e:	32 95       	swap	r19
+     aa0:	36 95       	lsr	r19
+     aa2:	36 95       	lsr	r19
+     aa4:	33 70       	andi	r19, 0x03	; 3
+     aa6:	20 91 0a 02 	lds	r18, 0x020A
+     aaa:	27 70       	andi	r18, 0x07	; 7
+     aac:	22 0f       	add	r18, r18
+     aae:	22 0f       	add	r18, r18
+     ab0:	92 2f       	mov	r25, r18
+     ab2:	93 2b       	or	r25, r19
+     ab4:	88 38       	cpi	r24, 0x88	; 136
+     ab6:	93 41       	sbci	r25, 0x13	; 19
+     ab8:	0c f0       	brlt	.+2      	; 0xabc <__stack+0x65d>
+     aba:	43 c0       	rjmp	.+134    	; 0xb42 <__stack+0x6e3>
+					{
+						game_settings.time_of_autoclick += 25;
+     abc:	20 91 08 02 	lds	r18, 0x0208
+     ac0:	22 95       	swap	r18
+     ac2:	26 95       	lsr	r18
+     ac4:	26 95       	lsr	r18
+     ac6:	23 70       	andi	r18, 0x03	; 3
+     ac8:	30 91 09 02 	lds	r19, 0x0209
+     acc:	33 0f       	add	r19, r19
+     ace:	33 0f       	add	r19, r19
+     ad0:	83 2f       	mov	r24, r19
+     ad2:	82 2b       	or	r24, r18
+     ad4:	30 91 09 02 	lds	r19, 0x0209
+     ad8:	32 95       	swap	r19
+     ada:	36 95       	lsr	r19
+     adc:	36 95       	lsr	r19
+     ade:	33 70       	andi	r19, 0x03	; 3
+     ae0:	20 91 0a 02 	lds	r18, 0x020A
+     ae4:	27 70       	andi	r18, 0x07	; 7
+     ae6:	22 0f       	add	r18, r18
+     ae8:	22 0f       	add	r18, r18
+     aea:	92 2f       	mov	r25, r18
+     aec:	93 2b       	or	r25, r19
+     aee:	49 96       	adiw	r24, 0x19	; 25
+     af0:	9f 71       	andi	r25, 0x1F	; 31
+     af2:	38 2f       	mov	r19, r24
+     af4:	32 95       	swap	r19
+     af6:	33 0f       	add	r19, r19
+     af8:	33 0f       	add	r19, r19
+     afa:	30 7c       	andi	r19, 0xC0	; 192
+     afc:	20 91 08 02 	lds	r18, 0x0208
+     b00:	2f 73       	andi	r18, 0x3F	; 63
+     b02:	23 2b       	or	r18, r19
+     b04:	20 93 08 02 	sts	0x0208, r18
+     b08:	28 2f       	mov	r18, r24
+     b0a:	26 95       	lsr	r18
+     b0c:	26 95       	lsr	r18
+     b0e:	80 91 09 02 	lds	r24, 0x0209
+     b12:	80 7c       	andi	r24, 0xC0	; 192
+     b14:	82 2b       	or	r24, r18
+     b16:	80 93 09 02 	sts	0x0209, r24
+     b1a:	29 2f       	mov	r18, r25
+     b1c:	22 95       	swap	r18
+     b1e:	22 0f       	add	r18, r18
+     b20:	22 0f       	add	r18, r18
+     b22:	20 7c       	andi	r18, 0xC0	; 192
+     b24:	80 91 09 02 	lds	r24, 0x0209
+     b28:	8f 73       	andi	r24, 0x3F	; 63
+     b2a:	82 2b       	or	r24, r18
+     b2c:	80 93 09 02 	sts	0x0209, r24
+     b30:	96 95       	lsr	r25
+     b32:	96 95       	lsr	r25
+     b34:	97 70       	andi	r25, 0x07	; 7
+     b36:	80 91 0a 02 	lds	r24, 0x020A
+     b3a:	88 7f       	andi	r24, 0xF8	; 248
+     b3c:	89 2b       	or	r24, r25
+     b3e:	80 93 0a 02 	sts	0x020A, r24
+					}
+				}
+				if (MINUS_BUTTON)
+     b42:	b0 99       	sbic	0x16, 0	; 22
+     b44:	60 c0       	rjmp	.+192    	; 0xc06 <__stack+0x7a7>
+				{
+					if (game_settings.time_of_autoclick > 250)
+     b46:	20 91 08 02 	lds	r18, 0x0208
+     b4a:	22 95       	swap	r18
+     b4c:	26 95       	lsr	r18
+     b4e:	26 95       	lsr	r18
+     b50:	23 70       	andi	r18, 0x03	; 3
+     b52:	30 91 09 02 	lds	r19, 0x0209
+     b56:	33 0f       	add	r19, r19
+     b58:	33 0f       	add	r19, r19
+     b5a:	83 2f       	mov	r24, r19
+     b5c:	82 2b       	or	r24, r18
+     b5e:	30 91 09 02 	lds	r19, 0x0209
+     b62:	32 95       	swap	r19
+     b64:	36 95       	lsr	r19
+     b66:	36 95       	lsr	r19
+     b68:	33 70       	andi	r19, 0x03	; 3
+     b6a:	20 91 0a 02 	lds	r18, 0x020A
+     b6e:	27 70       	andi	r18, 0x07	; 7
+     b70:	22 0f       	add	r18, r18
+     b72:	22 0f       	add	r18, r18
+     b74:	92 2f       	mov	r25, r18
+     b76:	93 2b       	or	r25, r19
+     b78:	8b 3f       	cpi	r24, 0xFB	; 251
+     b7a:	91 05       	cpc	r25, r1
+     b7c:	0c f4       	brge	.+2      	; 0xb80 <__stack+0x721>
+     b7e:	43 c0       	rjmp	.+134    	; 0xc06 <__stack+0x7a7>
+					{
+						game_settings.time_of_autoclick -=25;
+     b80:	20 91 08 02 	lds	r18, 0x0208
+     b84:	22 95       	swap	r18
+     b86:	26 95       	lsr	r18
+     b88:	26 95       	lsr	r18
+     b8a:	23 70       	andi	r18, 0x03	; 3
+     b8c:	30 91 09 02 	lds	r19, 0x0209
+     b90:	33 0f       	add	r19, r19
+     b92:	33 0f       	add	r19, r19
+     b94:	83 2f       	mov	r24, r19
+     b96:	82 2b       	or	r24, r18
+     b98:	30 91 09 02 	lds	r19, 0x0209
+     b9c:	32 95       	swap	r19
+     b9e:	36 95       	lsr	r19
+     ba0:	36 95       	lsr	r19
+     ba2:	33 70       	andi	r19, 0x03	; 3
+     ba4:	20 91 0a 02 	lds	r18, 0x020A
+     ba8:	27 70       	andi	r18, 0x07	; 7
+     baa:	22 0f       	add	r18, r18
+     bac:	22 0f       	add	r18, r18
+     bae:	92 2f       	mov	r25, r18
+     bb0:	93 2b       	or	r25, r19
+     bb2:	49 97       	sbiw	r24, 0x19	; 25
+     bb4:	9f 71       	andi	r25, 0x1F	; 31
+     bb6:	38 2f       	mov	r19, r24
+     bb8:	32 95       	swap	r19
+     bba:	33 0f       	add	r19, r19
+     bbc:	33 0f       	add	r19, r19
+     bbe:	30 7c       	andi	r19, 0xC0	; 192
+     bc0:	20 91 08 02 	lds	r18, 0x0208
+     bc4:	2f 73       	andi	r18, 0x3F	; 63
+     bc6:	23 2b       	or	r18, r19
+     bc8:	20 93 08 02 	sts	0x0208, r18
+     bcc:	28 2f       	mov	r18, r24
+     bce:	26 95       	lsr	r18
+     bd0:	26 95       	lsr	r18
+     bd2:	80 91 09 02 	lds	r24, 0x0209
+     bd6:	80 7c       	andi	r24, 0xC0	; 192
+     bd8:	82 2b       	or	r24, r18
+     bda:	80 93 09 02 	sts	0x0209, r24
+     bde:	29 2f       	mov	r18, r25
+     be0:	22 95       	swap	r18
+     be2:	22 0f       	add	r18, r18
+     be4:	22 0f       	add	r18, r18
+     be6:	20 7c       	andi	r18, 0xC0	; 192
+     be8:	80 91 09 02 	lds	r24, 0x0209
+     bec:	8f 73       	andi	r24, 0x3F	; 63
+     bee:	82 2b       	or	r24, r18
+     bf0:	80 93 09 02 	sts	0x0209, r24
+     bf4:	96 95       	lsr	r25
+     bf6:	96 95       	lsr	r25
+     bf8:	97 70       	andi	r25, 0x07	; 7
+     bfa:	80 91 0a 02 	lds	r24, 0x020A
+     bfe:	88 7f       	andi	r24, 0xF8	; 248
+     c00:	89 2b       	or	r24, r25
+     c02:	80 93 0a 02 	sts	0x020A, r24
+					}
+				}
+				if (SELECT_BUTTON)
+     c06:	85 99       	sbic	0x10, 5	; 16
+     c08:	cb c0       	rjmp	.+406    	; 0xda0 <__stack+0x941>
+     c0a:	8f ef       	ldi	r24, 0xFF	; 255
+     c0c:	91 ee       	ldi	r25, 0xE1	; 225
+     c0e:	24 e0       	ldi	r18, 0x04	; 4
+     c10:	81 50       	subi	r24, 0x01	; 1
+     c12:	90 40       	sbci	r25, 0x00	; 0
+     c14:	20 40       	sbci	r18, 0x00	; 0
+     c16:	e1 f7       	brne	.-8      	; 0xc10 <__stack+0x7b1>
+     c18:	00 c0       	rjmp	.+0      	; 0xc1a <__stack+0x7bb>
+     c1a:	00 00       	nop
+				{
+					settings_menu_flag++;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     c1c:	c8 d2       	rcall	.+1424   	; 0x11ae <lcd_cls>
+     c1e:	05 c0       	rjmp	.+10     	; 0xc2a <__stack+0x7cb>
+     c20:	05 e0       	ldi	r16, 0x05	; 5
+     c22:	7e cb       	rjmp	.-2308   	; 0x320 <game_setup+0x28>
+				}
+			}
+			if (settings_menu_flag == LEDMINUS_AUTODISABLE)
+     c24:	0a 30       	cpi	r16, 0x0A	; 10
+     c26:	09 f0       	breq	.+2      	; 0xc2a <__stack+0x7cb>
+     c28:	7b cb       	rjmp	.-2314   	; 0x320 <game_setup+0x28>
+			{
+				lcd_locate(0,0);
+     c2a:	60 e0       	ldi	r22, 0x00	; 0
+     c2c:	80 e0       	ldi	r24, 0x00	; 0
+     c2e:	b9 d2       	rcall	.+1394   	; 0x11a2 <lcd_locate>
+				lcd_str("AutoOFF b.minus");
+     c30:	80 e4       	ldi	r24, 0x40	; 64
+     c32:	91 e0       	ldi	r25, 0x01	; 1
+     c34:	6a d2       	rcall	.+1236   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     c36:	60 e0       	ldi	r22, 0x00	; 0
+     c38:	81 e0       	ldi	r24, 0x01	; 1
+     c3a:	b3 d2       	rcall	.+1382   	; 0x11a2 <lcd_locate>
+				lcd_str("=== ");
+     c3c:	8a ea       	ldi	r24, 0xAA	; 170
+     c3e:	90 e0       	ldi	r25, 0x00	; 0
+     c40:	64 d2       	rcall	.+1224   	; 0x110a <lcd_str>
+				lcd_str("Aktywny: ");
+     c42:	8b ef       	ldi	r24, 0xFB	; 251
+     c44:	90 e0       	ldi	r25, 0x00	; 0
+     c46:	61 d2       	rcall	.+1218   	; 0x110a <lcd_str>
+				lcd_str(game_settings.ledminus_auto_disable == true ? "TAK" : "NIE");
+     c48:	80 91 0a 02 	lds	r24, 0x020A
+     c4c:	83 ff       	sbrs	r24, 3
+     c4e:	03 c0       	rjmp	.+6      	; 0xc56 <__stack+0x7f7>
+     c50:	84 e6       	ldi	r24, 0x64	; 100
+     c52:	90 e0       	ldi	r25, 0x00	; 0
+     c54:	02 c0       	rjmp	.+4      	; 0xc5a <__stack+0x7fb>
+     c56:	88 e6       	ldi	r24, 0x68	; 104
+     c58:	90 e0       	ldi	r25, 0x00	; 0
+     c5a:	57 d2       	rcall	.+1198   	; 0x110a <lcd_str>
+				if (PLUS_BUTTON)
+     c5c:	87 99       	sbic	0x10, 7	; 16
+     c5e:	05 c0       	rjmp	.+10     	; 0xc6a <__stack+0x80b>
+				{
+					game_settings.ledminus_auto_disable = true;
+     c60:	80 91 0a 02 	lds	r24, 0x020A
+     c64:	88 60       	ori	r24, 0x08	; 8
+     c66:	80 93 0a 02 	sts	0x020A, r24
+				}
+				if (MINUS_BUTTON)
+     c6a:	b0 99       	sbic	0x16, 0	; 22
+     c6c:	05 c0       	rjmp	.+10     	; 0xc78 <__stack+0x819>
+				{
+					game_settings.ledminus_auto_disable = false;
+     c6e:	80 91 0a 02 	lds	r24, 0x020A
+     c72:	87 7f       	andi	r24, 0xF7	; 247
+     c74:	80 93 0a 02 	sts	0x020A, r24
+				}
+				if (SELECT_BUTTON)
+     c78:	85 99       	sbic	0x10, 5	; 16
+     c7a:	94 c0       	rjmp	.+296    	; 0xda4 <__stack+0x945>
+     c7c:	8f ef       	ldi	r24, 0xFF	; 255
+     c7e:	91 ee       	ldi	r25, 0xE1	; 225
+     c80:	24 e0       	ldi	r18, 0x04	; 4
+     c82:	81 50       	subi	r24, 0x01	; 1
+     c84:	90 40       	sbci	r25, 0x00	; 0
+     c86:	20 40       	sbci	r18, 0x00	; 0
+     c88:	e1 f7       	brne	.-8      	; 0xc82 <__stack+0x823>
+     c8a:	00 c0       	rjmp	.+0      	; 0xc8c <__stack+0x82d>
+     c8c:	00 00       	nop
+				{
+					settings_menu_flag = NUMBER_OF_LEDS;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     c8e:	8f d2       	rcall	.+1310   	; 0x11ae <lcd_cls>
+				{
+					game_settings.ledminus_auto_disable = false;
+				}
+				if (SELECT_BUTTON)
+				{
+					settings_menu_flag = NUMBER_OF_LEDS;
+     c90:	01 e0       	ldi	r16, 0x01	; 1
+     c92:	46 cb       	rjmp	.-2420   	; 0x320 <game_setup+0x28>
+					lcd_cls();
+				}
+			}
+		}
+		
+		if (main_menu_flag == INFO)
+     c94:	13 30       	cpi	r17, 0x03	; 3
+     c96:	49 f5       	brne	.+82     	; 0xcea <__stack+0x88b>
+		{
+			if (settings_menu_flag == MAIN_MENU)
+			{
+				lcd_locate(0,0);
+     c98:	60 e0       	ldi	r22, 0x00	; 0
+     c9a:	80 e0       	ldi	r24, 0x00	; 0
+			}
+		}
+		
+		if (main_menu_flag == INFO)
+		{
+			if (settings_menu_flag == MAIN_MENU)
+     c9c:	01 11       	cpse	r16, r1
+     c9e:	0d c0       	rjmp	.+26     	; 0xcba <__stack+0x85b>
+			{
+				lcd_locate(0,0);
+     ca0:	80 d2       	rcall	.+1280   	; 0x11a2 <lcd_locate>
+				lcd_str("===INFORMACJE===");
+     ca2:	80 e5       	ldi	r24, 0x50	; 80
+     ca4:	91 e0       	ldi	r25, 0x01	; 1
+     ca6:	31 d2       	rcall	.+1122   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     ca8:	60 e0       	ldi	r22, 0x00	; 0
+     caa:	81 e0       	ldi	r24, 0x01	; 1
+     cac:	7a d2       	rcall	.+1268   	; 0x11a2 <lcd_locate>
+				lcd_str("================");
+     cae:	8d e7       	ldi	r24, 0x7D	; 125
+     cb0:	90 e0       	ldi	r25, 0x00	; 0
+     cb2:	2b d2       	rcall	.+1110   	; 0x110a <lcd_str>
+				if (SELECT_BUTTON)
+     cb4:	85 99       	sbic	0x10, 5	; 16
+     cb6:	34 cb       	rjmp	.-2456   	; 0x320 <game_setup+0x28>
+     cb8:	e1 cf       	rjmp	.-62     	; 0xc7c <__stack+0x81d>
+					lcd_cls();
+				}
+			}
+			else
+			{
+				lcd_locate(0,0);
+     cba:	73 d2       	rcall	.+1254   	; 0x11a2 <lcd_locate>
+				lcd_str(":::LED::FIGHT:::");
+     cbc:	81 e6       	ldi	r24, 0x61	; 97
+     cbe:	91 e0       	ldi	r25, 0x01	; 1
+     cc0:	24 d2       	rcall	.+1096   	; 0x110a <lcd_str>
+				lcd_locate(1,0);
+     cc2:	60 e0       	ldi	r22, 0x00	; 0
+     cc4:	81 e0       	ldi	r24, 0x01	; 1
+     cc6:	6d d2       	rcall	.+1242   	; 0x11a2 <lcd_locate>
+				lcd_str("Autor: A.Chorian");
+     cc8:	82 e7       	ldi	r24, 0x72	; 114
+     cca:	91 e0       	ldi	r25, 0x01	; 1
+     ccc:	1e d2       	rcall	.+1084   	; 0x110a <lcd_str>
+				if (SELECT_BUTTON)
+     cce:	85 99       	sbic	0x10, 5	; 16
+     cd0:	27 cb       	rjmp	.-2482   	; 0x320 <game_setup+0x28>
+     cd2:	8f ef       	ldi	r24, 0xFF	; 255
+     cd4:	91 ee       	ldi	r25, 0xE1	; 225
+     cd6:	24 e0       	ldi	r18, 0x04	; 4
+     cd8:	81 50       	subi	r24, 0x01	; 1
+     cda:	90 40       	sbci	r25, 0x00	; 0
+     cdc:	20 40       	sbci	r18, 0x00	; 0
+     cde:	e1 f7       	brne	.-8      	; 0xcd8 <__stack+0x879>
+     ce0:	00 c0       	rjmp	.+0      	; 0xce2 <__stack+0x883>
+     ce2:	00 00       	nop
+				{
+					main_menu_flag = INFO;
+					settings_menu_flag = MAIN_MENU;
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+     ce4:	64 d2       	rcall	.+1224   	; 0x11ae <lcd_cls>
+				lcd_locate(1,0);
+				lcd_str("Autor: A.Chorian");
+				if (SELECT_BUTTON)
+				{
+					main_menu_flag = INFO;
+					settings_menu_flag = MAIN_MENU;
+     ce6:	00 e0       	ldi	r16, 0x00	; 0
+     ce8:	1b cb       	rjmp	.-2506   	; 0x320 <game_setup+0x28>
+					_delay_ms(DELAY_FOR_BUTTONS);
+					lcd_cls();
+				}
+			}
+		}
+		if (main_menu_flag == RESET_SETTINGS)
+     cea:	14 30       	cpi	r17, 0x04	; 4
+     cec:	09 f0       	breq	.+2      	; 0xcf0 <__stack+0x891>
+     cee:	18 cb       	rjmp	.-2512   	; 0x320 <game_setup+0x28>
+		{
+			lcd_locate(0,0);
+     cf0:	60 e0       	ldi	r22, 0x00	; 0
+     cf2:	80 e0       	ldi	r24, 0x00	; 0
+     cf4:	56 d2       	rcall	.+1196   	; 0x11a2 <lcd_locate>
+			lcd_str("=== RESETUJ  ===");
+     cf6:	83 e8       	ldi	r24, 0x83	; 131
+     cf8:	91 e0       	ldi	r25, 0x01	; 1
+     cfa:	07 d2       	rcall	.+1038   	; 0x110a <lcd_str>
+			lcd_locate(1,0);
+     cfc:	60 e0       	ldi	r22, 0x00	; 0
+     cfe:	81 e0       	ldi	r24, 0x01	; 1
+     d00:	50 d2       	rcall	.+1184   	; 0x11a2 <lcd_locate>
+			lcd_str("===USTAWIENIA===");
+     d02:	8e e8       	ldi	r24, 0x8E	; 142
+     d04:	90 e0       	ldi	r25, 0x00	; 0
+     d06:	01 d2       	rcall	.+1026   	; 0x110a <lcd_str>
+			if (SELECT_BUTTON)
+     d08:	85 99       	sbic	0x10, 5	; 16
+     d0a:	0a cb       	rjmp	.-2540   	; 0x320 <game_setup+0x28>
+			{
+				load_default_settings();
+     d0c:	e2 da       	rcall	.-2620   	; 0x2d2 <load_default_settings>
+				save_current_settings();
+     d0e:	d3 da       	rcall	.-2650   	; 0x2b6 <save_current_settings>
+     d10:	8f ef       	ldi	r24, 0xFF	; 255
+     d12:	91 ee       	ldi	r25, 0xE1	; 225
+     d14:	24 e0       	ldi	r18, 0x04	; 4
+     d16:	81 50       	subi	r24, 0x01	; 1
+     d18:	90 40       	sbci	r25, 0x00	; 0
+     d1a:	20 40       	sbci	r18, 0x00	; 0
+     d1c:	e1 f7       	brne	.-8      	; 0xd16 <__stack+0x8b7>
+     d1e:	00 c0       	rjmp	.+0      	; 0xd20 <__stack+0x8c1>
+     d20:	00 00       	nop
+				main_menu_flag = QUICK_GAME;
+				_delay_ms(DELAY_FOR_BUTTONS);
+				lcd_cls();
+     d22:	45 d2       	rcall	.+1162   	; 0x11ae <lcd_cls>
+			lcd_str("===USTAWIENIA===");
+			if (SELECT_BUTTON)
+			{
+				load_default_settings();
+				save_current_settings();
+				main_menu_flag = QUICK_GAME;
+     d24:	11 e0       	ldi	r17, 0x01	; 1
+     d26:	fc ca       	rjmp	.-2568   	; 0x320 <game_setup+0x28>
+				_delay_ms(DELAY_FOR_BUTTONS);
+				lcd_cls();
+			}
+		}
+	}
+	lcd_cls();
+     d28:	42 d2       	rcall	.+1156   	; 0x11ae <lcd_cls>
+	lcd_locate(0,0);
+     d2a:	60 e0       	ldi	r22, 0x00	; 0
+     d2c:	80 e0       	ldi	r24, 0x00	; 0
+     d2e:	39 d2       	rcall	.+1138   	; 0x11a2 <lcd_locate>
+	lcd_str("  Powodzenia !  ");
+     d30:	84 e9       	ldi	r24, 0x94	; 148
+     d32:	91 e0       	ldi	r25, 0x01	; 1
+     d34:	ea d1       	rcall	.+980    	; 0x110a <lcd_str>
+	init_data();
+     d36:	5a d1       	rcall	.+692    	; 0xfec <init_data>
+	init_timer0();
+     d38:	1e d1       	rcall	.+572    	; 0xf76 <init_timer0>
+	init_timer1();
+     d3a:	24 d1       	rcall	.+584    	; 0xf84 <init_timer1>
+	init_timer2();
+     d3c:	44 d1       	rcall	.+648    	; 0xfc6 <init_timer2>
+	
+	LEDMINUS_BONUS_ON;
+     d3e:	ad 98       	cbi	0x15, 5	; 21
+	LEDPLUS_BONUS_ON;
+     d40:	ac 98       	cbi	0x15, 4	; 21
+	RELAX_BONUS_ON;
+     d42:	ab 98       	cbi	0x15, 3	; 21
+     d44:	8f ef       	ldi	r24, 0xFF	; 255
+     d46:	99 e6       	ldi	r25, 0x69	; 105
+     d48:	28 e1       	ldi	r18, 0x18	; 24
+     d4a:	81 50       	subi	r24, 0x01	; 1
+     d4c:	90 40       	sbci	r25, 0x00	; 0
+     d4e:	20 40       	sbci	r18, 0x00	; 0
+     d50:	e1 f7       	brne	.-8      	; 0xd4a <__stack+0x8eb>
+     d52:	00 c0       	rjmp	.+0      	; 0xd54 <__stack+0x8f5>
+     d54:	00 00       	nop
+	_delay_ms(1000);
+	LEDMINUS_BONUS_OFF;
+     d56:	ad 9a       	sbi	0x15, 5	; 21
+     d58:	8f ef       	ldi	r24, 0xFF	; 255
+     d5a:	99 e6       	ldi	r25, 0x69	; 105
+     d5c:	28 e1       	ldi	r18, 0x18	; 24
+     d5e:	81 50       	subi	r24, 0x01	; 1
+     d60:	90 40       	sbci	r25, 0x00	; 0
+     d62:	20 40       	sbci	r18, 0x00	; 0
+     d64:	e1 f7       	brne	.-8      	; 0xd5e <__stack+0x8ff>
+     d66:	00 c0       	rjmp	.+0      	; 0xd68 <__stack+0x909>
+     d68:	00 00       	nop
+	_delay_ms(1000);
+	RELAX_BONUS_OFF;
+     d6a:	ab 9a       	sbi	0x15, 3	; 21
+     d6c:	8f ef       	ldi	r24, 0xFF	; 255
+     d6e:	99 e6       	ldi	r25, 0x69	; 105
+     d70:	28 e1       	ldi	r18, 0x18	; 24
+     d72:	81 50       	subi	r24, 0x01	; 1
+     d74:	90 40       	sbci	r25, 0x00	; 0
+     d76:	20 40       	sbci	r18, 0x00	; 0
+     d78:	e1 f7       	brne	.-8      	; 0xd72 <__stack+0x913>
+     d7a:	00 c0       	rjmp	.+0      	; 0xd7c <__stack+0x91d>
+     d7c:	00 00       	nop
+	_delay_ms(1000);
+	LEDPLUS_BONUS_OFF;
+     d7e:	ac 9a       	sbi	0x15, 4	; 21
+	
+	sei();
+     d80:	78 94       	sei
+}
+     d82:	df 91       	pop	r29
+     d84:	cf 91       	pop	r28
+     d86:	1f 91       	pop	r17
+     d88:	0f 91       	pop	r16
+     d8a:	ff 90       	pop	r15
+     d8c:	ef 90       	pop	r14
+     d8e:	df 90       	pop	r13
+     d90:	cf 90       	pop	r12
+     d92:	08 95       	ret
+     d94:	06 e0       	ldi	r16, 0x06	; 6
+     d96:	c4 ca       	rjmp	.-2680   	; 0x320 <game_setup+0x28>
+     d98:	07 e0       	ldi	r16, 0x07	; 7
+     d9a:	c2 ca       	rjmp	.-2684   	; 0x320 <game_setup+0x28>
+     d9c:	08 e0       	ldi	r16, 0x08	; 8
+     d9e:	c0 ca       	rjmp	.-2688   	; 0x320 <game_setup+0x28>
+     da0:	09 e0       	ldi	r16, 0x09	; 9
+     da2:	be ca       	rjmp	.-2692   	; 0x320 <game_setup+0x28>
+     da4:	0a e0       	ldi	r16, 0x0A	; 10
+     da6:	bc ca       	rjmp	.-2696   	; 0x320 <game_setup+0x28>
+
+00000da8 <check_end_of_battle>:
+
+void check_end_of_battle ()
+{
+	if (game_settings.player1_wins == true || game_settings.player2_wins == true)
+     da8:	80 91 0a 02 	lds	r24, 0x020A
+     dac:	84 fd       	sbrc	r24, 4
+     dae:	04 c0       	rjmp	.+8      	; 0xdb8 <check_end_of_battle+0x10>
+     db0:	80 91 0a 02 	lds	r24, 0x020A
+     db4:	85 ff       	sbrs	r24, 5
+     db6:	38 c0       	rjmp	.+112    	; 0xe28 <check_end_of_battle+0x80>
+	{
+		cli();
+     db8:	f8 94       	cli
+		button_parameters.button1_relax = false;
+     dba:	80 91 03 02 	lds	r24, 0x0203
+     dbe:	8f 7e       	andi	r24, 0xEF	; 239
+     dc0:	80 93 03 02 	sts	0x0203, r24
+		button_parameters.button2_relax = false;
+     dc4:	80 91 03 02 	lds	r24, 0x0203
+     dc8:	8f 7d       	andi	r24, 0xDF	; 223
+     dca:	80 93 03 02 	sts	0x0203, r24
+		lcd_cls();
+     dce:	ef d1       	rcall	.+990    	; 0x11ae <lcd_cls>
+		lcd_locate(0,0);
+     dd0:	60 e0       	ldi	r22, 0x00	; 0
+     dd2:	80 e0       	ldi	r24, 0x00	; 0
+     dd4:	e6 d1       	rcall	.+972    	; 0x11a2 <lcd_locate>
+		lcd_str("   Zwyci"_e _z"y"_l":   ");
+     dd6:	87 ec       	ldi	r24, 0xC7	; 199
+     dd8:	91 e0       	ldi	r25, 0x01	; 1
+     dda:	97 d1       	rcall	.+814    	; 0x110a <lcd_str>
+		lcd_locate(1,0);
+     ddc:	60 e0       	ldi	r22, 0x00	; 0
+     dde:	81 e0       	ldi	r24, 0x01	; 1
+     de0:	e0 d1       	rcall	.+960    	; 0x11a2 <lcd_locate>
+		lcd_str(game_settings.player1_wins ? "    GRACZ 1 !   " : "    GRACZ 2 !   ");
+     de2:	80 91 0a 02 	lds	r24, 0x020A
+     de6:	84 ff       	sbrs	r24, 4
+     de8:	03 c0       	rjmp	.+6      	; 0xdf0 <check_end_of_battle+0x48>
+     dea:	85 ea       	ldi	r24, 0xA5	; 165
+     dec:	91 e0       	ldi	r25, 0x01	; 1
+     dee:	02 c0       	rjmp	.+4      	; 0xdf4 <check_end_of_battle+0x4c>
+     df0:	86 eb       	ldi	r24, 0xB6	; 182
+     df2:	91 e0       	ldi	r25, 0x01	; 1
+     df4:	8a d1       	rcall	.+788    	; 0x110a <lcd_str>
+		game_settings.player1_wins = false;
+     df6:	80 91 0a 02 	lds	r24, 0x020A
+     dfa:	8f 7e       	andi	r24, 0xEF	; 239
+     dfc:	80 93 0a 02 	sts	0x020A, r24
+		game_settings.player2_wins = false;
+     e00:	80 91 0a 02 	lds	r24, 0x020A
+     e04:	8f 7d       	andi	r24, 0xDF	; 223
+     e06:	80 93 0a 02 	sts	0x020A, r24
+		LEDMINUS_BONUS_OFF;
+     e0a:	ad 9a       	sbi	0x15, 5	; 21
+		LEDPLUS_BONUS_OFF;
+     e0c:	ac 9a       	sbi	0x15, 4	; 21
+		RELAX_BONUS_OFF;
+     e0e:	ab 9a       	sbi	0x15, 3	; 21
+     e10:	2f ef       	ldi	r18, 0xFF	; 255
+     e12:	83 ed       	ldi	r24, 0xD3	; 211
+     e14:	90 e3       	ldi	r25, 0x30	; 48
+     e16:	21 50       	subi	r18, 0x01	; 1
+     e18:	80 40       	sbci	r24, 0x00	; 0
+     e1a:	90 40       	sbci	r25, 0x00	; 0
+     e1c:	e1 f7       	brne	.-8      	; 0xe16 <check_end_of_battle+0x6e>
+     e1e:	00 c0       	rjmp	.+0      	; 0xe20 <check_end_of_battle+0x78>
+     e20:	00 00       	nop
+		_delay_ms(2000);
+		change_led_states(CLEAN);
+     e22:	83 e0       	ldi	r24, 0x03	; 3
+     e24:	07 d2       	rcall	.+1038   	; 0x1234 <change_led_states>
+		game_setup();
+     e26:	68 ca       	rjmp	.-2864   	; 0x2f8 <game_setup>
+     e28:	08 95       	ret
+
+00000e2a <__vector_14>:
+	}
+}
+
+ISR(ADC_vect)
+{
+     e2a:	1f 92       	push	r1
+     e2c:	0f 92       	push	r0
+     e2e:	0f b6       	in	r0, 0x3f	; 63
+     e30:	0f 92       	push	r0
+     e32:	11 24       	eor	r1, r1
+     e34:	2f 93       	push	r18
+     e36:	8f 93       	push	r24
+     e38:	9f 93       	push	r25
+	random_number =  (random_number<<1);
+     e3a:	80 91 0f 02 	lds	r24, 0x020F
+     e3e:	88 0f       	add	r24, r24
+     e40:	80 93 0f 02 	sts	0x020F, r24
+	random_number |= ADC & 1;
+     e44:	20 91 0f 02 	lds	r18, 0x020F
+     e48:	84 b1       	in	r24, 0x04	; 4
+     e4a:	95 b1       	in	r25, 0x05	; 5
+     e4c:	81 70       	andi	r24, 0x01	; 1
+     e4e:	82 2b       	or	r24, r18
+     e50:	80 93 0f 02 	sts	0x020F, r24
+}
+     e54:	9f 91       	pop	r25
+     e56:	8f 91       	pop	r24
+     e58:	2f 91       	pop	r18
+     e5a:	0f 90       	pop	r0
+     e5c:	0f be       	out	0x3f, r0	; 63
+     e5e:	0f 90       	pop	r0
+     e60:	1f 90       	pop	r1
+     e62:	18 95       	reti
+
+00000e64 <button1_change_detect>:
+
+
+
+void button1_change_detect ()
+{
+	if(button_parameters.button1_state)//obsluga przejscia na 0
+     e64:	80 91 03 02 	lds	r24, 0x0203
+     e68:	80 ff       	sbrs	r24, 0
+     e6a:	0d c0       	rjmp	.+26     	; 0xe86 <button1_change_detect+0x22>
+	{
+		if(BTN1_0 && button_parameters.button1_to_check)
+     e6c:	85 9b       	sbis	0x10, 5	; 16
+     e6e:	0b c0       	rjmp	.+22     	; 0xe86 <button1_change_detect+0x22>
+     e70:	80 91 03 02 	lds	r24, 0x0203
+     e74:	82 ff       	sbrs	r24, 2
+     e76:	07 c0       	rjmp	.+14     	; 0xe86 <button1_change_detect+0x22>
+		{
+			TIMER0_CLEAR;
+     e78:	84 e8       	ldi	r24, 0x84	; 132
+     e7a:	82 bf       	out	0x32, r24	; 50
+			button_parameters.button1_to_check = check_1_to_0;
+     e7c:	80 91 03 02 	lds	r24, 0x0203
+     e80:	8b 7f       	andi	r24, 0xFB	; 251
+     e82:	80 93 03 02 	sts	0x0203, r24
+		}
+	}
+
+	if(!button_parameters.button1_state)//obsluga przejscia na 1
+     e86:	80 91 03 02 	lds	r24, 0x0203
+     e8a:	80 fd       	sbrc	r24, 0
+     e8c:	0d c0       	rjmp	.+26     	; 0xea8 <button1_change_detect+0x44>
+	{
+		if(BTN1_1 && !button_parameters.button1_to_check)
+     e8e:	85 99       	sbic	0x10, 5	; 16
+     e90:	0b c0       	rjmp	.+22     	; 0xea8 <button1_change_detect+0x44>
+     e92:	80 91 03 02 	lds	r24, 0x0203
+     e96:	82 fd       	sbrc	r24, 2
+     e98:	07 c0       	rjmp	.+14     	; 0xea8 <button1_change_detect+0x44>
+		{
+			TIMER0_CLEAR;
+     e9a:	84 e8       	ldi	r24, 0x84	; 132
+     e9c:	82 bf       	out	0x32, r24	; 50
+			button_parameters.button1_to_check = check_0_to_1;
+     e9e:	80 91 03 02 	lds	r24, 0x0203
+     ea2:	84 60       	ori	r24, 0x04	; 4
+     ea4:	80 93 03 02 	sts	0x0203, r24
+     ea8:	08 95       	ret
+
+00000eaa <button1b_change_detect>:
+	}
+}
+
+void button1b_change_detect ()
+{
+	if ( LEDMINUS_BONUS_STATE && BTN1B_1 )
+     eaa:	9d 99       	sbic	0x13, 5	; 19
+     eac:	05 c0       	rjmp	.+10     	; 0xeb8 <button1b_change_detect+0xe>
+     eae:	86 99       	sbic	0x10, 6	; 16
+     eb0:	03 c0       	rjmp	.+6      	; 0xeb8 <button1b_change_detect+0xe>
+	{
+		LEDMINUS_BONUS_OFF;
+     eb2:	ad 9a       	sbi	0x15, 5	; 21
+		change_led_states(RIGHT);
+     eb4:	81 e0       	ldi	r24, 0x01	; 1
+     eb6:	be d1       	rcall	.+892    	; 0x1234 <change_led_states>
+	}
+	if ( LEDPLUS_BONUS_STATE && BTN1B_1 )
+     eb8:	9c 99       	sbic	0x13, 4	; 19
+     eba:	09 c0       	rjmp	.+18     	; 0xece <button1b_change_detect+0x24>
+     ebc:	86 99       	sbic	0x10, 6	; 16
+     ebe:	07 c0       	rjmp	.+14     	; 0xece <button1b_change_detect+0x24>
+	{
+		LEDPLUS_BONUS_OFF;
+     ec0:	ac 9a       	sbi	0x15, 4	; 21
+		if (!button_parameters.button1_relax)
+     ec2:	80 91 03 02 	lds	r24, 0x0203
+     ec6:	84 fd       	sbrc	r24, 4
+     ec8:	02 c0       	rjmp	.+4      	; 0xece <button1b_change_detect+0x24>
+		change_led_states(LEFT);
+     eca:	80 e0       	ldi	r24, 0x00	; 0
+     ecc:	b3 d1       	rcall	.+870    	; 0x1234 <change_led_states>
+	}
+	if ( RELAX_BONUS_STATE && BTN1B_1 )
+     ece:	9b 99       	sbic	0x13, 3	; 19
+     ed0:	08 c0       	rjmp	.+16     	; 0xee2 <button1b_change_detect+0x38>
+     ed2:	86 99       	sbic	0x10, 6	; 16
+     ed4:	06 c0       	rjmp	.+12     	; 0xee2 <button1b_change_detect+0x38>
+	{
+		RELAX_BONUS_OFF;
+     ed6:	ab 9a       	sbi	0x15, 3	; 21
+		button_parameters.button1_relax = 1;
+     ed8:	80 91 03 02 	lds	r24, 0x0203
+     edc:	80 61       	ori	r24, 0x10	; 16
+     ede:	80 93 03 02 	sts	0x0203, r24
+     ee2:	08 95       	ret
+
+00000ee4 <button2_change_detect>:
+	}
+}
+
+void button2_change_detect ()
+{
+	if(button_parameters.button2_state)//obsluga przejscia na 0
+     ee4:	80 91 03 02 	lds	r24, 0x0203
+     ee8:	81 ff       	sbrs	r24, 1
+     eea:	0c c0       	rjmp	.+24     	; 0xf04 <button2_change_detect+0x20>
+	{
+		if(BTN2_0 && button_parameters.button2_to_check)
+     eec:	87 9b       	sbis	0x10, 7	; 16
+     eee:	0a c0       	rjmp	.+20     	; 0xf04 <button2_change_detect+0x20>
+     ef0:	80 91 03 02 	lds	r24, 0x0203
+     ef4:	83 ff       	sbrs	r24, 3
+     ef6:	06 c0       	rjmp	.+12     	; 0xf04 <button2_change_detect+0x20>
+		{
+			TIMER2_CLEAR;
+     ef8:	14 bc       	out	0x24, r1	; 36
+			button_parameters.button2_to_check = check_1_to_0;
+     efa:	80 91 03 02 	lds	r24, 0x0203
+     efe:	87 7f       	andi	r24, 0xF7	; 247
+     f00:	80 93 03 02 	sts	0x0203, r24
+		}
+	}
+
+	if(!button_parameters.button2_state)//obsluga przejscia na 1
+     f04:	80 91 03 02 	lds	r24, 0x0203
+     f08:	81 fd       	sbrc	r24, 1
+     f0a:	0c c0       	rjmp	.+24     	; 0xf24 <button2_change_detect+0x40>
+	{
+		if(BTN2_1 && !button_parameters.button2_to_check)
+     f0c:	87 99       	sbic	0x10, 7	; 16
+     f0e:	0a c0       	rjmp	.+20     	; 0xf24 <button2_change_detect+0x40>
+     f10:	80 91 03 02 	lds	r24, 0x0203
+     f14:	83 fd       	sbrc	r24, 3
+     f16:	06 c0       	rjmp	.+12     	; 0xf24 <button2_change_detect+0x40>
+		{
+			TIMER2_CLEAR;
+     f18:	14 bc       	out	0x24, r1	; 36
+			button_parameters.button2_to_check = check_0_to_1;
+     f1a:	80 91 03 02 	lds	r24, 0x0203
+     f1e:	88 60       	ori	r24, 0x08	; 8
+     f20:	80 93 03 02 	sts	0x0203, r24
+     f24:	08 95       	ret
+
+00000f26 <button2b_change_detect>:
+	}
+}
+
+void button2b_change_detect ()
+{
+	if ( LEDMINUS_BONUS_STATE && BTN2B_1 )
+     f26:	9d 99       	sbic	0x13, 5	; 19
+     f28:	05 c0       	rjmp	.+10     	; 0xf34 <button2b_change_detect+0xe>
+     f2a:	b0 99       	sbic	0x16, 0	; 22
+     f2c:	03 c0       	rjmp	.+6      	; 0xf34 <button2b_change_detect+0xe>
+	{
+		LEDMINUS_BONUS_OFF;
+     f2e:	ad 9a       	sbi	0x15, 5	; 21
+		change_led_states(LEFT);
+     f30:	80 e0       	ldi	r24, 0x00	; 0
+     f32:	80 d1       	rcall	.+768    	; 0x1234 <change_led_states>
+	}
+	if ( LEDPLUS_BONUS_STATE && BTN2B_1 )
+     f34:	9c 99       	sbic	0x13, 4	; 19
+     f36:	09 c0       	rjmp	.+18     	; 0xf4a <button2b_change_detect+0x24>
+     f38:	b0 99       	sbic	0x16, 0	; 22
+     f3a:	07 c0       	rjmp	.+14     	; 0xf4a <button2b_change_detect+0x24>
+	{
+		LEDPLUS_BONUS_OFF;
+     f3c:	ac 9a       	sbi	0x15, 4	; 21
+		if (!button_parameters.button1_relax)
+     f3e:	80 91 03 02 	lds	r24, 0x0203
+     f42:	84 fd       	sbrc	r24, 4
+     f44:	02 c0       	rjmp	.+4      	; 0xf4a <button2b_change_detect+0x24>
+		change_led_states(RIGHT);
+     f46:	81 e0       	ldi	r24, 0x01	; 1
+     f48:	75 d1       	rcall	.+746    	; 0x1234 <change_led_states>
+	}
+	if ( RELAX_BONUS_STATE && BTN2B_1 )
+     f4a:	9b 99       	sbic	0x13, 3	; 19
+     f4c:	08 c0       	rjmp	.+16     	; 0xf5e <button2b_change_detect+0x38>
+     f4e:	b0 99       	sbic	0x16, 0	; 22
+     f50:	06 c0       	rjmp	.+12     	; 0xf5e <button2b_change_detect+0x38>
+	{
+		RELAX_BONUS_OFF;
+     f52:	ab 9a       	sbi	0x15, 3	; 21
+		button_parameters.button2_relax = 1;
+     f54:	80 91 03 02 	lds	r24, 0x0203
+     f58:	80 62       	ori	r24, 0x20	; 32
+     f5a:	80 93 03 02 	sts	0x0203, r24
+     f5e:	08 95       	ret
+
+00000f60 <init_io>:
+										{2,4,14,16,14,1,30,0},            // œ
+										{4,0,31,2,4,8,31,0}      };		  // ¿											
+	
+void init_io ()
+{
+	PORT_BTN1 |= (1<<PIN_BTN1);
+     f60:	95 9a       	sbi	0x12, 5	; 18
+	PORT_BTN2 |= (1<<PIN_BTN2);
+     f62:	97 9a       	sbi	0x12, 7	; 18
+	
+	PORT_BTN1B |= (1<<PIN_BTN1B);
+     f64:	96 9a       	sbi	0x12, 6	; 18
+	PORT_BTN2B |= (1<<PIN_BTN2B);
+     f66:	c0 9a       	sbi	0x18, 0	; 24
+	
+	DDR_DS   |= (1<<PIN_DS);
+     f68:	b9 9a       	sbi	0x17, 1	; 23
+	DDR_SHCP |= (1<<PIN_SHCP);
+     f6a:	a2 9a       	sbi	0x14, 2	; 20
+	DDR_STCP |= (1<<PIN_STCP);
+     f6c:	a1 9a       	sbi	0x14, 1	; 20
+	
+	DDR_BONUS |= (1<<PIN_REDB)|(1<<PIN_GRNB)|(1<<PIN_BLUB);
+     f6e:	84 b3       	in	r24, 0x14	; 20
+     f70:	88 63       	ori	r24, 0x38	; 56
+     f72:	84 bb       	out	0x14, r24	; 20
+     f74:	08 95       	ret
+
+00000f76 <init_timer0>:
+}
+
+void init_timer0 ()
+{
+	TCCR0 |= (1<<CS02); //Preskaler 256
+     f76:	83 b7       	in	r24, 0x33	; 51
+     f78:	84 60       	ori	r24, 0x04	; 4
+     f7a:	83 bf       	out	0x33, r24	; 51
+	TCNT0 = TIMER0_CLEAR; //Liczy od 132 co 4ms
+     f7c:	84 e8       	ldi	r24, 0x84	; 132
+     f7e:	82 bf       	out	0x32, r24	; 50
+     f80:	82 bf       	out	0x32, r24	; 50
+     f82:	08 95       	ret
+
+00000f84 <init_timer1>:
+}
+
+void init_timer1 ()
+{
+	TCCR1B |= (1<<WGM12);
+     f84:	8e b5       	in	r24, 0x2e	; 46
+     f86:	88 60       	ori	r24, 0x08	; 8
+     f88:	8e bd       	out	0x2e, r24	; 46
+	TCCR1B |= (1<<CS12);
+     f8a:	8e b5       	in	r24, 0x2e	; 46
+     f8c:	84 60       	ori	r24, 0x04	; 4
+     f8e:	8e bd       	out	0x2e, r24	; 46
+	//OCR1A   = 249; //co 8ms
+	//OCR1A   = 30; //co 1ms
+	//OCR1A   = 62499; //co 2 sec
+	//OCR1A   = 31249; //co 1 sec
+	//OCR1B   = 31249;
+	OCR1B   = 30;
+     f90:	8e e1       	ldi	r24, 0x1E	; 30
+     f92:	90 e0       	ldi	r25, 0x00	; 0
+     f94:	99 bd       	out	0x29, r25	; 41
+     f96:	88 bd       	out	0x28, r24	; 40
+	//OCR1A   = FREQUENCY_OF_BONUS;
+	OCR1A = game_settings.frequency_of_bonus;
+     f98:	20 91 04 02 	lds	r18, 0x0204
+     f9c:	22 1f       	adc	r18, r18
+     f9e:	22 27       	eor	r18, r18
+     fa0:	22 1f       	adc	r18, r18
+     fa2:	e5 e0       	ldi	r30, 0x05	; 5
+     fa4:	f2 e0       	ldi	r31, 0x02	; 2
+     fa6:	30 81       	ld	r19, Z
+     fa8:	33 0f       	add	r19, r19
+     faa:	83 2f       	mov	r24, r19
+     fac:	82 2b       	or	r24, r18
+     fae:	20 81       	ld	r18, Z
+     fb0:	22 1f       	adc	r18, r18
+     fb2:	22 27       	eor	r18, r18
+     fb4:	22 1f       	adc	r18, r18
+     fb6:	30 91 06 02 	lds	r19, 0x0206
+     fba:	33 0f       	add	r19, r19
+     fbc:	93 2f       	mov	r25, r19
+     fbe:	92 2b       	or	r25, r18
+     fc0:	9b bd       	out	0x2b, r25	; 43
+     fc2:	8a bd       	out	0x2a, r24	; 42
+     fc4:	08 95       	ret
+
+00000fc6 <init_timer2>:
+	//OCR1A   = 5;
+}
+
+void init_timer2 ()
+{
+	TCCR2 |= (1<<WGM21); //Tryb CTC
+     fc6:	85 b5       	in	r24, 0x25	; 37
+     fc8:	88 60       	ori	r24, 0x08	; 8
+     fca:	85 bd       	out	0x25, r24	; 37
+	TCCR2 |= (1<<CS22)|(1<<CS21); //Preskaler 256
+     fcc:	85 b5       	in	r24, 0x25	; 37
+     fce:	86 60       	ori	r24, 0x06	; 6
+     fd0:	85 bd       	out	0x25, r24	; 37
+	OCR2   = 124; //Rejestr do porownania co 4 ms
+     fd2:	8c e7       	ldi	r24, 0x7C	; 124
+     fd4:	83 bd       	out	0x23, r24	; 35
+     fd6:	08 95       	ret
+
+00000fd8 <init_adc>:
+	//wybierz kana³ pomiarowy nr 0 czyli pin PC0, MUX3:0=0
+	//wyrównaj wynik pomiaru do prawej, ADLAR=0
+	//napiêcie odniesienia AVcc z kondensatorem na AREF
+	//je¿eli nie wykorzystujesz ADC do innych celów, to mo¿esz
+	//nie dodawaæ kondensatora
+	ADMUX  = (1<<REFS0);
+     fd8:	80 e4       	ldi	r24, 0x40	; 64
+     fda:	87 b9       	out	0x07, r24	; 7
+
+	//ustawiamy rejestr ADCSRA
+	//ADCSRA  |=  (1<<ADPS0); //preskaler 2, pomiar co 3,25 us, pelna liczba po 29 us
+	//ADCSRA  |=  (1<<ADPS1)|(1<<ADPS0); //ustaw preskaler ADC na 8
+	ADCSRA  |=  (1<<ADPS2)|(1<<ADPS1)|(1<<ADPS0); //ustaw preskaler ADC na 128, pelna liczba losowa co 1,664 ms
+     fdc:	86 b1       	in	r24, 0x06	; 6
+     fde:	87 60       	ori	r24, 0x07	; 7
+     fe0:	86 b9       	out	0x06, r24	; 6
+	//ADCSRA  |=  (1<<ADPS2)|(1<<ADPS1); //ustaw preskaler ADC na 64, pelna liczba losowa co 0,832 ms
+	ADCSRA  |=  (1<<ADEN); //w³¹cz ADC
+     fe2:	37 9a       	sbi	0x06, 7	; 6
+	ADCSRA  |=  (1<<ADFR); //w³¹cz tryb FREE RUNNING
+     fe4:	35 9a       	sbi	0x06, 5	; 6
+	ADCSRA  |=  (1<<ADIE); //w³¹cz przerwania z ADC
+     fe6:	33 9a       	sbi	0x06, 3	; 6
+	ADCSRA  |= (1<<ADSC);  //rozpocznij pierwszy pomiar ADC
+     fe8:	36 9a       	sbi	0x06, 6	; 6
+     fea:	08 95       	ret
+
+00000fec <init_data>:
+}
+
+void init_data ()
+{
+	led_states = 0b10101010101010101010110101010101;
+     fec:	85 e5       	ldi	r24, 0x55	; 85
+     fee:	9d ea       	ldi	r25, 0xAD	; 173
+     ff0:	aa ea       	ldi	r26, 0xAA	; 170
+     ff2:	ba ea       	ldi	r27, 0xAA	; 170
+     ff4:	80 93 0b 02 	sts	0x020B, r24
+     ff8:	90 93 0c 02 	sts	0x020C, r25
+     ffc:	a0 93 0d 02 	sts	0x020D, r26
+    1000:	b0 93 0e 02 	sts	0x020E, r27
+	change_led_states(INIT);
+    1004:	82 e0       	ldi	r24, 0x02	; 2
+    1006:	16 d1       	rcall	.+556    	; 0x1234 <change_led_states>
+	LEDMINUS_BONUS_OFF;
+    1008:	ad 9a       	sbi	0x15, 5	; 21
+	LEDPLUS_BONUS_OFF;
+    100a:	ac 9a       	sbi	0x15, 4	; 21
+	RELAX_BONUS_OFF;
+    100c:	ab 9a       	sbi	0x15, 3	; 21
+	button_parameters.button1_state = 0;
+    100e:	80 91 03 02 	lds	r24, 0x0203
+    1012:	8e 7f       	andi	r24, 0xFE	; 254
+    1014:	80 93 03 02 	sts	0x0203, r24
+	button_parameters.button1_to_check = check_1_to_0;
+    1018:	80 91 03 02 	lds	r24, 0x0203
+    101c:	8b 7f       	andi	r24, 0xFB	; 251
+    101e:	80 93 03 02 	sts	0x0203, r24
+	button_parameters.button2_state = 0;
+    1022:	80 91 03 02 	lds	r24, 0x0203
+    1026:	8d 7f       	andi	r24, 0xFD	; 253
+    1028:	80 93 03 02 	sts	0x0203, r24
+	button_parameters.button2_to_check = check_1_to_0;
+    102c:	80 91 03 02 	lds	r24, 0x0203
+    1030:	87 7f       	andi	r24, 0xF7	; 247
+    1032:	80 93 03 02 	sts	0x0203, r24
+	player1_click_count = 0;
+    1036:	10 92 01 02 	sts	0x0201, r1
+	player2_click_count = 0;
+    103a:	10 92 02 02 	sts	0x0202, r1
+    103e:	08 95       	ret
+
+00001040 <program_polish_characters>:
+}
+
+void program_polish_characters ()
+{
+    1040:	1f 93       	push	r17
+    1042:	cf 93       	push	r28
+    1044:	df 93       	push	r29
+    1046:	c7 e0       	ldi	r28, 0x07	; 7
+    1048:	d0 e0       	ldi	r29, 0x00	; 0
+	register u08 adress = 0x80;
+    104a:	80 e8       	ldi	r24, 0x80	; 128
+	for (int i = 0; i < 8; i++)
+	{
+		lcd_defchar_E(adress++,polish_characters[i]);
+    104c:	11 e0       	ldi	r17, 0x01	; 1
+    104e:	18 0f       	add	r17, r24
+    1050:	be 01       	movw	r22, r28
+    1052:	84 d0       	rcall	.+264    	; 0x115c <lcd_defchar_E>
+    1054:	28 96       	adiw	r28, 0x08	; 8
+}
+
+void program_polish_characters ()
+{
+	register u08 adress = 0x80;
+	for (int i = 0; i < 8; i++)
+    1056:	18 38       	cpi	r17, 0x88	; 136
+    1058:	11 f0       	breq	.+4      	; 0x105e <program_polish_characters+0x1e>
+	{
+		lcd_defchar_E(adress++,polish_characters[i]);
+    105a:	81 2f       	mov	r24, r17
+    105c:	f7 cf       	rjmp	.-18     	; 0x104c <program_polish_characters+0xc>
+	}
+	
+	lcd_locate(0,0);
+    105e:	60 e0       	ldi	r22, 0x00	; 0
+    1060:	80 e0       	ldi	r24, 0x00	; 0
+    1062:	df 91       	pop	r29
+    1064:	cf 91       	pop	r28
+    1066:	1f 91       	pop	r17
+	for (int i = 0; i < 8; i++)
+	{
+		lcd_defchar_E(adress++,polish_characters[i]);
+	}
+	
+	lcd_locate(0,0);
+    1068:	9c c0       	rjmp	.+312    	; 0x11a2 <lcd_locate>
+
+0000106a <data_dir_out>:
+//		 Ustawienie wszystkich 4 linii danych jako WYjœcia
+//
+//----------------------------------------------------------------------------------------
+static inline void data_dir_out(void)
+{
+	DDR(LCD_D7PORT)	|= (1<<LCD_D7);
+    106a:	88 9a       	sbi	0x11, 0	; 17
+	DDR(LCD_D6PORT)	|= (1<<LCD_D6);
+    106c:	89 9a       	sbi	0x11, 1	; 17
+	DDR(LCD_D5PORT)	|= (1<<LCD_D5);
+    106e:	8a 9a       	sbi	0x11, 2	; 17
+	DDR(LCD_D4PORT)	|= (1<<LCD_D4);
+    1070:	8b 9a       	sbi	0x11, 3	; 17
+    1072:	08 95       	ret
+
+00001074 <lcd_readHalf>:
+//----------------------------------------------------------------------------------------
+static inline uint8_t lcd_readHalf(void)
+{
+	uint8_t result=0;
+
+	if(PIN(LCD_D4PORT)&(1<<LCD_D4)) result |= (1<<0);
+    1074:	80 b3       	in	r24, 0x10	; 16
+    1076:	83 fb       	bst	r24, 3
+    1078:	88 27       	eor	r24, r24
+    107a:	80 f9       	bld	r24, 0
+	if(PIN(LCD_D5PORT)&(1<<LCD_D5)) result |= (1<<1);
+    107c:	82 99       	sbic	0x10, 2	; 16
+    107e:	82 60       	ori	r24, 0x02	; 2
+	if(PIN(LCD_D6PORT)&(1<<LCD_D6)) result |= (1<<2);
+    1080:	81 99       	sbic	0x10, 1	; 16
+    1082:	84 60       	ori	r24, 0x04	; 4
+	if(PIN(LCD_D7PORT)&(1<<LCD_D7)) result |= (1<<3);
+    1084:	80 99       	sbic	0x10, 0	; 16
+    1086:	88 60       	ori	r24, 0x08	; 8
+
+	return result;
+}
+    1088:	08 95       	ret
+
+0000108a <lcd_sendHalf>:
+//		 Wys³anie po³ówki bajtu do LCD (D4..D7)
+//
+//----------------------------------------------------------------------------------------
+static inline void lcd_sendHalf(uint8_t data)
+{
+	if (data&(1<<0)) PORT(LCD_D4PORT) |= (1<<LCD_D4); else PORT(LCD_D4PORT) &= ~(1<<LCD_D4);
+    108a:	80 ff       	sbrs	r24, 0
+    108c:	02 c0       	rjmp	.+4      	; 0x1092 <lcd_sendHalf+0x8>
+    108e:	93 9a       	sbi	0x12, 3	; 18
+    1090:	01 c0       	rjmp	.+2      	; 0x1094 <lcd_sendHalf+0xa>
+    1092:	93 98       	cbi	0x12, 3	; 18
+	if (data&(1<<1)) PORT(LCD_D5PORT) |= (1<<LCD_D5); else PORT(LCD_D5PORT) &= ~(1<<LCD_D5);
+    1094:	81 ff       	sbrs	r24, 1
+    1096:	02 c0       	rjmp	.+4      	; 0x109c <lcd_sendHalf+0x12>
+    1098:	92 9a       	sbi	0x12, 2	; 18
+    109a:	01 c0       	rjmp	.+2      	; 0x109e <lcd_sendHalf+0x14>
+    109c:	92 98       	cbi	0x12, 2	; 18
+	if (data&(1<<2)) PORT(LCD_D6PORT) |= (1<<LCD_D6); else PORT(LCD_D6PORT) &= ~(1<<LCD_D6);
+    109e:	82 ff       	sbrs	r24, 2
+    10a0:	02 c0       	rjmp	.+4      	; 0x10a6 <lcd_sendHalf+0x1c>
+    10a2:	91 9a       	sbi	0x12, 1	; 18
+    10a4:	01 c0       	rjmp	.+2      	; 0x10a8 <lcd_sendHalf+0x1e>
+    10a6:	91 98       	cbi	0x12, 1	; 18
+	if (data&(1<<3)) PORT(LCD_D7PORT) |= (1<<LCD_D7); else PORT(LCD_D7PORT) &= ~(1<<LCD_D7);
+    10a8:	83 ff       	sbrs	r24, 3
+    10aa:	02 c0       	rjmp	.+4      	; 0x10b0 <lcd_sendHalf+0x26>
+    10ac:	90 9a       	sbi	0x12, 0	; 18
+    10ae:	08 95       	ret
+    10b0:	90 98       	cbi	0x12, 0	; 18
+    10b2:	08 95       	ret
+
+000010b4 <_lcd_read_byte>:
+//
+//		 Odczyt bajtu z wyœwietlacza LCD
+//
+//----------------------------------------------------------------------------------------
+uint8_t _lcd_read_byte(void)
+{
+    10b4:	cf 93       	push	r28
+//		 Ustawienie wszystkich 4 linii danych jako WEjœcia
+//
+//----------------------------------------------------------------------------------------
+static inline void data_dir_in(void)
+{
+	DDR(LCD_D7PORT)	&= ~(1<<LCD_D7);
+    10b6:	88 98       	cbi	0x11, 0	; 17
+	DDR(LCD_D6PORT)	&= ~(1<<LCD_D6);
+    10b8:	89 98       	cbi	0x11, 1	; 17
+	DDR(LCD_D5PORT)	&= ~(1<<LCD_D5);
+    10ba:	8a 98       	cbi	0x11, 2	; 17
+	DDR(LCD_D4PORT)	&= ~(1<<LCD_D4);
+    10bc:	8b 98       	cbi	0x11, 3	; 17
+uint8_t _lcd_read_byte(void)
+{
+	uint8_t result=0;
+	data_dir_in();
+
+	SET_RW;
+    10be:	c6 9a       	sbi	0x18, 6	; 24
+
+	SET_E;
+    10c0:	94 9a       	sbi	0x12, 4	; 18
+	result = (lcd_readHalf() << 4);	// odczyt starszej czêœci bajtu z LCD D7..D4
+    10c2:	d8 df       	rcall	.-80     	; 0x1074 <lcd_readHalf>
+    10c4:	c8 2f       	mov	r28, r24
+    10c6:	c2 95       	swap	r28
+    10c8:	c0 7f       	andi	r28, 0xF0	; 240
+	CLR_E;
+    10ca:	94 98       	cbi	0x12, 4	; 18
+
+	SET_E;
+    10cc:	94 9a       	sbi	0x12, 4	; 18
+	result |= lcd_readHalf();			// odczyt m³odszej czêœci bajtu z LCD D3..D0
+    10ce:	d2 df       	rcall	.-92     	; 0x1074 <lcd_readHalf>
+	CLR_E;
+    10d0:	94 98       	cbi	0x12, 4	; 18
+
+	return result;
+}
+    10d2:	8c 2b       	or	r24, r28
+    10d4:	cf 91       	pop	r28
+    10d6:	08 95       	ret
+
+000010d8 <check_BF>:
+//		 Sprawdzenie stanu Busy Flag (Zajêtoœci wyœwietlacza)
+//
+//----------------------------------------------------------------------------------------
+uint8_t check_BF(void)
+{
+	CLR_RS;
+    10d8:	c7 98       	cbi	0x18, 7	; 24
+	return _lcd_read_byte();
+    10da:	ec cf       	rjmp	.-40     	; 0x10b4 <_lcd_read_byte>
+
+000010dc <_lcd_write_byte>:
+//
+//		 Zapis bajtu do wyœwietlacza LCD
+//
+//----------------------------------------------------------------------------------------
+void _lcd_write_byte(unsigned char _data)
+{
+    10dc:	cf 93       	push	r28
+    10de:	c8 2f       	mov	r28, r24
+	// Ustawienie pinów portu LCD D4..D7 jako wyjœcia
+	data_dir_out();
+    10e0:	c4 df       	rcall	.-120    	; 0x106a <data_dir_out>
+
+#if USE_RW == 1
+	CLR_RW;
+    10e2:	c6 98       	cbi	0x18, 6	; 24
+#endif
+
+	SET_E;
+    10e4:	94 9a       	sbi	0x12, 4	; 18
+	lcd_sendHalf(_data >> 4);			// wys³anie starszej czêœci bajtu danych D7..D4
+    10e6:	8c 2f       	mov	r24, r28
+    10e8:	82 95       	swap	r24
+    10ea:	8f 70       	andi	r24, 0x0F	; 15
+    10ec:	ce df       	rcall	.-100    	; 0x108a <lcd_sendHalf>
+	CLR_E;
+    10ee:	94 98       	cbi	0x12, 4	; 18
+
+	SET_E;
+    10f0:	94 9a       	sbi	0x12, 4	; 18
+	lcd_sendHalf(_data);				// wys³anie m³odszej czêœci bajtu danych D3..D0
+    10f2:	8c 2f       	mov	r24, r28
+    10f4:	ca df       	rcall	.-108    	; 0x108a <lcd_sendHalf>
+	CLR_E;
+    10f6:	94 98       	cbi	0x12, 4	; 18
+
+#if USE_RW == 1
+	while( (check_BF() & (1<<7)) );
+    10f8:	ef df       	rcall	.-34     	; 0x10d8 <check_BF>
+    10fa:	87 fd       	sbrc	r24, 7
+    10fc:	fd cf       	rjmp	.-6      	; 0x10f8 <_lcd_write_byte+0x1c>
+#else
+	_delay_us(120);
+#endif
+
+}
+    10fe:	cf 91       	pop	r28
+    1100:	08 95       	ret
+
+00001102 <lcd_write_cmd>:
+//		 Zapis komendy do wyœwietlacza LCD
+//
+//----------------------------------------------------------------------------------------
+void lcd_write_cmd(uint8_t cmd)
+{
+	CLR_RS;
+    1102:	c7 98       	cbi	0x18, 7	; 24
+	_lcd_write_byte(cmd);
+    1104:	eb cf       	rjmp	.-42     	; 0x10dc <_lcd_write_byte>
+
+00001106 <lcd_write_data>:
+//		 Zapis danych do wyœwietlacza LCD
+//
+//----------------------------------------------------------------------------------------
+void lcd_write_data(uint8_t data)
+{
+	SET_RS;
+    1106:	c7 9a       	sbi	0x18, 7	; 24
+	_lcd_write_byte(data);
+    1108:	e9 cf       	rjmp	.-46     	; 0x10dc <_lcd_write_byte>
+
+0000110a <lcd_str>:
+//		 8 w³asnych znaków zdefiniowanych w CGRAM
+//		 wysy³amy za pomoc¹ kodów 0x80 do 0x87 zamiast 0x00 do 0x07
+//
+//----------------------------------------------------------------------------------------
+void lcd_str(char * str)
+{
+    110a:	cf 93       	push	r28
+    110c:	df 93       	push	r29
+    110e:	ec 01       	movw	r28, r24
+	register char znak;
+	while ( (znak=*(str++)) )
+    1110:	89 91       	ld	r24, Y+
+    1112:	88 23       	and	r24, r24
+    1114:	39 f0       	breq	.+14     	; 0x1124 <lcd_str+0x1a>
+		lcd_write_data( ( znak>=0x80 && znak<=0x87 ) ? (znak & 0x07) : znak);
+    1116:	90 e8       	ldi	r25, 0x80	; 128
+    1118:	98 0f       	add	r25, r24
+    111a:	98 30       	cpi	r25, 0x08	; 8
+    111c:	08 f4       	brcc	.+2      	; 0x1120 <lcd_str+0x16>
+    111e:	87 70       	andi	r24, 0x07	; 7
+    1120:	f2 df       	rcall	.-28     	; 0x1106 <lcd_write_data>
+    1122:	f6 cf       	rjmp	.-20     	; 0x1110 <lcd_str+0x6>
+}
+    1124:	df 91       	pop	r29
+    1126:	cf 91       	pop	r28
+    1128:	08 95       	ret
+
+0000112a <lcd_int>:
+//
+//		 Wyœwietla liczbê dziesiêtn¹ na wyœwietlaczu LCD
+//
+//----------------------------------------------------------------------------------------
+void lcd_int(int val)
+{
+    112a:	cf 93       	push	r28
+    112c:	df 93       	push	r29
+    112e:	cd b7       	in	r28, 0x3d	; 61
+    1130:	de b7       	in	r29, 0x3e	; 62
+    1132:	61 97       	sbiw	r28, 0x11	; 17
+    1134:	0f b6       	in	r0, 0x3f	; 63
+    1136:	f8 94       	cli
+    1138:	de bf       	out	0x3e, r29	; 62
+    113a:	0f be       	out	0x3f, r0	; 63
+    113c:	cd bf       	out	0x3d, r28	; 61
+    } else if (__radix < 2 || __radix > 36) {
+	*__s = 0;
+	return __s;
+    } else {
+	extern char *__itoa_ncheck (int, char *, unsigned char);
+	return __itoa_ncheck (__val, __s, __radix);
+    113e:	4a e0       	ldi	r20, 0x0A	; 10
+    1140:	be 01       	movw	r22, r28
+    1142:	6f 5f       	subi	r22, 0xFF	; 255
+    1144:	7f 4f       	sbci	r23, 0xFF	; 255
+    1146:	36 d3       	rcall	.+1644   	; 0x17b4 <__itoa_ncheck>
+	char bufor[17];
+	lcd_str( itoa(val, bufor, 10) );
+    1148:	e0 df       	rcall	.-64     	; 0x110a <lcd_str>
+}
+    114a:	61 96       	adiw	r28, 0x11	; 17
+    114c:	0f b6       	in	r0, 0x3f	; 63
+    114e:	f8 94       	cli
+    1150:	de bf       	out	0x3e, r29	; 62
+    1152:	0f be       	out	0x3f, r0	; 63
+    1154:	cd bf       	out	0x3d, r28	; 61
+    1156:	df 91       	pop	r29
+    1158:	cf 91       	pop	r28
+    115a:	08 95       	ret
+
+0000115c <lcd_defchar_E>:
+//		nr: 		- kod znaku w pamiêci CGRAM od 0x80 do 0x87
+//		*def_znak:	- wskaŸnik do tablicy 7 bajtów definiuj¹cych znak
+//
+//----------------------------------------------------------------------------------------
+void lcd_defchar_E(uint8_t nr, uint8_t *def_znak)
+{
+    115c:	ef 92       	push	r14
+    115e:	ff 92       	push	r15
+    1160:	0f 93       	push	r16
+    1162:	1f 93       	push	r17
+    1164:	cf 93       	push	r28
+    1166:	df 93       	push	r29
+    1168:	eb 01       	movw	r28, r22
+	register uint8_t i,c;
+
+	lcd_write_cmd( 64+((nr&0x07)*8) );
+    116a:	87 70       	andi	r24, 0x07	; 7
+    116c:	88 0f       	add	r24, r24
+    116e:	88 0f       	add	r24, r24
+    1170:	88 0f       	add	r24, r24
+    1172:	80 5c       	subi	r24, 0xC0	; 192
+    1174:	c6 df       	rcall	.-116    	; 0x1102 <lcd_write_cmd>
+    1176:	7e 01       	movw	r14, r28
+    1178:	88 e0       	ldi	r24, 0x08	; 8
+    117a:	e8 0e       	add	r14, r24
+    117c:	f1 1c       	adc	r15, r1
+	for(i=0;i<8;i++)
+	{
+		c = eeprom_read_byte(def_znak++);
+    117e:	8e 01       	movw	r16, r28
+    1180:	0f 5f       	subi	r16, 0xFF	; 255
+    1182:	1f 4f       	sbci	r17, 0xFF	; 255
+    1184:	ce 01       	movw	r24, r28
+    1186:	49 d3       	rcall	.+1682   	; 0x181a <__eerd_byte_m8a>
+		lcd_write_data(c);
+    1188:	be df       	rcall	.-132    	; 0x1106 <lcd_write_data>
+void lcd_defchar_E(uint8_t nr, uint8_t *def_znak)
+{
+	register uint8_t i,c;
+
+	lcd_write_cmd( 64+((nr&0x07)*8) );
+	for(i=0;i<8;i++)
+    118a:	0e 15       	cp	r16, r14
+    118c:	1f 05       	cpc	r17, r15
+    118e:	11 f0       	breq	.+4      	; 0x1194 <lcd_defchar_E+0x38>
+	{
+		c = eeprom_read_byte(def_znak++);
+    1190:	e8 01       	movw	r28, r16
+    1192:	f5 cf       	rjmp	.-22     	; 0x117e <lcd_defchar_E+0x22>
+		lcd_write_data(c);
+	}
+}
+    1194:	df 91       	pop	r29
+    1196:	cf 91       	pop	r28
+    1198:	1f 91       	pop	r17
+    119a:	0f 91       	pop	r16
+    119c:	ff 90       	pop	r15
+    119e:	ef 90       	pop	r14
+    11a0:	08 95       	ret
+
+000011a2 <lcd_locate>:
+//		w zale¿noœci od rodzaju wyœwietlacza (ile posiada wierszy)
+//
+//----------------------------------------------------------------------------------------
+void lcd_locate(uint8_t y, uint8_t x)
+{
+	switch(y)
+    11a2:	81 30       	cpi	r24, 0x01	; 1
+    11a4:	09 f4       	brne	.+2      	; 0x11a8 <lcd_locate+0x6>
+	{
+		case 0: y = LCD_LINE1; break;
+
+#if (LCD_Y>1)
+	    case 1: y = LCD_LINE2; break; // adres 1 znaku 2 wiersza
+    11a6:	80 e4       	ldi	r24, 0x40	; 64
+#if (LCD_Y>3)
+    	case 3: y = LCD_LINE4; break; // adres 1 znaku 4 wiersza
+#endif
+	}
+
+	lcd_write_cmd( (0x80 + y + x) );
+    11a8:	60 58       	subi	r22, 0x80	; 128
+    11aa:	86 0f       	add	r24, r22
+    11ac:	aa cf       	rjmp	.-172    	; 0x1102 <lcd_write_cmd>
+
+000011ae <lcd_cls>:
+//		Kasowanie ekranu wyœwietlacza
+//
+//----------------------------------------------------------------------------------------
+void lcd_cls(void)
+{
+	lcd_write_cmd( LCDC_CLS );
+    11ae:	81 e0       	ldi	r24, 0x01	; 1
+    11b0:	a8 cf       	rjmp	.-176    	; 0x1102 <lcd_write_cmd>
+
+000011b2 <lcd_init>:
+//----------------------------------------------------------------------------------------
+void lcd_init(void)
+{
+	// inicjowanie pinów portów ustalonych do pod³¹czenia z wyœwietlaczem LCD
+	// ustawienie wszystkich jako wyjœcia
+	data_dir_out();
+    11b2:	5b df       	rcall	.-330    	; 0x106a <data_dir_out>
+	DDR(LCD_RSPORT) |= (1<<LCD_RS);
+    11b4:	bf 9a       	sbi	0x17, 7	; 23
+	DDR(LCD_EPORT) |= (1<<LCD_E);
+    11b6:	8c 9a       	sbi	0x11, 4	; 17
+	#if USE_RW == 1
+		DDR(LCD_RWPORT) |= (1<<LCD_RW);
+    11b8:	be 9a       	sbi	0x17, 6	; 23
+	#endif
+
+	PORT(LCD_RSPORT) |= (1<<LCD_RS);
+    11ba:	c7 9a       	sbi	0x18, 7	; 24
+	PORT(LCD_EPORT) |= (1<<LCD_E);
+    11bc:	94 9a       	sbi	0x12, 4	; 18
+	#if USE_RW == 1
+		PORT(LCD_RWPORT) |= (1<<LCD_RW);
+    11be:	c6 9a       	sbi	0x18, 6	; 24
+    11c0:	8f e2       	ldi	r24, 0x2F	; 47
+    11c2:	95 e7       	ldi	r25, 0x75	; 117
+    11c4:	01 97       	sbiw	r24, 0x01	; 1
+    11c6:	f1 f7       	brne	.-4      	; 0x11c4 <lcd_init+0x12>
+    11c8:	00 c0       	rjmp	.+0      	; 0x11ca <lcd_init+0x18>
+    11ca:	00 00       	nop
+	#endif
+
+	_delay_ms(15);
+	PORT(LCD_EPORT) &= ~(1<<LCD_E);
+    11cc:	94 98       	cbi	0x12, 4	; 18
+	PORT(LCD_RSPORT) &= ~(1<<LCD_RS);
+    11ce:	c7 98       	cbi	0x18, 7	; 24
+	#if USE_RW == 1
+    	PORT(LCD_RWPORT) &= ~(1<<LCD_RW);
+    11d0:	c6 98       	cbi	0x18, 6	; 24
+	#endif
+
+	// jeszcze nie mo¿na u¿ywaæ Busy Flag
+	SET_E;
+    11d2:	94 9a       	sbi	0x12, 4	; 18
+	lcd_sendHalf(0x03);	// tryb 8-bitowy
+    11d4:	83 e0       	ldi	r24, 0x03	; 3
+    11d6:	59 df       	rcall	.-334    	; 0x108a <lcd_sendHalf>
+	CLR_E;
+    11d8:	94 98       	cbi	0x12, 4	; 18
+    11da:	87 e0       	ldi	r24, 0x07	; 7
+    11dc:	90 e2       	ldi	r25, 0x20	; 32
+    11de:	01 97       	sbiw	r24, 0x01	; 1
+    11e0:	f1 f7       	brne	.-4      	; 0x11de <lcd_init+0x2c>
+    11e2:	00 c0       	rjmp	.+0      	; 0x11e4 <lcd_init+0x32>
+    11e4:	00 00       	nop
+	_delay_ms(4.1);
+
+	SET_E;
+    11e6:	94 9a       	sbi	0x12, 4	; 18
+	lcd_sendHalf(0x03);	// tryb 8-bitowy
+    11e8:	83 e0       	ldi	r24, 0x03	; 3
+    11ea:	4f df       	rcall	.-354    	; 0x108a <lcd_sendHalf>
+	CLR_E;
+    11ec:	94 98       	cbi	0x12, 4	; 18
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+    11ee:	87 ec       	ldi	r24, 0xC7	; 199
+    11f0:	90 e0       	ldi	r25, 0x00	; 0
+    11f2:	01 97       	sbiw	r24, 0x01	; 1
+    11f4:	f1 f7       	brne	.-4      	; 0x11f2 <lcd_init+0x40>
+    11f6:	00 c0       	rjmp	.+0      	; 0x11f8 <lcd_init+0x46>
+    11f8:	00 00       	nop
+	_delay_us(100);
+
+	SET_E;
+    11fa:	94 9a       	sbi	0x12, 4	; 18
+	lcd_sendHalf(0x03);	// tryb 8-bitowy
+    11fc:	83 e0       	ldi	r24, 0x03	; 3
+    11fe:	45 df       	rcall	.-374    	; 0x108a <lcd_sendHalf>
+	CLR_E;
+    1200:	94 98       	cbi	0x12, 4	; 18
+    1202:	87 ec       	ldi	r24, 0xC7	; 199
+    1204:	90 e0       	ldi	r25, 0x00	; 0
+    1206:	01 97       	sbiw	r24, 0x01	; 1
+    1208:	f1 f7       	brne	.-4      	; 0x1206 <lcd_init+0x54>
+    120a:	00 c0       	rjmp	.+0      	; 0x120c <lcd_init+0x5a>
+    120c:	00 00       	nop
+	_delay_us(100);
+
+	SET_E;
+    120e:	94 9a       	sbi	0x12, 4	; 18
+	lcd_sendHalf(0x02);// tryb 4-bitowy
+    1210:	82 e0       	ldi	r24, 0x02	; 2
+    1212:	3b df       	rcall	.-394    	; 0x108a <lcd_sendHalf>
+	CLR_E;
+    1214:	94 98       	cbi	0x12, 4	; 18
+    1216:	87 ec       	ldi	r24, 0xC7	; 199
+    1218:	90 e0       	ldi	r25, 0x00	; 0
+    121a:	01 97       	sbiw	r24, 0x01	; 1
+    121c:	f1 f7       	brne	.-4      	; 0x121a <lcd_init+0x68>
+    121e:	00 c0       	rjmp	.+0      	; 0x1220 <lcd_init+0x6e>
+    1220:	00 00       	nop
+	_delay_us(100);
+
+	// ju¿ mo¿na u¿ywaæ Busy Flag
+	// tryb 4-bitowy, 2 wiersze, znak 5x7
+	lcd_write_cmd( LCDC_FUNC|LCDC_FUNC4B|LCDC_FUNC2L|LCDC_FUNC5x7 );
+    1222:	88 e2       	ldi	r24, 0x28	; 40
+    1224:	6e df       	rcall	.-292    	; 0x1102 <lcd_write_cmd>
+	// wy³¹czenie kursora
+	lcd_write_cmd( LCDC_ONOFF|LCDC_CURSOROFF );
+    1226:	88 e0       	ldi	r24, 0x08	; 8
+    1228:	6c df       	rcall	.-296    	; 0x1102 <lcd_write_cmd>
+	// w³¹czenie wyœwietlacza
+	lcd_write_cmd( LCDC_ONOFF|LCDC_DISPLAYON );
+    122a:	8c e0       	ldi	r24, 0x0C	; 12
+    122c:	6a df       	rcall	.-300    	; 0x1102 <lcd_write_cmd>
+	// przesuwanie kursora w prawo bez przesuwania zawartoœci ekranu
+	lcd_write_cmd( LCDC_ENTRY|LCDC_ENTRYR );
+    122e:	86 e0       	ldi	r24, 0x06	; 6
+    1230:	68 df       	rcall	.-304    	; 0x1102 <lcd_write_cmd>
+
+	// kasowanie ekranu
+	lcd_cls();
+    1232:	bd cf       	rjmp	.-134    	; 0x11ae <lcd_cls>
+
+00001234 <change_led_states>:
+ */
+
+#include "led.h"
+
+void change_led_states (bool direction)
+{
+    1234:	cf 93       	push	r28
+ISR(TIMER1_COMPA_vect);
+ISR(TIMER1_COMPB_vect);
+
+inline void shift_bits (bool direction)
+{
+	if (direction == RIGHT)
+    1236:	81 30       	cpi	r24, 0x01	; 1
+    1238:	89 f4       	brne	.+34     	; 0x125c <change_led_states+0x28>
+	{
+		led_states = (led_states>>2)|(1UL<<31);
+    123a:	80 91 0b 02 	lds	r24, 0x020B
+    123e:	90 91 0c 02 	lds	r25, 0x020C
+    1242:	a0 91 0d 02 	lds	r26, 0x020D
+    1246:	b0 91 0e 02 	lds	r27, 0x020E
+    124a:	32 e0       	ldi	r19, 0x02	; 2
+    124c:	b6 95       	lsr	r27
+    124e:	a7 95       	ror	r26
+    1250:	97 95       	ror	r25
+    1252:	87 95       	ror	r24
+    1254:	3a 95       	dec	r19
+    1256:	d1 f7       	brne	.-12     	; 0x124c <change_led_states+0x18>
+    1258:	b0 68       	ori	r27, 0x80	; 128
+    125a:	12 c0       	rjmp	.+36     	; 0x1280 <change_led_states+0x4c>
+	}
+	if (direction == LEFT)
+    125c:	81 11       	cpse	r24, r1
+    125e:	19 c0       	rjmp	.+50     	; 0x1292 <change_led_states+0x5e>
+	{
+		led_states = (led_states<<2)|1UL;
+    1260:	80 91 0b 02 	lds	r24, 0x020B
+    1264:	90 91 0c 02 	lds	r25, 0x020C
+    1268:	a0 91 0d 02 	lds	r26, 0x020D
+    126c:	b0 91 0e 02 	lds	r27, 0x020E
+    1270:	22 e0       	ldi	r18, 0x02	; 2
+    1272:	88 0f       	add	r24, r24
+    1274:	99 1f       	adc	r25, r25
+    1276:	aa 1f       	adc	r26, r26
+    1278:	bb 1f       	adc	r27, r27
+    127a:	2a 95       	dec	r18
+    127c:	d1 f7       	brne	.-12     	; 0x1272 <change_led_states+0x3e>
+    127e:	81 60       	ori	r24, 0x01	; 1
+    1280:	80 93 0b 02 	sts	0x020B, r24
+    1284:	90 93 0c 02 	sts	0x020C, r25
+    1288:	a0 93 0d 02 	sts	0x020D, r26
+    128c:	b0 93 0e 02 	sts	0x020E, r27
+    1290:	02 c0       	rjmp	.+4      	; 0x1296 <change_led_states+0x62>
+	shift_bits(direction);
+	
+	if (direction == CLEAN)
+    1292:	83 30       	cpi	r24, 0x03	; 3
+    1294:	21 f0       	breq	.+8      	; 0x129e <change_led_states+0x6a>
+    1296:	60 e0       	ldi	r22, 0x00	; 0
+			SHCP_0;
+		}
+	} 
+	else
+	{
+		for (u08 i = 0; i < NUMBER_OF_EMPTY_BITS; i++)
+    1298:	46 e1       	ldi	r20, 0x16	; 22
+    129a:	50 e0       	ldi	r21, 0x00	; 0
+    129c:	07 c0       	rjmp	.+14     	; 0x12ac <change_led_states+0x78>
+
+void change_led_states (bool direction)
+{
+	shift_bits(direction);
+	
+	if (direction == CLEAN)
+    129e:	88 e1       	ldi	r24, 0x18	; 24
+	{
+		for (u08 i = 0; i < 24; i++)
+		{
+			DS_0;
+    12a0:	c1 9a       	sbi	0x18, 1	; 24
+			SHCP_1;
+    12a2:	aa 9a       	sbi	0x15, 2	; 21
+			SHCP_0;
+    12a4:	aa 98       	cbi	0x15, 2	; 21
+    12a6:	81 50       	subi	r24, 0x01	; 1
+{
+	shift_bits(direction);
+	
+	if (direction == CLEAN)
+	{
+		for (u08 i = 0; i < 24; i++)
+    12a8:	d9 f7       	brne	.-10     	; 0x12a0 <change_led_states+0x6c>
+    12aa:	77 c0       	rjmp	.+238    	; 0x139a <change_led_states+0x166>
+			SHCP_0;
+		}
+	} 
+	else
+	{
+		for (u08 i = 0; i < NUMBER_OF_EMPTY_BITS; i++)
+    12ac:	80 91 04 02 	lds	r24, 0x0204
+    12b0:	8f 71       	andi	r24, 0x1F	; 31
+    12b2:	26 2f       	mov	r18, r22
+    12b4:	30 e0       	ldi	r19, 0x00	; 0
+    12b6:	da 01       	movw	r26, r20
+    12b8:	a8 1b       	sub	r26, r24
+    12ba:	b1 09       	sbc	r27, r1
+    12bc:	cd 01       	movw	r24, r26
+    12be:	95 95       	asr	r25
+    12c0:	87 95       	ror	r24
+    12c2:	28 17       	cp	r18, r24
+    12c4:	39 07       	cpc	r19, r25
+    12c6:	2c f4       	brge	.+10     	; 0x12d2 <change_led_states+0x9e>
+		{
+			DS_0;
+    12c8:	c1 9a       	sbi	0x18, 1	; 24
+			SHCP_1;
+    12ca:	aa 9a       	sbi	0x15, 2	; 21
+			SHCP_0;
+    12cc:	aa 98       	cbi	0x15, 2	; 21
+			SHCP_0;
+		}
+	} 
+	else
+	{
+		for (u08 i = 0; i < NUMBER_OF_EMPTY_BITS; i++)
+    12ce:	6f 5f       	subi	r22, 0xFF	; 255
+    12d0:	ed cf       	rjmp	.-38     	; 0x12ac <change_led_states+0x78>
+			DS_0;
+			SHCP_1;
+			SHCP_0;
+		}
+		
+		for (u08 i = NUMBER_OF_EMPTY_BITS; i < game_settings.number_of_leds+NUMBER_OF_EMPTY_BITS; i++)
+    12d2:	20 91 04 02 	lds	r18, 0x0204
+    12d6:	2f 71       	andi	r18, 0x1F	; 31
+    12d8:	86 e1       	ldi	r24, 0x16	; 22
+    12da:	90 e0       	ldi	r25, 0x00	; 0
+    12dc:	82 1b       	sub	r24, r18
+    12de:	91 09       	sbc	r25, r1
+    12e0:	95 95       	asr	r25
+    12e2:	87 95       	ror	r24
+    12e4:	c8 2f       	mov	r28, r24
+    12e6:	20 e0       	ldi	r18, 0x00	; 0
+    12e8:	30 e0       	ldi	r19, 0x00	; 0
+    12ea:	66 e1       	ldi	r22, 0x16	; 22
+    12ec:	70 e0       	ldi	r23, 0x00	; 0
+    12ee:	fc 2f       	mov	r31, r28
+    12f0:	f2 0f       	add	r31, r18
+    12f2:	4f 2f       	mov	r20, r31
+    12f4:	50 e0       	ldi	r21, 0x00	; 0
+    12f6:	e0 91 04 02 	lds	r30, 0x0204
+    12fa:	ef 71       	andi	r30, 0x1F	; 31
+    12fc:	90 91 04 02 	lds	r25, 0x0204
+    1300:	9f 71       	andi	r25, 0x1F	; 31
+    1302:	db 01       	movw	r26, r22
+    1304:	a9 1b       	sub	r26, r25
+    1306:	b1 09       	sbc	r27, r1
+    1308:	cd 01       	movw	r24, r26
+    130a:	95 95       	asr	r25
+    130c:	87 95       	ror	r24
+    130e:	8e 0f       	add	r24, r30
+    1310:	91 1d       	adc	r25, r1
+    1312:	48 17       	cp	r20, r24
+    1314:	59 07       	cpc	r21, r25
+    1316:	cc f4       	brge	.+50     	; 0x134a <change_led_states+0x116>
+		{
+			if( CHECK_BIT(i) )
+    1318:	80 91 0b 02 	lds	r24, 0x020B
+    131c:	90 91 0c 02 	lds	r25, 0x020C
+    1320:	a0 91 0d 02 	lds	r26, 0x020D
+    1324:	b0 91 0e 02 	lds	r27, 0x020E
+    1328:	04 c0       	rjmp	.+8      	; 0x1332 <change_led_states+0xfe>
+    132a:	b6 95       	lsr	r27
+    132c:	a7 95       	ror	r26
+    132e:	97 95       	ror	r25
+    1330:	87 95       	ror	r24
+    1332:	fa 95       	dec	r31
+    1334:	d2 f7       	brpl	.-12     	; 0x132a <change_led_states+0xf6>
+    1336:	80 ff       	sbrs	r24, 0
+    1338:	02 c0       	rjmp	.+4      	; 0x133e <change_led_states+0x10a>
+			DS_1;
+    133a:	c1 98       	cbi	0x18, 1	; 24
+    133c:	01 c0       	rjmp	.+2      	; 0x1340 <change_led_states+0x10c>
+			else
+			DS_0;
+    133e:	c1 9a       	sbi	0x18, 1	; 24
+			SHCP_1;
+    1340:	aa 9a       	sbi	0x15, 2	; 21
+			SHCP_0;
+    1342:	aa 98       	cbi	0x15, 2	; 21
+    1344:	2f 5f       	subi	r18, 0xFF	; 255
+    1346:	3f 4f       	sbci	r19, 0xFF	; 255
+    1348:	d2 cf       	rjmp	.-92     	; 0x12ee <change_led_states+0xba>
+			DS_0;
+			SHCP_1;
+			SHCP_0;
+		}
+		
+		for (u08 i = NUMBER_OF_EMPTY_BITS; i < game_settings.number_of_leds+NUMBER_OF_EMPTY_BITS; i++)
+    134a:	60 e0       	ldi	r22, 0x00	; 0
+			DS_0;
+			SHCP_1;
+			SHCP_0;
+		}
+		
+		for (u08 i = 0; i < NUMBER_OF_EMPTY_BITS; i++)
+    134c:	46 e1       	ldi	r20, 0x16	; 22
+    134e:	50 e0       	ldi	r21, 0x00	; 0
+    1350:	80 91 04 02 	lds	r24, 0x0204
+    1354:	8f 71       	andi	r24, 0x1F	; 31
+    1356:	26 2f       	mov	r18, r22
+    1358:	30 e0       	ldi	r19, 0x00	; 0
+    135a:	fa 01       	movw	r30, r20
+    135c:	e8 1b       	sub	r30, r24
+    135e:	f1 09       	sbc	r31, r1
+    1360:	cf 01       	movw	r24, r30
+    1362:	95 95       	asr	r25
+    1364:	87 95       	ror	r24
+    1366:	28 17       	cp	r18, r24
+    1368:	39 07       	cpc	r19, r25
+    136a:	2c f4       	brge	.+10     	; 0x1376 <change_led_states+0x142>
+		{
+			DS_0;
+    136c:	c1 9a       	sbi	0x18, 1	; 24
+			SHCP_1;
+    136e:	aa 9a       	sbi	0x15, 2	; 21
+			SHCP_0;
+    1370:	aa 98       	cbi	0x15, 2	; 21
+			DS_0;
+			SHCP_1;
+			SHCP_0;
+		}
+		
+		for (u08 i = 0; i < NUMBER_OF_EMPTY_BITS; i++)
+    1372:	6f 5f       	subi	r22, 0xFF	; 255
+    1374:	ed cf       	rjmp	.-38     	; 0x1350 <change_led_states+0x11c>
+			DS_0;
+			SHCP_1;
+			SHCP_0;
+		}
+		
+		if (button_parameters.button1_relax == true)
+    1376:	80 91 03 02 	lds	r24, 0x0203
+    137a:	84 ff       	sbrs	r24, 4
+    137c:	02 c0       	rjmp	.+4      	; 0x1382 <change_led_states+0x14e>
+		DS_1;
+    137e:	c1 98       	cbi	0x18, 1	; 24
+    1380:	01 c0       	rjmp	.+2      	; 0x1384 <change_led_states+0x150>
+		else
+		DS_0;
+    1382:	c1 9a       	sbi	0x18, 1	; 24
+		SHCP_1;
+    1384:	aa 9a       	sbi	0x15, 2	; 21
+		SHCP_0;
+    1386:	aa 98       	cbi	0x15, 2	; 21
+		
+		if (button_parameters.button2_relax == true)
+    1388:	80 91 03 02 	lds	r24, 0x0203
+    138c:	85 ff       	sbrs	r24, 5
+    138e:	02 c0       	rjmp	.+4      	; 0x1394 <change_led_states+0x160>
+		DS_1;
+    1390:	c1 98       	cbi	0x18, 1	; 24
+    1392:	01 c0       	rjmp	.+2      	; 0x1396 <change_led_states+0x162>
+		else
+		DS_0;
+    1394:	c1 9a       	sbi	0x18, 1	; 24
+		SHCP_1;
+    1396:	aa 9a       	sbi	0x15, 2	; 21
+		SHCP_0;
+    1398:	aa 98       	cbi	0x15, 2	; 21
+	}
+
+	STCP_1;
+    139a:	a9 9a       	sbi	0x15, 1	; 21
+	STCP_0;
+    139c:	a9 98       	cbi	0x15, 1	; 21
+}
+    139e:	cf 91       	pop	r28
+    13a0:	08 95       	ret
+
+000013a2 <__vector_7>:
+
+ISR(TIMER1_COMPB_vect)
+{
+    13a2:	1f 92       	push	r1
+    13a4:	0f 92       	push	r0
+    13a6:	0f b6       	in	r0, 0x3f	; 63
+    13a8:	0f 92       	push	r0
+    13aa:	11 24       	eor	r1, r1
+    13ac:	2f 93       	push	r18
+    13ae:	3f 93       	push	r19
+    13b0:	4f 93       	push	r20
+    13b2:	5f 93       	push	r21
+    13b4:	6f 93       	push	r22
+    13b6:	7f 93       	push	r23
+    13b8:	8f 93       	push	r24
+    13ba:	9f 93       	push	r25
+    13bc:	af 93       	push	r26
+    13be:	bf 93       	push	r27
+    13c0:	ef 93       	push	r30
+    13c2:	ff 93       	push	r31
+	if ( player1_click_count > (player2_click_count + game_settings.threshold_of_change) )
+    13c4:	20 91 01 02 	lds	r18, 0x0201
+    13c8:	40 91 02 02 	lds	r20, 0x0202
+    13cc:	80 91 04 02 	lds	r24, 0x0204
+    13d0:	82 95       	swap	r24
+    13d2:	86 95       	lsr	r24
+    13d4:	83 70       	andi	r24, 0x03	; 3
+    13d6:	30 e0       	ldi	r19, 0x00	; 0
+    13d8:	90 e0       	ldi	r25, 0x00	; 0
+    13da:	84 0f       	add	r24, r20
+    13dc:	91 1d       	adc	r25, r1
+    13de:	82 17       	cp	r24, r18
+    13e0:	93 07       	cpc	r25, r19
+    13e2:	74 f5       	brge	.+92     	; 0x1440 <__vector_7+0x9e>
+	{
+		player1_click_count = 0;
+    13e4:	10 92 01 02 	sts	0x0201, r1
+		player2_click_count = 0;
+    13e8:	10 92 02 02 	sts	0x0202, r1
+		
+		if(!button_parameters.button2_relax)
+    13ec:	80 91 03 02 	lds	r24, 0x0203
+    13f0:	85 fd       	sbrc	r24, 5
+    13f2:	02 c0       	rjmp	.+4      	; 0x13f8 <__vector_7+0x56>
+		change_led_states(LEFT);
+    13f4:	80 e0       	ldi	r24, 0x00	; 0
+    13f6:	1e df       	rcall	.-452    	; 0x1234 <change_led_states>
+		
+		if (CHECKIF_PLAYER1_WINS)
+    13f8:	80 91 0b 02 	lds	r24, 0x020B
+    13fc:	90 91 0c 02 	lds	r25, 0x020C
+    1400:	a0 91 0d 02 	lds	r26, 0x020D
+    1404:	b0 91 0e 02 	lds	r27, 0x020E
+    1408:	40 91 04 02 	lds	r20, 0x0204
+    140c:	4f 71       	andi	r20, 0x1F	; 31
+    140e:	50 91 04 02 	lds	r21, 0x0204
+    1412:	5f 71       	andi	r21, 0x1F	; 31
+    1414:	26 e1       	ldi	r18, 0x16	; 22
+    1416:	30 e0       	ldi	r19, 0x00	; 0
+    1418:	25 1b       	sub	r18, r21
+    141a:	31 09       	sbc	r19, r1
+    141c:	35 95       	asr	r19
+    141e:	27 95       	ror	r18
+    1420:	24 0f       	add	r18, r20
+    1422:	31 1d       	adc	r19, r1
+    1424:	04 c0       	rjmp	.+8      	; 0x142e <__vector_7+0x8c>
+    1426:	b6 95       	lsr	r27
+    1428:	a7 95       	ror	r26
+    142a:	97 95       	ror	r25
+    142c:	87 95       	ror	r24
+    142e:	2a 95       	dec	r18
+    1430:	d2 f7       	brpl	.-12     	; 0x1426 <__vector_7+0x84>
+    1432:	80 ff       	sbrs	r24, 0
+    1434:	05 c0       	rjmp	.+10     	; 0x1440 <__vector_7+0x9e>
+		{
+			game_settings.player1_wins = true;
+    1436:	80 91 0a 02 	lds	r24, 0x020A
+    143a:	80 61       	ori	r24, 0x10	; 16
+    143c:	80 93 0a 02 	sts	0x020A, r24
+		}	
+	}
+	if ( player2_click_count > (player1_click_count + game_settings.threshold_of_change) )
+    1440:	20 91 02 02 	lds	r18, 0x0202
+    1444:	40 91 01 02 	lds	r20, 0x0201
+    1448:	80 91 04 02 	lds	r24, 0x0204
+    144c:	82 95       	swap	r24
+    144e:	86 95       	lsr	r24
+    1450:	83 70       	andi	r24, 0x03	; 3
+    1452:	30 e0       	ldi	r19, 0x00	; 0
+    1454:	90 e0       	ldi	r25, 0x00	; 0
+    1456:	84 0f       	add	r24, r20
+    1458:	91 1d       	adc	r25, r1
+    145a:	82 17       	cp	r24, r18
+    145c:	93 07       	cpc	r25, r19
+    145e:	6c f5       	brge	.+90     	; 0x14ba <__vector_7+0x118>
+	{
+		player1_click_count = 0;
+    1460:	10 92 01 02 	sts	0x0201, r1
+		player2_click_count = 0;
+    1464:	10 92 02 02 	sts	0x0202, r1
+		
+		if(!button_parameters.button1_relax)
+    1468:	80 91 03 02 	lds	r24, 0x0203
+    146c:	84 fd       	sbrc	r24, 4
+    146e:	02 c0       	rjmp	.+4      	; 0x1474 <__vector_7+0xd2>
+		change_led_states(RIGHT);
+    1470:	81 e0       	ldi	r24, 0x01	; 1
+    1472:	e0 de       	rcall	.-576    	; 0x1234 <change_led_states>
+		
+		if (CHECKIF_PLAYER2_WINS)
+    1474:	80 91 0b 02 	lds	r24, 0x020B
+    1478:	90 91 0c 02 	lds	r25, 0x020C
+    147c:	a0 91 0d 02 	lds	r26, 0x020D
+    1480:	b0 91 0e 02 	lds	r27, 0x020E
+    1484:	40 91 04 02 	lds	r20, 0x0204
+    1488:	4f 71       	andi	r20, 0x1F	; 31
+    148a:	80 95       	com	r24
+    148c:	90 95       	com	r25
+    148e:	a0 95       	com	r26
+    1490:	b0 95       	com	r27
+    1492:	26 e1       	ldi	r18, 0x16	; 22
+    1494:	30 e0       	ldi	r19, 0x00	; 0
+    1496:	24 1b       	sub	r18, r20
+    1498:	31 09       	sbc	r19, r1
+    149a:	35 95       	asr	r19
+    149c:	27 95       	ror	r18
+    149e:	04 c0       	rjmp	.+8      	; 0x14a8 <__vector_7+0x106>
+    14a0:	b6 95       	lsr	r27
+    14a2:	a7 95       	ror	r26
+    14a4:	97 95       	ror	r25
+    14a6:	87 95       	ror	r24
+    14a8:	2a 95       	dec	r18
+    14aa:	d2 f7       	brpl	.-12     	; 0x14a0 <__vector_7+0xfe>
+    14ac:	80 ff       	sbrs	r24, 0
+    14ae:	05 c0       	rjmp	.+10     	; 0x14ba <__vector_7+0x118>
+		{
+			game_settings.player2_wins = true;
+    14b0:	80 91 0a 02 	lds	r24, 0x020A
+    14b4:	80 62       	ori	r24, 0x20	; 32
+    14b6:	80 93 0a 02 	sts	0x020A, r24
+		}
+	}
+	OCR1B += 30;
+    14ba:	88 b5       	in	r24, 0x28	; 40
+    14bc:	99 b5       	in	r25, 0x29	; 41
+    14be:	4e 96       	adiw	r24, 0x1e	; 30
+    14c0:	99 bd       	out	0x29, r25	; 41
+    14c2:	88 bd       	out	0x28, r24	; 40
+}
+    14c4:	ff 91       	pop	r31
+    14c6:	ef 91       	pop	r30
+    14c8:	bf 91       	pop	r27
+    14ca:	af 91       	pop	r26
+    14cc:	9f 91       	pop	r25
+    14ce:	8f 91       	pop	r24
+    14d0:	7f 91       	pop	r23
+    14d2:	6f 91       	pop	r22
+    14d4:	5f 91       	pop	r21
+    14d6:	4f 91       	pop	r20
+    14d8:	3f 91       	pop	r19
+    14da:	2f 91       	pop	r18
+    14dc:	0f 90       	pop	r0
+    14de:	0f be       	out	0x3f, r0	; 63
+    14e0:	0f 90       	pop	r0
+    14e2:	1f 90       	pop	r1
+    14e4:	18 95       	reti
+
+000014e6 <__vector_6>:
+
+ISR(TIMER1_COMPA_vect)
+{
+    14e6:	1f 92       	push	r1
+    14e8:	0f 92       	push	r0
+    14ea:	0f b6       	in	r0, 0x3f	; 63
+    14ec:	0f 92       	push	r0
+    14ee:	11 24       	eor	r1, r1
+    14f0:	2f 93       	push	r18
+    14f2:	3f 93       	push	r19
+    14f4:	4f 93       	push	r20
+    14f6:	5f 93       	push	r21
+    14f8:	6f 93       	push	r22
+    14fa:	7f 93       	push	r23
+    14fc:	8f 93       	push	r24
+    14fe:	9f 93       	push	r25
+    1500:	af 93       	push	r26
+    1502:	bf 93       	push	r27
+    1504:	ef 93       	push	r30
+    1506:	ff 93       	push	r31
+	static u08 ledminus_auto_off = 0;
+	
+	if (game_settings.ledminus_auto_disable == true)
+    1508:	80 91 0a 02 	lds	r24, 0x020A
+    150c:	83 ff       	sbrs	r24, 3
+    150e:	0c c0       	rjmp	.+24     	; 0x1528 <__vector_6+0x42>
+	{
+		if (ledminus_auto_off == 2)
+    1510:	80 91 00 02 	lds	r24, 0x0200
+    1514:	82 30       	cpi	r24, 0x02	; 2
+    1516:	19 f4       	brne	.+6      	; 0x151e <__vector_6+0x38>
+		{
+			LEDMINUS_BONUS_OFF;
+    1518:	ad 9a       	sbi	0x15, 5	; 21
+			ledminus_auto_off = 0;
+    151a:	10 92 00 02 	sts	0x0200, r1
+		}
+		ledminus_auto_off++;
+    151e:	80 91 00 02 	lds	r24, 0x0200
+    1522:	8f 5f       	subi	r24, 0xFF	; 255
+    1524:	80 93 00 02 	sts	0x0200, r24
+	}
+	
+	saved_number = rand();
+    1528:	2d d1       	rcall	.+602    	; 0x1784 <rand>
+    152a:	80 93 10 02 	sts	0x0210, r24
+	
+	if ( saved_number % game_settings.probability_of_bonus == 0 && game_settings.ledminus_bonus_enable == true )
+    152e:	80 91 10 02 	lds	r24, 0x0210
+    1532:	90 91 06 02 	lds	r25, 0x0206
+    1536:	99 1f       	adc	r25, r25
+    1538:	99 27       	eor	r25, r25
+    153a:	99 1f       	adc	r25, r25
+    153c:	60 91 07 02 	lds	r22, 0x0207
+    1540:	67 70       	andi	r22, 0x07	; 7
+    1542:	66 0f       	add	r22, r22
+    1544:	69 2b       	or	r22, r25
+    1546:	90 e0       	ldi	r25, 0x00	; 0
+    1548:	70 e0       	ldi	r23, 0x00	; 0
+    154a:	89 d0       	rcall	.+274    	; 0x165e <__divmodhi4>
+    154c:	89 2b       	or	r24, r25
+    154e:	39 f4       	brne	.+14     	; 0x155e <__vector_6+0x78>
+    1550:	80 91 07 02 	lds	r24, 0x0207
+    1554:	83 ff       	sbrs	r24, 3
+    1556:	03 c0       	rjmp	.+6      	; 0x155e <__vector_6+0x78>
+	{
+		LEDPLUS_BONUS_OFF;
+    1558:	ac 9a       	sbi	0x15, 4	; 21
+		RELAX_BONUS_OFF;
+    155a:	ab 9a       	sbi	0x15, 3	; 21
+		LEDMINUS_BONUS_ON;
+    155c:	ad 98       	cbi	0x15, 5	; 21
+	}
+	if ( saved_number % game_settings.probability_of_bonus == 1 && game_settings.ledplus_bonus_enable == true )
+    155e:	80 91 10 02 	lds	r24, 0x0210
+    1562:	90 91 06 02 	lds	r25, 0x0206
+    1566:	99 1f       	adc	r25, r25
+    1568:	99 27       	eor	r25, r25
+    156a:	99 1f       	adc	r25, r25
+    156c:	60 91 07 02 	lds	r22, 0x0207
+    1570:	67 70       	andi	r22, 0x07	; 7
+    1572:	66 0f       	add	r22, r22
+    1574:	69 2b       	or	r22, r25
+    1576:	90 e0       	ldi	r25, 0x00	; 0
+    1578:	70 e0       	ldi	r23, 0x00	; 0
+    157a:	71 d0       	rcall	.+226    	; 0x165e <__divmodhi4>
+    157c:	01 97       	sbiw	r24, 0x01	; 1
+    157e:	39 f4       	brne	.+14     	; 0x158e <__vector_6+0xa8>
+    1580:	80 91 07 02 	lds	r24, 0x0207
+    1584:	84 ff       	sbrs	r24, 4
+    1586:	03 c0       	rjmp	.+6      	; 0x158e <__vector_6+0xa8>
+	{
+		LEDMINUS_BONUS_OFF;
+    1588:	ad 9a       	sbi	0x15, 5	; 21
+		RELAX_BONUS_OFF;
+    158a:	ab 9a       	sbi	0x15, 3	; 21
+		LEDPLUS_BONUS_ON;
+    158c:	ac 98       	cbi	0x15, 4	; 21
+	}
+	if ( saved_number % game_settings.probability_of_bonus == 2 && game_settings.relax_bonus_enable == true )
+    158e:	80 91 10 02 	lds	r24, 0x0210
+    1592:	90 91 06 02 	lds	r25, 0x0206
+    1596:	99 1f       	adc	r25, r25
+    1598:	99 27       	eor	r25, r25
+    159a:	99 1f       	adc	r25, r25
+    159c:	60 91 07 02 	lds	r22, 0x0207
+    15a0:	67 70       	andi	r22, 0x07	; 7
+    15a2:	66 0f       	add	r22, r22
+    15a4:	69 2b       	or	r22, r25
+    15a6:	90 e0       	ldi	r25, 0x00	; 0
+    15a8:	70 e0       	ldi	r23, 0x00	; 0
+    15aa:	59 d0       	rcall	.+178    	; 0x165e <__divmodhi4>
+    15ac:	02 97       	sbiw	r24, 0x02	; 2
+    15ae:	39 f4       	brne	.+14     	; 0x15be <__vector_6+0xd8>
+    15b0:	80 91 07 02 	lds	r24, 0x0207
+    15b4:	85 ff       	sbrs	r24, 5
+    15b6:	03 c0       	rjmp	.+6      	; 0x15be <__vector_6+0xd8>
+	{
+		LEDMINUS_BONUS_OFF;
+    15b8:	ad 9a       	sbi	0x15, 5	; 21
+		LEDPLUS_BONUS_OFF;
+    15ba:	ac 9a       	sbi	0x15, 4	; 21
+		RELAX_BONUS_ON;
+    15bc:	ab 98       	cbi	0x15, 3	; 21
+	}
+	
+	OCR1B = 30;
+    15be:	8e e1       	ldi	r24, 0x1E	; 30
+    15c0:	90 e0       	ldi	r25, 0x00	; 0
+    15c2:	99 bd       	out	0x29, r25	; 41
+    15c4:	88 bd       	out	0x28, r24	; 40
+    15c6:	ff 91       	pop	r31
+    15c8:	ef 91       	pop	r30
+    15ca:	bf 91       	pop	r27
+    15cc:	af 91       	pop	r26
+    15ce:	9f 91       	pop	r25
+    15d0:	8f 91       	pop	r24
+    15d2:	7f 91       	pop	r23
+    15d4:	6f 91       	pop	r22
+    15d6:	5f 91       	pop	r21
+    15d8:	4f 91       	pop	r20
+    15da:	3f 91       	pop	r19
+    15dc:	2f 91       	pop	r18
+    15de:	0f 90       	pop	r0
+    15e0:	0f be       	out	0x3f, r0	; 63
+    15e2:	0f 90       	pop	r0
+    15e4:	1f 90       	pop	r1
+    15e6:	18 95       	reti
+
+000015e8 <main>:
+
+#include "common.h"
+
+int main(void)
+{
+	sei();
+    15e8:	78 94       	sei
+	
+	ENABLE_PLAYER1_INTERRUPT;  
+    15ea:	89 b7       	in	r24, 0x39	; 57
+    15ec:	81 60       	ori	r24, 0x01	; 1
+    15ee:	89 bf       	out	0x39, r24	; 57
+	ENABLE_PLAYER2_INTERRUPT;     
+    15f0:	89 b7       	in	r24, 0x39	; 57
+    15f2:	80 68       	ori	r24, 0x80	; 128
+    15f4:	89 bf       	out	0x39, r24	; 57
+	ENABLE_LEDCHANGE_INTERRUPT;   
+    15f6:	89 b7       	in	r24, 0x39	; 57
+    15f8:	88 60       	ori	r24, 0x08	; 8
+    15fa:	89 bf       	out	0x39, r24	; 57
+	ENABLE_BONUS_INTERRUPT;	
+    15fc:	89 b7       	in	r24, 0x39	; 57
+    15fe:	80 61       	ori	r24, 0x10	; 16
+    1600:	89 bf       	out	0x39, r24	; 57
+	
+	init_io();
+    1602:	ae dc       	rcall	.-1700   	; 0xf60 <init_io>
+	init_data();
+    1604:	f3 dc       	rcall	.-1562   	; 0xfec <init_data>
+	lcd_init();
+    1606:	d5 dd       	rcall	.-1110   	; 0x11b2 <lcd_init>
+	check_last_settings();
+    1608:	6b d6       	rcall	.+3286   	; 0x22e0 <__data_load_end+0x85c>
+	program_polish_characters();
+    160a:	1a dd       	rcall	.-1484   	; 0x1040 <program_polish_characters>
+	init_adc();
+    160c:	e5 dc       	rcall	.-1590   	; 0xfd8 <init_adc>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+    160e:	8f e1       	ldi	r24, 0x1F	; 31
+    1610:	9e e4       	ldi	r25, 0x4E	; 78
+    1612:	01 97       	sbiw	r24, 0x01	; 1
+    1614:	f1 f7       	brne	.-4      	; 0x1612 <main+0x2a>
+    1616:	00 c0       	rjmp	.+0      	; 0x1618 <main+0x30>
+    1618:	00 00       	nop
+	_delay_ms(10);
+	DISABLE_ADC;
+    161a:	37 98       	cbi	0x06, 7	; 6
+	srand(random_number);
+    161c:	80 91 0f 02 	lds	r24, 0x020F
+    1620:	90 e0       	ldi	r25, 0x00	; 0
+    1622:	b4 d0       	rcall	.+360    	; 0x178c <srand>
+	
+	lcd_cls();
+    1624:	c4 dd       	rcall	.-1144   	; 0x11ae <lcd_cls>
+	lcd_locate(0,0);
+    1626:	60 e0       	ldi	r22, 0x00	; 0
+    1628:	80 e0       	ldi	r24, 0x00	; 0
+    162a:	bb dd       	rcall	.-1162   	; 0x11a2 <lcd_locate>
+	lcd_str(":::::: LED :::::");
+    162c:	88 ed       	ldi	r24, 0xD8	; 216
+    162e:	91 e0       	ldi	r25, 0x01	; 1
+    1630:	6c dd       	rcall	.-1320   	; 0x110a <lcd_str>
+	lcd_locate(1,0);
+    1632:	60 e0       	ldi	r22, 0x00	; 0
+    1634:	81 e0       	ldi	r24, 0x01	; 1
+    1636:	b5 dd       	rcall	.-1174   	; 0x11a2 <lcd_locate>
+	lcd_str("::::: FIGHT ::::");
+    1638:	89 ee       	ldi	r24, 0xE9	; 233
+    163a:	91 e0       	ldi	r25, 0x01	; 1
+    163c:	66 dd       	rcall	.-1332   	; 0x110a <lcd_str>
+    163e:	9f ef       	ldi	r25, 0xFF	; 255
+    1640:	23 ed       	ldi	r18, 0xD3	; 211
+    1642:	80 e3       	ldi	r24, 0x30	; 48
+    1644:	91 50       	subi	r25, 0x01	; 1
+    1646:	20 40       	sbci	r18, 0x00	; 0
+    1648:	80 40       	sbci	r24, 0x00	; 0
+    164a:	e1 f7       	brne	.-8      	; 0x1644 <main+0x5c>
+    164c:	00 c0       	rjmp	.+0      	; 0x164e <main+0x66>
+    164e:	00 00       	nop
+	_delay_ms(2000);
+	
+	game_setup();	
+    1650:	53 d6       	rcall	.+3238   	; 0x22f8 <__data_load_end+0x874>
+	
+    while(1)
+    {		
+		check_end_of_battle();		
+    1652:	aa db       	rcall	.-2220   	; 0xda8 <check_end_of_battle>
+		button1_change_detect();
+    1654:	07 dc       	rcall	.-2034   	; 0xe64 <button1_change_detect>
+		button1b_change_detect();
+    1656:	29 dc       	rcall	.-1966   	; 0xeaa <button1b_change_detect>
+		button2_change_detect();
+    1658:	45 dc       	rcall	.-1910   	; 0xee4 <button2_change_detect>
+		button2b_change_detect();
+    165a:	65 dc       	rcall	.-1846   	; 0xf26 <button2b_change_detect>
+    165c:	fa cf       	rjmp	.-12     	; 0x1652 <main+0x6a>
+
+0000165e <__divmodhi4>:
+    165e:	97 fb       	bst	r25, 7
+    1660:	07 2e       	mov	r0, r23
+    1662:	16 f4       	brtc	.+4      	; 0x1668 <__divmodhi4+0xa>
+    1664:	00 94       	com	r0
+    1666:	06 d0       	rcall	.+12     	; 0x1674 <__divmodhi4_neg1>
+    1668:	77 fd       	sbrc	r23, 7
+    166a:	08 d0       	rcall	.+16     	; 0x167c <__divmodhi4_neg2>
+    166c:	2d d0       	rcall	.+90     	; 0x16c8 <__udivmodhi4>
+    166e:	07 fc       	sbrc	r0, 7
+    1670:	05 d0       	rcall	.+10     	; 0x167c <__divmodhi4_neg2>
+    1672:	3e f4       	brtc	.+14     	; 0x1682 <__divmodhi4_exit>
+
+00001674 <__divmodhi4_neg1>:
+    1674:	90 95       	com	r25
+    1676:	81 95       	neg	r24
+    1678:	9f 4f       	sbci	r25, 0xFF	; 255
+    167a:	08 95       	ret
+
+0000167c <__divmodhi4_neg2>:
+    167c:	70 95       	com	r23
+    167e:	61 95       	neg	r22
+    1680:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00001682 <__divmodhi4_exit>:
+    1682:	08 95       	ret
+
+00001684 <__udivmodsi4>:
+    1684:	a1 e2       	ldi	r26, 0x21	; 33
+    1686:	1a 2e       	mov	r1, r26
+    1688:	aa 1b       	sub	r26, r26
+    168a:	bb 1b       	sub	r27, r27
+    168c:	fd 01       	movw	r30, r26
+    168e:	0d c0       	rjmp	.+26     	; 0x16aa <__udivmodsi4_ep>
+
+00001690 <__udivmodsi4_loop>:
+    1690:	aa 1f       	adc	r26, r26
+    1692:	bb 1f       	adc	r27, r27
+    1694:	ee 1f       	adc	r30, r30
+    1696:	ff 1f       	adc	r31, r31
+    1698:	a2 17       	cp	r26, r18
+    169a:	b3 07       	cpc	r27, r19
+    169c:	e4 07       	cpc	r30, r20
+    169e:	f5 07       	cpc	r31, r21
+    16a0:	20 f0       	brcs	.+8      	; 0x16aa <__udivmodsi4_ep>
+    16a2:	a2 1b       	sub	r26, r18
+    16a4:	b3 0b       	sbc	r27, r19
+    16a6:	e4 0b       	sbc	r30, r20
+    16a8:	f5 0b       	sbc	r31, r21
+
+000016aa <__udivmodsi4_ep>:
+    16aa:	66 1f       	adc	r22, r22
+    16ac:	77 1f       	adc	r23, r23
+    16ae:	88 1f       	adc	r24, r24
+    16b0:	99 1f       	adc	r25, r25
+    16b2:	1a 94       	dec	r1
+    16b4:	69 f7       	brne	.-38     	; 0x1690 <__udivmodsi4_loop>
+    16b6:	60 95       	com	r22
+    16b8:	70 95       	com	r23
+    16ba:	80 95       	com	r24
+    16bc:	90 95       	com	r25
+    16be:	9b 01       	movw	r18, r22
+    16c0:	ac 01       	movw	r20, r24
+    16c2:	bd 01       	movw	r22, r26
+    16c4:	cf 01       	movw	r24, r30
+    16c6:	08 95       	ret
+
+000016c8 <__udivmodhi4>:
+    16c8:	aa 1b       	sub	r26, r26
+    16ca:	bb 1b       	sub	r27, r27
+    16cc:	51 e1       	ldi	r21, 0x11	; 17
+    16ce:	07 c0       	rjmp	.+14     	; 0x16de <__udivmodhi4_ep>
+
+000016d0 <__udivmodhi4_loop>:
+    16d0:	aa 1f       	adc	r26, r26
+    16d2:	bb 1f       	adc	r27, r27
+    16d4:	a6 17       	cp	r26, r22
+    16d6:	b7 07       	cpc	r27, r23
+    16d8:	10 f0       	brcs	.+4      	; 0x16de <__udivmodhi4_ep>
+    16da:	a6 1b       	sub	r26, r22
+    16dc:	b7 0b       	sbc	r27, r23
+
+000016de <__udivmodhi4_ep>:
+    16de:	88 1f       	adc	r24, r24
+    16e0:	99 1f       	adc	r25, r25
+    16e2:	5a 95       	dec	r21
+    16e4:	a9 f7       	brne	.-22     	; 0x16d0 <__udivmodhi4_loop>
+    16e6:	80 95       	com	r24
+    16e8:	90 95       	com	r25
+    16ea:	bc 01       	movw	r22, r24
+    16ec:	cd 01       	movw	r24, r26
+    16ee:	08 95       	ret
+
+000016f0 <do_rand>:
+    16f0:	8f 92       	push	r8
+    16f2:	9f 92       	push	r9
+    16f4:	af 92       	push	r10
+    16f6:	bf 92       	push	r11
+    16f8:	cf 92       	push	r12
+    16fa:	df 92       	push	r13
+    16fc:	ef 92       	push	r14
+    16fe:	ff 92       	push	r15
+    1700:	cf 93       	push	r28
+    1702:	df 93       	push	r29
+    1704:	ec 01       	movw	r28, r24
+    1706:	68 81       	ld	r22, Y
+    1708:	79 81       	ldd	r23, Y+1	; 0x01
+    170a:	8a 81       	ldd	r24, Y+2	; 0x02
+    170c:	9b 81       	ldd	r25, Y+3	; 0x03
+    170e:	61 15       	cp	r22, r1
+    1710:	71 05       	cpc	r23, r1
+    1712:	81 05       	cpc	r24, r1
+    1714:	91 05       	cpc	r25, r1
+    1716:	21 f4       	brne	.+8      	; 0x1720 <do_rand+0x30>
+    1718:	64 e2       	ldi	r22, 0x24	; 36
+    171a:	79 ed       	ldi	r23, 0xD9	; 217
+    171c:	8b e5       	ldi	r24, 0x5B	; 91
+    171e:	97 e0       	ldi	r25, 0x07	; 7
+    1720:	2d e1       	ldi	r18, 0x1D	; 29
+    1722:	33 ef       	ldi	r19, 0xF3	; 243
+    1724:	41 e0       	ldi	r20, 0x01	; 1
+    1726:	50 e0       	ldi	r21, 0x00	; 0
+    1728:	a6 d0       	rcall	.+332    	; 0x1876 <__divmodsi4>
+    172a:	49 01       	movw	r8, r18
+    172c:	5a 01       	movw	r10, r20
+    172e:	9b 01       	movw	r18, r22
+    1730:	ac 01       	movw	r20, r24
+    1732:	a7 ea       	ldi	r26, 0xA7	; 167
+    1734:	b1 e4       	ldi	r27, 0x41	; 65
+    1736:	bb d0       	rcall	.+374    	; 0x18ae <__muluhisi3>
+    1738:	6b 01       	movw	r12, r22
+    173a:	7c 01       	movw	r14, r24
+    173c:	ac ee       	ldi	r26, 0xEC	; 236
+    173e:	b4 ef       	ldi	r27, 0xF4	; 244
+    1740:	a5 01       	movw	r20, r10
+    1742:	94 01       	movw	r18, r8
+    1744:	c0 d0       	rcall	.+384    	; 0x18c6 <__mulohisi3>
+    1746:	c6 0e       	add	r12, r22
+    1748:	d7 1e       	adc	r13, r23
+    174a:	e8 1e       	adc	r14, r24
+    174c:	f9 1e       	adc	r15, r25
+    174e:	f7 fe       	sbrs	r15, 7
+    1750:	06 c0       	rjmp	.+12     	; 0x175e <do_rand+0x6e>
+    1752:	81 e0       	ldi	r24, 0x01	; 1
+    1754:	c8 1a       	sub	r12, r24
+    1756:	d1 08       	sbc	r13, r1
+    1758:	e1 08       	sbc	r14, r1
+    175a:	80 e8       	ldi	r24, 0x80	; 128
+    175c:	f8 0a       	sbc	r15, r24
+    175e:	c8 82       	st	Y, r12
+    1760:	d9 82       	std	Y+1, r13	; 0x01
+    1762:	ea 82       	std	Y+2, r14	; 0x02
+    1764:	fb 82       	std	Y+3, r15	; 0x03
+    1766:	c6 01       	movw	r24, r12
+    1768:	9f 77       	andi	r25, 0x7F	; 127
+    176a:	df 91       	pop	r29
+    176c:	cf 91       	pop	r28
+    176e:	ff 90       	pop	r15
+    1770:	ef 90       	pop	r14
+    1772:	df 90       	pop	r13
+    1774:	cf 90       	pop	r12
+    1776:	bf 90       	pop	r11
+    1778:	af 90       	pop	r10
+    177a:	9f 90       	pop	r9
+    177c:	8f 90       	pop	r8
+    177e:	08 95       	ret
+
+00001780 <rand_r>:
+    1780:	b7 df       	rcall	.-146    	; 0x16f0 <do_rand>
+    1782:	08 95       	ret
+
+00001784 <rand>:
+    1784:	80 e6       	ldi	r24, 0x60	; 96
+    1786:	90 e0       	ldi	r25, 0x00	; 0
+    1788:	b3 df       	rcall	.-154    	; 0x16f0 <do_rand>
+    178a:	08 95       	ret
+
+0000178c <srand>:
+    178c:	a0 e0       	ldi	r26, 0x00	; 0
+    178e:	b0 e0       	ldi	r27, 0x00	; 0
+    1790:	80 93 60 00 	sts	0x0060, r24
+    1794:	90 93 61 00 	sts	0x0061, r25
+    1798:	a0 93 62 00 	sts	0x0062, r26
+    179c:	b0 93 63 00 	sts	0x0063, r27
+    17a0:	08 95       	ret
+
+000017a2 <memcpy_P>:
+    17a2:	fb 01       	movw	r30, r22
+    17a4:	dc 01       	movw	r26, r24
+    17a6:	02 c0       	rjmp	.+4      	; 0x17ac <memcpy_P+0xa>
+    17a8:	05 90       	lpm	r0, Z+
+    17aa:	0d 92       	st	X+, r0
+    17ac:	41 50       	subi	r20, 0x01	; 1
+    17ae:	50 40       	sbci	r21, 0x00	; 0
+    17b0:	d8 f7       	brcc	.-10     	; 0x17a8 <memcpy_P+0x6>
+    17b2:	08 95       	ret
+
+000017b4 <__itoa_ncheck>:
+    17b4:	bb 27       	eor	r27, r27
+    17b6:	4a 30       	cpi	r20, 0x0A	; 10
+    17b8:	31 f4       	brne	.+12     	; 0x17c6 <__itoa_ncheck+0x12>
+    17ba:	99 23       	and	r25, r25
+    17bc:	22 f4       	brpl	.+8      	; 0x17c6 <__itoa_ncheck+0x12>
+    17be:	bd e2       	ldi	r27, 0x2D	; 45
+    17c0:	90 95       	com	r25
+    17c2:	81 95       	neg	r24
+    17c4:	9f 4f       	sbci	r25, 0xFF	; 255
+    17c6:	01 c0       	rjmp	.+2      	; 0x17ca <__utoa_common>
+
+000017c8 <__utoa_ncheck>:
+    17c8:	bb 27       	eor	r27, r27
+
+000017ca <__utoa_common>:
+    17ca:	fb 01       	movw	r30, r22
+    17cc:	55 27       	eor	r21, r21
+    17ce:	aa 27       	eor	r26, r26
+    17d0:	88 0f       	add	r24, r24
+    17d2:	99 1f       	adc	r25, r25
+    17d4:	aa 1f       	adc	r26, r26
+    17d6:	a4 17       	cp	r26, r20
+    17d8:	10 f0       	brcs	.+4      	; 0x17de <__utoa_common+0x14>
+    17da:	a4 1b       	sub	r26, r20
+    17dc:	83 95       	inc	r24
+    17de:	50 51       	subi	r21, 0x10	; 16
+    17e0:	b9 f7       	brne	.-18     	; 0x17d0 <__utoa_common+0x6>
+    17e2:	a0 5d       	subi	r26, 0xD0	; 208
+    17e4:	aa 33       	cpi	r26, 0x3A	; 58
+    17e6:	08 f0       	brcs	.+2      	; 0x17ea <__utoa_common+0x20>
+    17e8:	a9 5d       	subi	r26, 0xD9	; 217
+    17ea:	a1 93       	st	Z+, r26
+    17ec:	00 97       	sbiw	r24, 0x00	; 0
+    17ee:	79 f7       	brne	.-34     	; 0x17ce <__utoa_common+0x4>
+    17f0:	b1 11       	cpse	r27, r1
+    17f2:	b1 93       	st	Z+, r27
+    17f4:	11 92       	st	Z+, r1
+    17f6:	cb 01       	movw	r24, r22
+    17f8:	2e c0       	rjmp	.+92     	; 0x1856 <strrev>
+
+000017fa <__eerd_block_m8a>:
+    17fa:	dc 01       	movw	r26, r24
+    17fc:	cb 01       	movw	r24, r22
+
+000017fe <__eerd_blraw_m8a>:
+    17fe:	fc 01       	movw	r30, r24
+    1800:	e1 99       	sbic	0x1c, 1	; 28
+    1802:	fe cf       	rjmp	.-4      	; 0x1800 <__eerd_blraw_m8a+0x2>
+    1804:	06 c0       	rjmp	.+12     	; 0x1812 <__eerd_blraw_m8a+0x14>
+    1806:	ff bb       	out	0x1f, r31	; 31
+    1808:	ee bb       	out	0x1e, r30	; 30
+    180a:	e0 9a       	sbi	0x1c, 0	; 28
+    180c:	31 96       	adiw	r30, 0x01	; 1
+    180e:	0d b2       	in	r0, 0x1d	; 29
+    1810:	0d 92       	st	X+, r0
+    1812:	41 50       	subi	r20, 0x01	; 1
+    1814:	50 40       	sbci	r21, 0x00	; 0
+    1816:	b8 f7       	brcc	.-18     	; 0x1806 <__eerd_blraw_m8a+0x8>
+    1818:	08 95       	ret
+
+0000181a <__eerd_byte_m8a>:
+    181a:	e1 99       	sbic	0x1c, 1	; 28
+    181c:	fe cf       	rjmp	.-4      	; 0x181a <__eerd_byte_m8a>
+    181e:	9f bb       	out	0x1f, r25	; 31
+    1820:	8e bb       	out	0x1e, r24	; 30
+    1822:	e0 9a       	sbi	0x1c, 0	; 28
+    1824:	99 27       	eor	r25, r25
+    1826:	8d b3       	in	r24, 0x1d	; 29
+    1828:	08 95       	ret
+
+0000182a <__eewr_block_m8a>:
+    182a:	dc 01       	movw	r26, r24
+    182c:	cb 01       	movw	r24, r22
+    182e:	02 c0       	rjmp	.+4      	; 0x1834 <__eewr_block_m8a+0xa>
+    1830:	2d 91       	ld	r18, X+
+    1832:	05 d0       	rcall	.+10     	; 0x183e <__eewr_r18_m8a>
+    1834:	41 50       	subi	r20, 0x01	; 1
+    1836:	50 40       	sbci	r21, 0x00	; 0
+    1838:	d8 f7       	brcc	.-10     	; 0x1830 <__eewr_block_m8a+0x6>
+    183a:	08 95       	ret
+
+0000183c <__eewr_byte_m8a>:
+    183c:	26 2f       	mov	r18, r22
+
+0000183e <__eewr_r18_m8a>:
+    183e:	e1 99       	sbic	0x1c, 1	; 28
+    1840:	fe cf       	rjmp	.-4      	; 0x183e <__eewr_r18_m8a>
+    1842:	9f bb       	out	0x1f, r25	; 31
+    1844:	8e bb       	out	0x1e, r24	; 30
+    1846:	2d bb       	out	0x1d, r18	; 29
+    1848:	0f b6       	in	r0, 0x3f	; 63
+    184a:	f8 94       	cli
+    184c:	e2 9a       	sbi	0x1c, 2	; 28
+    184e:	e1 9a       	sbi	0x1c, 1	; 28
+    1850:	0f be       	out	0x3f, r0	; 63
+    1852:	01 96       	adiw	r24, 0x01	; 1
+    1854:	08 95       	ret
+
+00001856 <strrev>:
+    1856:	dc 01       	movw	r26, r24
+    1858:	fc 01       	movw	r30, r24
+    185a:	67 2f       	mov	r22, r23
+    185c:	71 91       	ld	r23, Z+
+    185e:	77 23       	and	r23, r23
+    1860:	e1 f7       	brne	.-8      	; 0x185a <strrev+0x4>
+    1862:	32 97       	sbiw	r30, 0x02	; 2
+    1864:	04 c0       	rjmp	.+8      	; 0x186e <strrev+0x18>
+    1866:	7c 91       	ld	r23, X
+    1868:	6d 93       	st	X+, r22
+    186a:	70 83       	st	Z, r23
+    186c:	62 91       	ld	r22, -Z
+    186e:	ae 17       	cp	r26, r30
+    1870:	bf 07       	cpc	r27, r31
+    1872:	c8 f3       	brcs	.-14     	; 0x1866 <strrev+0x10>
+    1874:	08 95       	ret
+
+00001876 <__divmodsi4>:
+    1876:	05 2e       	mov	r0, r21
+    1878:	97 fb       	bst	r25, 7
+    187a:	16 f4       	brtc	.+4      	; 0x1880 <__divmodsi4+0xa>
+    187c:	00 94       	com	r0
+    187e:	0f d0       	rcall	.+30     	; 0x189e <__negsi2>
+    1880:	57 fd       	sbrc	r21, 7
+    1882:	05 d0       	rcall	.+10     	; 0x188e <__divmodsi4_neg2>
+    1884:	ff de       	rcall	.-514    	; 0x1684 <__udivmodsi4>
+    1886:	07 fc       	sbrc	r0, 7
+    1888:	02 d0       	rcall	.+4      	; 0x188e <__divmodsi4_neg2>
+    188a:	46 f4       	brtc	.+16     	; 0x189c <__divmodsi4_exit>
+    188c:	08 c0       	rjmp	.+16     	; 0x189e <__negsi2>
+
+0000188e <__divmodsi4_neg2>:
+    188e:	50 95       	com	r21
+    1890:	40 95       	com	r20
+    1892:	30 95       	com	r19
+    1894:	21 95       	neg	r18
+    1896:	3f 4f       	sbci	r19, 0xFF	; 255
+    1898:	4f 4f       	sbci	r20, 0xFF	; 255
+    189a:	5f 4f       	sbci	r21, 0xFF	; 255
+
+0000189c <__divmodsi4_exit>:
+    189c:	08 95       	ret
+
+0000189e <__negsi2>:
+    189e:	90 95       	com	r25
+    18a0:	80 95       	com	r24
+    18a2:	70 95       	com	r23
+    18a4:	61 95       	neg	r22
+    18a6:	7f 4f       	sbci	r23, 0xFF	; 255
+    18a8:	8f 4f       	sbci	r24, 0xFF	; 255
+    18aa:	9f 4f       	sbci	r25, 0xFF	; 255
+    18ac:	08 95       	ret
+
+000018ae <__muluhisi3>:
+    18ae:	0f d0       	rcall	.+30     	; 0x18ce <__umulhisi3>
+    18b0:	a5 9f       	mul	r26, r21
+    18b2:	90 0d       	add	r25, r0
+    18b4:	b4 9f       	mul	r27, r20
+    18b6:	90 0d       	add	r25, r0
+    18b8:	a4 9f       	mul	r26, r20
+    18ba:	80 0d       	add	r24, r0
+    18bc:	91 1d       	adc	r25, r1
+    18be:	11 24       	eor	r1, r1
+    18c0:	08 95       	ret
+
+000018c2 <__mulshisi3>:
+    18c2:	b7 ff       	sbrs	r27, 7
+    18c4:	f4 cf       	rjmp	.-24     	; 0x18ae <__muluhisi3>
+
+000018c6 <__mulohisi3>:
+    18c6:	f3 df       	rcall	.-26     	; 0x18ae <__muluhisi3>
+    18c8:	82 1b       	sub	r24, r18
+    18ca:	93 0b       	sbc	r25, r19
+    18cc:	08 95       	ret
+
+000018ce <__umulhisi3>:
+    18ce:	a2 9f       	mul	r26, r18
+    18d0:	b0 01       	movw	r22, r0
+    18d2:	b3 9f       	mul	r27, r19
+    18d4:	c0 01       	movw	r24, r0
+    18d6:	a3 9f       	mul	r26, r19
+    18d8:	01 d0       	rcall	.+2      	; 0x18dc <__umulhisi3+0xe>
+    18da:	b2 9f       	mul	r27, r18
+    18dc:	70 0d       	add	r23, r0
+    18de:	81 1d       	adc	r24, r1
+    18e0:	11 24       	eor	r1, r1
+    18e2:	91 1d       	adc	r25, r1
+    18e4:	08 95       	ret
+
+000018e6 <_exit>:
+    18e6:	f8 94       	cli
+
+000018e8 <__stop_program>:
+    18e8:	ff cf       	rjmp	.-2      	; 0x18e8 <__stop_program>
